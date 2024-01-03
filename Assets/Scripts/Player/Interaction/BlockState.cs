@@ -10,7 +10,7 @@ public class BlockState : InteractionState
 
     public void ExitState(PlayerInteractionManager manager)
     {
-        manager.PlayerModel.IsBlocked = true;
+        manager.PlayerModel.IsBlocked = false;
         manager.Animator.SetBool("isBlock", false);
     }
 
@@ -21,7 +21,7 @@ public class BlockState : InteractionState
             ExitState(manager);
             manager.SwitchState(manager.AttackState);
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
+        else if (Input.GetKeyUp(KeyCode.Mouse1) || !IsMoving())
         {
             ExitState(manager);
             manager.SwitchState(manager.IdleState);

@@ -14,7 +14,7 @@ public class IdleState : InteractionState
         {
             manager.SwitchState(manager.AttackState);
         }
-        else if (Input.GetKey(KeyCode.Mouse1)) 
+        else if (Input.GetKey(KeyCode.Mouse1) && IsMoving()) 
         {
             manager.SwitchState(manager.BlockState);
         }

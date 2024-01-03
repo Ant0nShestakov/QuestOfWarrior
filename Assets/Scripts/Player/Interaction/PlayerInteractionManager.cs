@@ -10,13 +10,14 @@ public class PlayerInteractionManager : MonoBehaviour
     public IdleState IdleState = new IdleState();
 
     public Animator Animator { get; private set; }
-    public Rigidbody Rigidbody { get; private set; }
+    public CharacterController CharacterController { get; private set; }
     public PlayerModel PlayerModel { get; private set; }
 
     private void Start()
     {
         Animator = GetComponent<Animator>();
         PlayerModel = GetComponent<PlayerModel>();
+        CharacterController = GetComponent<CharacterController>();
         _curentState = IdleState;
     }
 
