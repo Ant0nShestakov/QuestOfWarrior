@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAttackManager : MonoBehaviour
+public class WeaponManager : MonoBehaviour
 {
     private PlayerModel _playerModel;
 

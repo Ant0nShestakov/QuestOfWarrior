@@ -3,28 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
-    private InteractionState _curentState;
-
-    public AttackState AttackState = new AttackState();
-    public BlockState BlockState = new BlockState();
-    public IdleState IdleState = new IdleState();
-
-    public Animator Animator { get; private set; }
-    public CharacterController CharacterController { get; private set; }
     public PlayerModel PlayerModel { get; private set; }
 
     private void Start()
     {
-        Animator = GetComponent<Animator>();
         PlayerModel = GetComponent<PlayerModel>();
-        CharacterController = GetComponent<CharacterController>();
-        _curentState = IdleState;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        _curentState.UpdateState(this);
     }
 
     private void OnTriggerStay(Collider other)
@@ -35,12 +18,6 @@ public class PlayerInteractionManager : MonoBehaviour
                 door.OpenDoor();
             return;
         }
-    }
-
-    public void SwitchState(InteractionState state)
-    {
-        _curentState = state;
-        _curentState.EnterState(this);
     }
 
     public void TakeDamage(int Damage)
