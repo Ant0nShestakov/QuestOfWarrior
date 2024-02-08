@@ -26,12 +26,12 @@ public class BlockState : AttackState
             ExitState(manager);
             manager.SwitchState(manager.IdleState);
         }
-        else if (Input.GetKey(KeyCode.F) && IsNotMoving())
+        else if (Input.GetKey(KeyCode.F))
         {
             ExitState(manager);
             manager.SwitchState(manager.SpecialAttackState);
         }
-        else if (Input.GetKey(KeyCode.R) && IsNotMoving())
+        else if (Input.GetKey(KeyCode.R))
         {
             ExitState(manager);
             manager.SwitchState(manager.SpecialFastAttackState);

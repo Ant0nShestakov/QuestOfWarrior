@@ -14,7 +14,7 @@ public class AutoAttackState : AttackState
 
     public override void UpdateState(PlayerAttackManager manager)
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse1) && IsNotMoving())
         {
             ExitState(manager);
             manager.SwitchState(manager.BlockState);
@@ -24,12 +24,12 @@ public class AutoAttackState : AttackState
             ExitState(manager);
             manager.SwitchState(manager.IdleState);
         }
-        else if (Input.GetKey(KeyCode.F) && IsNotMoving())
+        else if (Input.GetKey(KeyCode.F))
         {
             ExitState(manager);
             manager.SwitchState(manager.SpecialAttackState);
         }
-        else if (Input.GetKey(KeyCode.R) && IsNotMoving())
+        else if (Input.GetKey(KeyCode.R))
         {
             ExitState(manager);
             manager.SwitchState(manager.SpecialFastAttackState);

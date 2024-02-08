@@ -14,12 +14,12 @@ public class SpecialFastAttack : AttackState
 
     public override void UpdateState(PlayerAttackManager manager)
     {
-        if (Input.GetKeyUp(KeyCode.R) || !IsNotMoving())
+        if (Input.GetKeyUp(KeyCode.R))
         {
             ExitState(manager);
             manager.SwitchState(manager.IdleState);
         }
-        else if (Input.GetKey(KeyCode.F) && !IsNotMoving())
+        else if (Input.GetKey(KeyCode.F))
         {
             ExitState(manager);
             manager.SwitchState(manager.SpecialAttackState);

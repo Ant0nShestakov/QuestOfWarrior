@@ -4,7 +4,7 @@ public class WalkingState : MovenetState
 {
     public override void EnterState(PlayerMovemenManager movement)
     {
-        movement.SetWalkSpeedState();
+        movement.PlayerModel.SetWalkSpeedState();
         movement.Animator.SetBool("isWalking", true);
     }
 
@@ -15,7 +15,7 @@ public class WalkingState : MovenetState
 
     public override void UpdateState(PlayerMovemenManager movement)
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && !movement.PlayerModel.IsStay)
         {
             ExitState(movement);
             movement.SwitchState(movement.RuningState);

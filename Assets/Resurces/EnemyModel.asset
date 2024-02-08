@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf99b66f083da44d8eb0fb133227efe, type: 3}
   m_Name: EnemyModel
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 5
+  <AutoAttackDamage>k__BackingField: 5
+  <SpecialStrongAttackDamage>k__BackingField: 0
+  <SpecialFastAttackDamage>k__BackingField: 0
   <Health>k__BackingField: 100
+  <WalkSpeed>k__BackingField: 0
+  <RunSpeed>k__BackingField: 0

@@ -14,7 +14,7 @@ public class SpecialStrongAttack : AttackState
 
     public override void UpdateState(PlayerAttackManager manager)
     {
-        if(Input.GetKeyUp(KeyCode.F) || !IsNotMoving()) 
+        if (Input.GetKeyUp(KeyCode.F))
         {
             ExitState(manager);
             manager.SwitchState(manager.IdleState);
@@ -24,7 +24,7 @@ public class SpecialStrongAttack : AttackState
             ExitState(manager);
             manager.SwitchState(manager.AttackState);
         }
-        else if (Input.GetKey(KeyCode.R) && IsNotMoving())
+        else if (Input.GetKey(KeyCode.R))
         {
             ExitState(manager);
             manager.SwitchState(manager.SpecialFastAttackState);
