@@ -5,6 +5,7 @@ public class PlayerModel : MonoBehaviour
     [SerializeField] private GameModels _playerProperites;
 
     [field: SerializeField] public int Health { get; private set; }
+    [field: SerializeField] public int Stamina { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public int Speed { get; private set; }
     [field: SerializeField] public bool LockState { get; set; }
@@ -15,6 +16,7 @@ public class PlayerModel : MonoBehaviour
     {
         Health = _playerProperites.Health;
         Damage = _playerProperites.AutoAttackDamage;
+        Stamina = _playerProperites.MaxStamina;
         Speed = _playerProperites.WalkSpeed;
     }
 
