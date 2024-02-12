@@ -14,7 +14,7 @@ public class SpecialStrongAttack : AttackState
 
     public override void UpdateState(PlayerAttackManager manager)
     {
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.F) || !manager.PlayerModel.CheckStaminaForAttack(manager.SpecialStrongAttackState))
         {
             ExitState(manager);
             manager.SwitchState(manager.IdleState);

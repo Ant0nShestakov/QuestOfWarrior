@@ -26,12 +26,12 @@ public class BlockState : AttackState
             ExitState(manager);
             manager.SwitchState(manager.IdleState);
         }
-        else if (Input.GetKey(KeyCode.F))
+        else if (Input.GetKey(KeyCode.F) && manager.PlayerModel.CheckStaminaForAttack(manager.SpecialStrongAttackState))
         {
             ExitState(manager);
-            manager.SwitchState(manager.SpecialAttackState);
+            manager.SwitchState(manager.SpecialStrongAttackState);
         }
-        else if (Input.GetKey(KeyCode.R))
+        else if (Input.GetKey(KeyCode.R) && manager.PlayerModel.CheckStaminaForAttack(manager.SpecialFastAttackState))
         {
             ExitState(manager);
             manager.SwitchState(manager.SpecialFastAttackState);

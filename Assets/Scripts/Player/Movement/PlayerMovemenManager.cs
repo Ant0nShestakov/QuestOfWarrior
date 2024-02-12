@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class PlayerMovemenManager : MonoBehaviour
 {
-    [SerializeField] private float _runingSpeed = 10;
-    [SerializeField] private float _walkingSpeed = 6;
-
     private float _hInput;
     private float _vInput;
 

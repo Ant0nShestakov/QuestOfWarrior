@@ -20,9 +20,10 @@ public class HealthBar : MonoBehaviour
 
         _textOnImageHpBar = _healthBar.GetComponentInChildren<Text>();
         _textOnImageStaminaBar = _staminaBar.GetComponentInChildren<Text>();
+        UpdateInfo();
     }
 
-    void Update()
+    public void UpdateInfo() 
     {
         _textOnImageHpBar.text = _playerModel.Health.ToString() + " / " + _maxHP.ToString();
         _textOnImageStaminaBar.text = _playerModel.Stamina.ToString() + " / " + _maxStamina.ToString();

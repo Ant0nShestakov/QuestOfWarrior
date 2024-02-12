@@ -3565,8 +3565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663735b8adf4bf348b57fff0d033dcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _runingSpeed: 9
-  _walkingSpeed: 6
 --- !u!114 &6772759857458844384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3652,6 +3650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd56c5ee4ccdee42a4d7d7ddf32b058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RegenerationInSeconds: 3
 --- !u!114 &2471362666856145408
 MonoBehaviour:
   m_ObjectHideFlags: 0

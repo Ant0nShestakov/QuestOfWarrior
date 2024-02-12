@@ -27,7 +27,7 @@ public class AutoAttackState : AttackState
         else if (Input.GetKey(KeyCode.F))
         {
             ExitState(manager);
-            manager.SwitchState(manager.SpecialAttackState);
+            manager.SwitchState(manager.SpecialStrongAttackState);
         }
         else if (Input.GetKey(KeyCode.R))
         {

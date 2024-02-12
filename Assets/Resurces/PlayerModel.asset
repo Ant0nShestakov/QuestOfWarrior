@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AutoAttackDamage>k__BackingField: 20
   <SpecialStrongAttackDamage>k__BackingField: 50
+  <UsingForStaminaSpecialStrongAttack>k__BackingField: 100
   <SpecialFastAttackDamage>k__BackingField: 30
+  <UsingStaminaForSpecialFastAttack>k__BackingField: 70
   <Health>k__BackingField: 200
   <MaxStamina>k__BackingField: 350
+  <RegenerationStamina>k__BackingField: 30
   <WalkSpeed>k__BackingField: 6
   <RunSpeed>k__BackingField: 10
