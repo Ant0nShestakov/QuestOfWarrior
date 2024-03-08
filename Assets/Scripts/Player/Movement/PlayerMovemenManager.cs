@@ -10,6 +10,8 @@ public class PlayerMovemenManager : MonoBehaviour
     private MovenetState _state;
     private Vector3 _direction;
 
+    private AudioSource _source;
+
     public RunningState RuningState = new RunningState();
     public WalkingState WalkingState = new WalkingState();
 
@@ -21,6 +23,7 @@ public class PlayerMovemenManager : MonoBehaviour
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
         PlayerModel = GetComponent<PlayerModel>();
+        _source = GetComponentInChildren<AudioSource>();
         _state = WalkingState;
     }
 
@@ -43,5 +46,11 @@ public class PlayerMovemenManager : MonoBehaviour
     {
         _state = state;
         _state.EnterState(this);
+    }
+
+    public void PlayWalkSound(int indexPan) 
+    {
+        _source.panStereo = indexPan;
+        _source.Play();
     }
 }

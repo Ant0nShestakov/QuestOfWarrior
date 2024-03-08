@@ -87076,15 +87076,36 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.2
+    functionName: PlayWalkSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: -1
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: PlayWalkSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 0.9166667
+    functionName: PlayWalkSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: -1
+    messageOptions: 0
   - time: 1.1166667
-    functionName: SetWalkSpeedState
+    functionName: SetAutoAttackDamage
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.1166667
-    functionName: SetAutoAttackDamage
+    functionName: SetWalkSpeedState
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

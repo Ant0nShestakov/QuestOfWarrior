@@ -7,6 +7,7 @@ public class LoadLvL : MonoBehaviour
 
     public void LoadScene()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(index);
     }
 }

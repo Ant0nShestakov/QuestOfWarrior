@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerModel
   m_EditorClassIdentifier: 
   <AutoAttackDamage>k__BackingField: 20
-  <SpecialStrongAttackDamage>k__BackingField: 50
+  <SpecialStrongAttackDamage>k__BackingField: 40
   <UsingForStaminaSpecialStrongAttack>k__BackingField: 100
   <SpecialFastAttackDamage>k__BackingField: 30
   <UsingStaminaForSpecialFastAttack>k__BackingField: 70

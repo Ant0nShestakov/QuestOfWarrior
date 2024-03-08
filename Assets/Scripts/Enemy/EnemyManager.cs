@@ -13,6 +13,8 @@ public class EnemyManager : MonoBehaviour
     private EnemyModel _enemyModel;
     private bool _isDeath;
 
+    private AudioSource _audioSource;
+
     private GameObject _player;
     private AIDestinationSetter _destinationSetter;
 
@@ -26,6 +28,7 @@ public class EnemyManager : MonoBehaviour
         _enemyPool = Singelton<CreateEnemyPool>.Instance;
         _destinationSetter = GetComponent<AIDestinationSetter>();
         _player = GameObject.FindWithTag("Player");
+        _audioSource = GetComponentInChildren<AudioSource>();
     }
 
     private void OnEnable()
@@ -82,5 +85,11 @@ public class EnemyManager : MonoBehaviour
             _destinationSetter.target = null;
             StartCoroutine(DeathEnemy());
         }
+    }
+
+    public void PlayWalkSound(int indexPan)
+    {
+        _audioSource.panStereo = indexPan;
+        _audioSource.Play();
     }
 }
