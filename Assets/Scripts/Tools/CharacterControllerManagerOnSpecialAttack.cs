@@ -7,11 +7,16 @@ public class CharacterControllerManagerOnSpecialAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _characterController =GetComponent<CharacterController>();
+        _characterController = GetComponent<CharacterController>();
     }
 
-    public void MoveCollider(float value)
+    public void MoveUpCollider(float value)
     {
-        _characterController.center = new Vector3(0, value, 0);
+        _characterController.height += value;
+    }
+
+    public void MoveDownCollider(float value)
+    {
+        _characterController.height -= value;
     }
 }

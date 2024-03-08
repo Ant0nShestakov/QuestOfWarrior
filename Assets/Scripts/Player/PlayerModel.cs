@@ -71,9 +71,10 @@ public class PlayerModel : MonoBehaviour
 
     public void RegenerationStamina() 
     {
-        if (Stamina == _playerProperites.MaxStamina)
-            return;
-        Stamina += _playerProperites.RegenerationStamina;
+        if (Stamina + _playerProperites.RegenerationStamina >= _playerProperites.MaxStamina)
+            Stamina = _playerProperites.MaxStamina;
+        else
+            Stamina += _playerProperites.RegenerationStamina;
         UpdateUiInfo();
     }
 
