@@ -44,6 +44,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7664734977046154543}
     m_Modifications:
+    - target: {fileID: 1426020366425673040, guid: 571864210d6f8d545908cb0a40d85a3f, type: 3}
+      propertyPath: MaxDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4299612916475397712, guid: 571864210d6f8d545908cb0a40d85a3f, type: 3}
       propertyPath: m_Name
       value: Civil

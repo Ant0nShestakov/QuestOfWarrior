@@ -5,6 +5,7 @@ public class PlayerAttackManager : MonoBehaviour
 {
     [SerializeField] private float RegenerationInSeconds;
     private AttackState _curentAttackState;
+    private PlayerAttackSoundsManager _soundManager;
 
     public AutoAttackState AttackState = new AutoAttackState();
     public BlockState BlockState = new BlockState();
@@ -22,6 +23,7 @@ public class PlayerAttackManager : MonoBehaviour
         Animator = GetComponent<Animator>();
         PlayerModel = GetComponent<PlayerModel>();
         StartCoroutine(RegenarationStamina());
+        _soundManager = GetComponentInChildren<PlayerAttackSoundsManager>();
     }
 
     // Update is called once per frame
@@ -43,5 +45,10 @@ public class PlayerAttackManager : MonoBehaviour
     {
         _curentAttackState = state;
         _curentAttackState.EnterState(this);
+    }
+
+    public void PlayAttackSound() 
+    {
+        _soundManager.PlayRageSound();
     }
 }
