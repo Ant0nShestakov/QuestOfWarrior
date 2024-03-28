@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAttackSoundsManager : MonoBehaviour
+public class PlayerAttackSoundController : MonoBehaviour
 {
     [SerializeField] private AudioClip[] _rageSounds;
 

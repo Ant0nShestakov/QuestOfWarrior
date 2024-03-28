@@ -29,10 +29,10 @@ public class PlayerModel : MonoBehaviour
 
     public bool CheckStaminaForAttack(AttackState state)
     {
-        if(state is SpecialFastAttack)
+        if(state is SpecialFastAttackState)
             if (Stamina - _playerProperites.UsingStaminaForSpecialFastAttack < 0)
                 return false;
-        if(state is SpecialStrongAttack)
+        if(state is SpecialStrongAttackState)
             if (Stamina - _playerProperites.UsingForStaminaSpecialStrongAttack < 0)
                 return false;
         return true;

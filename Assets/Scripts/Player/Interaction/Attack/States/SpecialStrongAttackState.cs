@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class SpecialStrongAttack : AttackState
+public class SpecialStrongAttackState : AttackState
 {
-    public override void EnterState(PlayerAttackManager manager)
-    {
+    public override void EnterState(PlayerAttackManager manager) =>        
         manager.Animator.SetBool("isSpecialAttack", true);
-    }
 
-    public void ExitState(PlayerAttackManager manager)
-    {
+    public void ExitState(PlayerAttackManager manager) =>
         manager.Animator.SetBool("isSpecialAttack", false);
-    }
 
     public override void UpdateState(PlayerAttackManager manager)
     {

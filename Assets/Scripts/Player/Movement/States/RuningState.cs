@@ -20,5 +20,11 @@ public class RunningState : MovenetState
             ExitState(movement);
             movement.SwitchState(movement.WalkingState);
         }
+        else if (Input.GetKey(KeyCode.Space) && movement.isOnGround) 
+        {
+            ExitState(movement);
+            movement.SwitchState(movement.JumpingState);
+            movement.CharacterController.Move(new Vector3(0, movement.JumpForce, 0).normalized);
+        }
     }
 }

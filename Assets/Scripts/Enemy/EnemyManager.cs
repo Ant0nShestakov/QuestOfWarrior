@@ -72,7 +72,7 @@ public class EnemyManager : MonoBehaviour
                 _enemyPool.ObjectPoolEnemy.ReturnObjectToPool(this);
                 break;
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_animationDeathTime);
         }
     }
 
@@ -80,6 +80,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (_enemyModel.GetDamage(damage) <= 0 && !_isDeath)
         {
+            _destinationSetter.target = null;
             _isDeath = true;
             _animator.SetBool("isDeath", _isDeath);
             _destinationSetter.target = null;
