@@ -19,22 +19,24 @@ public class BlockState : AttackState
         if (Input.GetKey(KeyCode.Mouse0))
         {
             ExitState(manager);
-            manager.SwitchState(manager.AttackState);
+            manager.SwitchState(manager.AttackStateSwitcher.AutoAttackState);
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1) || !IsNotMoving())
         {
             ExitState(manager);
-            manager.SwitchState(manager.IdleState);
+            manager.SwitchState(manager.AttackStateSwitcher.IdleState);
         }
-        else if (Input.GetKey(KeyCode.F) && manager.PlayerModel.CheckStaminaForAttack(manager.SpecialStrongAttackState))
+        else if (Input.GetKey(KeyCode.F) 
+            && manager.PlayerModel.CheckStaminaForAttack(manager.AttackStateSwitcher.SpecialStrongAttackState))
         {
             ExitState(manager);
-            manager.SwitchState(manager.SpecialStrongAttackState);
+            manager.SwitchState(manager.AttackStateSwitcher.SpecialStrongAttackState);
         }
-        else if (Input.GetKey(KeyCode.R) && manager.PlayerModel.CheckStaminaForAttack(manager.SpecialFastAttackState))
+        else if (Input.GetKey(KeyCode.R) 
+            && manager.PlayerModel.CheckStaminaForAttack(manager.AttackStateSwitcher.SpecialFastAttackState))
         {
             ExitState(manager);
-            manager.SwitchState(manager.SpecialFastAttackState);
+            manager.SwitchState(manager.AttackStateSwitcher.SpecialFastAttackState);
         }
     }
 }

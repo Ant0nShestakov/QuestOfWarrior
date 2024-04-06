@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour
 {
-    [SerializeField] private CreateEnemyPool _enemyPool;
+    [SerializeField] private EnemyPool _enemyPool;
 
     private Animator _animator;
 
@@ -16,5 +16,4 @@ public class DoorManager : MonoBehaviour
         if(!_enemyPool.ObjectPoolEnemy.ÑheckingForActive())
             _animator.SetBool("isOpen", true);
     }
-
 }

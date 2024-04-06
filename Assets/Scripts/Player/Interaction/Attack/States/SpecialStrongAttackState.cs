@@ -10,20 +10,20 @@ public class SpecialStrongAttackState : AttackState
 
     public override void UpdateState(PlayerAttackManager manager)
     {
-        if (Input.GetKeyUp(KeyCode.F) || !manager.PlayerModel.CheckStaminaForAttack(manager.SpecialStrongAttackState))
+        if (Input.GetKeyUp(KeyCode.F) || !manager.PlayerModel.CheckStaminaForAttack(manager.AttackStateSwitcher.SpecialStrongAttackState))
         {
             ExitState(manager);
-            manager.SwitchState(manager.IdleState);
+            manager.SwitchState(manager.AttackStateSwitcher.IdleState);
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         {
             ExitState(manager);
-            manager.SwitchState(manager.AttackState);
+            manager.SwitchState(manager.AttackStateSwitcher.AutoAttackState);
         }
         else if (Input.GetKey(KeyCode.R))
         {
             ExitState(manager);
-            manager.SwitchState(manager.SpecialFastAttackState);
+            manager.SwitchState(manager.AttackStateSwitcher.SpecialFastAttackState);
         }
     }
 }

@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class LandingState : MovenetState
+public class LandingState : MovementState
 {
+    public LandingState() : base() { }
+
     public override void EnterState(PlayerMovemenManager movement)
     {
         movement.Animator.SetBool("IsLanding", true);
@@ -18,9 +20,9 @@ public class LandingState : MovenetState
         {
             ExitState(movement);
             if(Input.GetKey(KeyCode.LeftShift)) 
-                movement.SwitchState(movement.RuningState);
+                movement.SwitchState(movement.RealMovementState.RunningState);
             else
-                movement.SwitchState(movement.WalkingState);
+                movement.SwitchState(movement.RealMovementState.WalkingState);
         }
 
     }

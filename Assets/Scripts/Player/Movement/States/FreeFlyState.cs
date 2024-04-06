@@ -1,5 +1,8 @@
-public class FreeFlyState : MovenetState
+public class FreeFlyState : MovementState
 {
+
+    public FreeFlyState() : base() { }
+
     public override void EnterState(PlayerMovemenManager movement)
     {
         movement.Animator.SetBool("isFreeFly", true);
@@ -15,7 +18,7 @@ public class FreeFlyState : MovenetState
         if(movement.isOnGround) 
         {
             ExitState(movement);
-            movement.SwitchState(movement.LandingState);
+            movement.SwitchState(movement.RealMovementState.LandingState);
         }
     }
 }

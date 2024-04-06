@@ -13,22 +13,22 @@ public class AutoAttackState : AttackState
         if (Input.GetKey(KeyCode.Mouse1) && IsNotMoving())
         {
             ExitState(manager);
-            manager.SwitchState(manager.BlockState);
+            manager.SwitchState(manager.AttackStateSwitcher.BlockState);
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             ExitState(manager);
-            manager.SwitchState(manager.IdleState);
+            manager.SwitchState(manager.AttackStateSwitcher.IdleState);
         }
-        else if (Input.GetKey(KeyCode.F) && manager.PlayerModel.CheckStaminaForAttack(manager.SpecialStrongAttackState))
+        else if (Input.GetKey(KeyCode.F) && manager.PlayerModel.CheckStaminaForAttack(manager.AttackStateSwitcher.SpecialStrongAttackState))
         {
             ExitState(manager);
-            manager.SwitchState(manager.SpecialStrongAttackState);
+            manager.SwitchState(manager.AttackStateSwitcher.SpecialStrongAttackState);
         }
-        else if (Input.GetKey(KeyCode.R) && manager.PlayerModel.CheckStaminaForAttack(manager.SpecialFastAttackState))
+        else if (Input.GetKey(KeyCode.R) && manager.PlayerModel.CheckStaminaForAttack(manager.AttackStateSwitcher.SpecialFastAttackState))
         {
             ExitState(manager);
-            manager.SwitchState(manager.SpecialFastAttackState);
+            manager.SwitchState(manager.AttackStateSwitcher.SpecialFastAttackState);
         }
     }
 }

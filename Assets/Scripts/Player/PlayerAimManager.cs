@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAimManager : MonoBehaviour
 {
     [SerializeField] private Transform _cameraPosition;
-    [SerializeField] private float sensetivity = 1;
+    [SerializeField] private float _sensetivity = 1;
     [SerializeField] private float _vClampMax;
     [SerializeField] private float _vClampMin;
 
@@ -11,18 +11,18 @@ public class PlayerAimManager : MonoBehaviour
     private float _hInput;
     private float _vInput;
 
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         _playerModel = GetComponent<PlayerModel>();
     }
 
-    void Update()
+    private void Update()
     {
         if (!_playerModel.LockState)
         {
-            _hInput += Input.GetAxis("Mouse X") * sensetivity;
-            _vInput += Input.GetAxis("Mouse Y") * sensetivity;
+            _hInput += Input.GetAxis("Mouse X") * _sensetivity;
+            _vInput += Input.GetAxis("Mouse Y") * _sensetivity;
 
             _vInput = Mathf.Clamp(_vInput, _vClampMin, _vClampMax);
         }

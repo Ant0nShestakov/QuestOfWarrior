@@ -1,4 +1,4 @@
-public abstract class MovenetState
+public abstract class MovementState
 {
     public abstract void EnterState(PlayerMovemenManager movement);
     public abstract void ExitState(PlayerMovemenManager movement);

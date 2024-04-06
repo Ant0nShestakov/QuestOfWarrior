@@ -5,21 +5,16 @@ public class PlayerAttackManager : MonoBehaviour
 {
     [SerializeField] private float RegenerationInSeconds;
 
-    private AttackState _curentAttackState;
     private PlayerAttackSoundController _soundManager;
-
-    public AutoAttackState AttackState = new AutoAttackState();
-    public BlockState BlockState = new BlockState();
-    public IdleState IdleState = new IdleState();
-    public SpecialStrongAttackState SpecialStrongAttackState = new SpecialStrongAttackState(); 
-    public SpecialFastAttackState SpecialFastAttackState = new SpecialFastAttackState();
+    private AttackStateSwitcher _attackStateSwitcher;
 
     public Animator Animator { get; private set; }
     public PlayerModel PlayerModel { get; private set; }
+    public AttackStateSwitcher AttackStateSwitcher { get => _attackStateSwitcher; }
 
     private void Start()
     {
-        _curentAttackState = IdleState;
+        _attackStateSwitcher = new AttackStateSwitcher();
         Animator = GetComponent<Animator>();
         PlayerModel = GetComponent<PlayerModel>();
         StartCoroutine(RegenarationStamina());
@@ -29,7 +24,7 @@ public class PlayerAttackManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        _curentAttackState.UpdateState(this);
+        _attackStateSwitcher.UpdateState(this);
     }
 
     private IEnumerator RegenarationStamina()
@@ -41,11 +36,7 @@ public class PlayerAttackManager : MonoBehaviour
         }
     }
 
-    public void SwitchState(AttackState state)
-    {
-        _curentAttackState = state;
-        _curentAttackState.EnterState(this);
-    }
+    public void SwitchState(AttackState state) => _attackStateSwitcher.SwitchState(this, state);
 
     public void PlayAttackSound() => _soundManager.PlayRageSound();
 }

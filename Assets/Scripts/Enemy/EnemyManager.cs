@@ -7,10 +7,11 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _animationDeathTime;
 
-    private CreateEnemyPool _enemyPool;
+    private EnemyPool _enemyPool;
     private Animator _animator;
     private AIPath _aiPath;
     private EnemyModel _enemyModel;
+    private CharacterController _characterController;
     private bool _isDeath;
 
     private AudioSource _audioSource;
@@ -18,16 +19,16 @@ public class EnemyManager : MonoBehaviour
     private GameObject _player;
     private AIDestinationSetter _destinationSetter;
 
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _aiPath = GetComponent<AIPath>();
         _enemyModel = GetComponent<EnemyModel>();
         _aiPath.maxSpeed = _speed;
-        _enemyPool = Singelton<CreateEnemyPool>.Instance;
+        _enemyPool = Singelton<EnemyPool>.Instance;
         _destinationSetter = GetComponent<AIDestinationSetter>();
         _player = GameObject.FindWithTag("Player");
+        _characterController = GetComponent<CharacterController>();
         _audioSource = GetComponentInChildren<AudioSource>();
     }
 
@@ -44,7 +45,7 @@ public class EnemyManager : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.TryGetComponent<PlayerInteractionManager>(out PlayerInteractionManager pl))
+        if (hit.collider.TryGetComponent<PlayerInteractionManager>(out PlayerInteractionManager _))
             _animator.SetBool("isAttack", true);
         else
             _animator.SetBool("isAttack", false);
@@ -57,6 +58,7 @@ public class EnemyManager : MonoBehaviour
         if (AnimationName == null)
             return false;
         var check = _animator.GetCurrentAnimatorStateInfo(0);
+
         return check.IsName(AnimationName);
     }
     
@@ -69,6 +71,7 @@ public class EnemyManager : MonoBehaviour
                 _isDeath = false;
                 _animator.SetBool("isDeath", _isDeath);
                 _enemyModel.SetDefaultState();
+                _characterController.excludeLayers = default;
                 _enemyPool.ObjectPoolEnemy.ReturnObjectToPool(this);
                 break;
             }
@@ -83,7 +86,6 @@ public class EnemyManager : MonoBehaviour
             _destinationSetter.target = null;
             _isDeath = true;
             _animator.SetBool("isDeath", _isDeath);
-            _destinationSetter.target = null;
             StartCoroutine(DeathEnemy());
         }
     }

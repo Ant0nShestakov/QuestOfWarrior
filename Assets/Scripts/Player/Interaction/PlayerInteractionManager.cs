@@ -1,13 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
+    private event Action _healthAndStaminaEvent;
+
     public PlayerModel PlayerModel { get; private set; }
 
     private void Start()
     {
         PlayerModel = GetComponent<PlayerModel>();
+        _healthAndStaminaEvent += PlayerModel.UpdateUiInfo;
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -20,6 +25,11 @@ public class PlayerInteractionManager : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        _healthAndStaminaEvent -= PlayerModel.UpdateUiInfo;        
+    }
+
     public void TakeDamage(int Damage)
     {
         if (PlayerModel.GetDamage(Damage) <= 0 && !PlayerModel.LockState)
@@ -27,5 +37,6 @@ public class PlayerInteractionManager : MonoBehaviour
             PlayerModel.SetCursorFreeState();
             SceneManager.LoadScene(2);
         }
+        _healthAndStaminaEvent.Invoke();
     }
 }

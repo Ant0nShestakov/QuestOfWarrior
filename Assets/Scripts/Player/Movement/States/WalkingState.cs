@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class WalkingState : MovenetState
+public class WalkingState : MovementState
 {
+    public WalkingState() : base() { }
+
     public override void EnterState(PlayerMovemenManager movement)
     {
         movement.PlayerModel.SetWalkSpeedState();
@@ -18,13 +20,13 @@ public class WalkingState : MovenetState
         if (Input.GetKey(KeyCode.LeftShift) && !movement.PlayerModel.IsStay)
         {
             ExitState(movement);
-            movement.SwitchState(movement.RuningState);
+            movement.SwitchState(movement.RealMovementState.RunningState);
         }
         else if (Input.GetKey(KeyCode.Space) && movement.isOnGround && !movement.PlayerModel.IsStay) 
         {
             ExitState(movement);
-            movement.SwitchState(movement.JumpingState);
-            movement.CharacterController.Move(new Vector3(0, movement.JumpForce * Time.deltaTime, 0).normalized);
+            movement.SwitchState(movement.RealMovementState.JumpingState);
+            movement.CharacterController.Move(new Vector3(0, movement.PlayerModel.JumpForce * Time.deltaTime, 0).normalized);
         }
     }
 }

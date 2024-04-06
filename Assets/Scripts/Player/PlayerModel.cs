@@ -1,5 +1,5 @@
 using UnityEngine;
-//вынести свойства и методы атаки в отдельный класс
+
 public class PlayerModel : MonoBehaviour
 {
     [SerializeField] private GameModels _playerProperites;
@@ -10,6 +10,7 @@ public class PlayerModel : MonoBehaviour
     [field: SerializeField] public int Stamina { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public int Speed { get; private set; }
+    [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public bool LockState { get; set; }
     [field: SerializeField] public bool IsBlocked { get; set; }
     [field: SerializeField] public bool IsStay { get; set; }
@@ -20,23 +21,11 @@ public class PlayerModel : MonoBehaviour
         Damage = _playerProperites.AutoAttackDamage;
         Stamina = _playerProperites.MaxStamina;
         Speed = _playerProperites.WalkSpeed;
+        JumpForce = _playerProperites.JumpForce;
         _healthBar = Singelton<HealthBar>.Instance;
     }
 
-    private void UpdateUiInfo() => _healthBar.UpdateInfo();
-
     public void SetAutoAttackDamage() => Damage = _playerProperites.AutoAttackDamage;
-
-    public bool CheckStaminaForAttack(AttackState state)
-    {
-        if(state is SpecialFastAttackState)
-            if (Stamina - _playerProperites.UsingStaminaForSpecialFastAttack < 0)
-                return false;
-        if(state is SpecialStrongAttackState)
-            if (Stamina - _playerProperites.UsingForStaminaSpecialStrongAttack < 0)
-                return false;
-        return true;
-    }
 
     public void SetSpecialFastAttackDamage()
     {
@@ -66,6 +55,17 @@ public class PlayerModel : MonoBehaviour
         Speed = 0; 
     }
 
+    public bool CheckStaminaForAttack(AttackState state)
+    {
+        if (state is SpecialFastAttackState)
+            if (Stamina - _playerProperites.UsingStaminaForSpecialFastAttack < 0)
+                return false;
+        if (state is SpecialStrongAttackState)
+            if (Stamina - _playerProperites.UsingForStaminaSpecialStrongAttack < 0)
+                return false;
+        return true;
+    }
+
     public bool CheckRegenerationStamina() => 
         Stamina + _playerProperites.RegenerationStamina < _playerProperites.MaxStamina;
 
@@ -84,13 +84,14 @@ public class PlayerModel : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public void UpdateUiInfo() => _healthBar.UpdateInfo();
+
     public void SetCursorFreeState() => Cursor.lockState = CursorLockMode.None;
 
     public int GetDamage(int Damage)
     {
         if(!IsBlocked)
             Health -= Damage;
-        UpdateUiInfo();
         return Health;
     }
 }

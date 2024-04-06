@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpamerController : MonoBehaviour
 {
     [SerializeField] private Transform _spamerTransform;
-    [SerializeField] private CreateEnemyPool _enemyPool;
+    [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private int _enemyCount;
     [SerializeField] float _xSpread;
     [SerializeField] float _zSpread;
@@ -18,10 +18,9 @@ public class SpamerController : MonoBehaviour
                     _spamerTransform.position.y,_spamerTransform.position.z + _zSpread);
                 if (_enemyPool.ObjectPoolEnemy.TryGetObject(out EnemyManager enemy, spamPosition))
                 {
-                    Debug.Log(enemy.transform.position);
+                    _xSpread += 1;
+                    _zSpread += 1;
                 }
-                _xSpread += 1;
-                _zSpread += 1;
             }
             gameObject.SetActive(false);
         }
