@@ -13,12 +13,17 @@ public class HealthBar : MonoBehaviour
     private Text _textOnImageHpBar;
     private Text _textOnImageStaminaBar;
 
-    private void Start()
+    private void Awake()
     {
-        _maxHP = _playerModel.Health;
-        _maxStamina = _playerModel.Stamina;
         _textOnImageHpBar = _healthBar.GetComponentInChildren<Text>();
         _textOnImageStaminaBar = _staminaBar.GetComponentInChildren<Text>();
+    }
+
+    private void Start()
+    {
+        _playerModel = GetComponentInParent<PlayerModel>();
+        _maxHP = _playerModel.Health;
+        _maxStamina = _playerModel.Stamina;
         UpdateInfo();
     }
 

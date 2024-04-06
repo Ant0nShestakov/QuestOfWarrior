@@ -30,6 +30,7 @@ public class EnemyManager : MonoBehaviour
         _player = GameObject.FindWithTag("Player");
         _characterController = GetComponent<CharacterController>();
         _audioSource = GetComponentInChildren<AudioSource>();
+
     }
 
     private void OnEnable()
@@ -46,7 +47,9 @@ public class EnemyManager : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.collider.TryGetComponent<PlayerInteractionManager>(out PlayerInteractionManager _))
+        {
             _animator.SetBool("isAttack", true);
+        }
         else
             _animator.SetBool("isAttack", false);
     }
@@ -85,6 +88,7 @@ public class EnemyManager : MonoBehaviour
         {
             _destinationSetter.target = null;
             _isDeath = true;
+            _characterController.excludeLayers = 65;
             _animator.SetBool("isDeath", _isDeath);
             StartCoroutine(DeathEnemy());
         }

@@ -1,23 +1,21 @@
 public class JumpingState : MovementState
 {
-    public JumpingState() : base() { }
-
-    public override void EnterState(PlayerMovemenManager movement)
+    public override void EnterState(IManager movement)
     {
         movement.Animator.SetBool("isJump", true);
     }
 
-    public override void ExitState(PlayerMovemenManager movement)
+    public override void ExitState(IManager movement)
     {
         movement.Animator.SetBool("isJump", false);
     }
 
-    public override void UpdateState(PlayerMovemenManager movement)
+    public override void UpdateState(IManager movement)
     {
-        if (!movement.isOnGround) 
+        if (!movement.IsOnGround) 
         {
             ExitState(movement);
-            movement.SwitchState(movement.RealMovementState.FreeFlyState);
+            movement.SwitchState(movement.StateSwitcher.FreeFlyState.Value);
         }
     }
 }

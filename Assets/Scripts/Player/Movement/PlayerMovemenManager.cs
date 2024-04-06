@@ -1,31 +1,33 @@
 using UnityEngine;
 
-public class PlayerMovemenManager : MonoBehaviour
+public class PlayerMovemenManager : MonoBehaviour, IManager
 {
     private float _hInput;
     private float _vInput;
 
     private Animator _animator;
+    private PlayerModel _playerModel;
     private CharacterController _characterController;
+    private bool _isOnGround;
 
-    private MovementStateSwitcher _movementStateSwitcher;
+    private StateSwitcher _stateSwitcher;
     private PlayerMovementSoundController _soundManager;
     private Vector3 _direction;
 
-    public bool isOnGround { get; private set; }
-    public PlayerModel PlayerModel { get; private set; }
+    public bool IsOnGround { get => _isOnGround; }
+    public PlayerModel PlayerModel { get => _playerModel; }
     public CharacterController CharacterController { get => _characterController;}
     public Animator Animator { get => _animator; }
-    public MovementStateSwitcher RealMovementState { get => _movementStateSwitcher; }
+    public StateSwitcher StateSwitcher { get => _stateSwitcher; }
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
-        PlayerModel = GetComponent<PlayerModel>();
+        _playerModel = GetComponent<PlayerModel>();
         _soundManager = GetComponentInChildren<PlayerMovementSoundController>();
-        _movementStateSwitcher = new MovementStateSwitcher();
-        isOnGround = true;
+        _stateSwitcher = new StateSwitcher(new WalkingState());
+        _isOnGround = true;
     }
 
     private void Update()
@@ -37,28 +39,28 @@ public class PlayerMovemenManager : MonoBehaviour
         _vInput = Input.GetAxis("Vertical");
         _direction = this.transform.forward * _vInput + this.transform.right * _hInput;
         _characterController.Move(_direction.normalized * PlayerModel.Speed * Time.deltaTime);
-        _movementStateSwitcher.UpdateState(this);
+        _stateSwitcher.UpdateState(this);
         _animator.SetFloat("hInput", _hInput);
         _animator.SetFloat("vInput", _vInput);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (isOnGround)
+        if (IsOnGround)
             return;
 
         if (other.gameObject.layer == 8)
-            isOnGround = true;
+            _isOnGround = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == 8)
-            isOnGround = false;
+            _isOnGround = false;
     }
 
-    public void SwitchState(MovementState state) =>
-        _movementStateSwitcher.SwitchState(this, state);
+    public void SwitchState(IState state) =>
+        _stateSwitcher.SwitchState(this, state);
 
     public void PlayWalkSound(int indexPan) => 
         _soundManager.PlayWalkSound(indexPan);

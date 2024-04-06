@@ -1,24 +1,22 @@
 public class FreeFlyState : MovementState
 {
 
-    public FreeFlyState() : base() { }
-
-    public override void EnterState(PlayerMovemenManager movement)
+    public override void EnterState(IManager movement)
     {
         movement.Animator.SetBool("isFreeFly", true);
     }
 
-    public override void ExitState(PlayerMovemenManager movement)
+    public override void ExitState(IManager movement)
     {
         movement.Animator.SetBool("isFreeFly", false);
     }
 
-    public override void UpdateState(PlayerMovemenManager movement)
+    public override void UpdateState(IManager movement)
     {
-        if(movement.isOnGround) 
+        if(movement.IsOnGround) 
         {
             ExitState(movement);
-            movement.SwitchState(movement.RealMovementState.LandingState);
+            movement.SwitchState(movement.StateSwitcher.LandingState.Value);
         }
     }
 }

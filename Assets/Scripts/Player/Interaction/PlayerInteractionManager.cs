@@ -5,14 +5,19 @@ using UnityEngine.SceneManagement;
 public class PlayerInteractionManager : MonoBehaviour
 {
     private event Action _healthAndStaminaEvent;
+    private HealthBar _healthBar;
 
     public PlayerModel PlayerModel { get; private set; }
 
     private void Start()
     {
         PlayerModel = GetComponent<PlayerModel>();
-        _healthAndStaminaEvent += PlayerModel.UpdateUiInfo;
+        _healthBar = GetComponentInChildren<HealthBar>();
+    }
 
+    private void OnEnable()
+    {
+        _healthAndStaminaEvent += UpdateUiInfo;
     }
 
     private void OnTriggerStay(Collider other)
@@ -27,8 +32,10 @@ public class PlayerInteractionManager : MonoBehaviour
 
     private void OnDisable()
     {
-        _healthAndStaminaEvent -= PlayerModel.UpdateUiInfo;        
+        _healthAndStaminaEvent -= UpdateUiInfo;        
     }
+
+    public void UpdateUiInfo() => _healthBar.UpdateInfo();
 
     public void TakeDamage(int Damage)
     {

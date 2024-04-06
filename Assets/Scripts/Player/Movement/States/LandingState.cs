@@ -2,27 +2,25 @@ using UnityEngine;
 
 public class LandingState : MovementState
 {
-    public LandingState() : base() { }
-
-    public override void EnterState(PlayerMovemenManager movement)
+    public override void EnterState(IManager movement)
     {
         movement.Animator.SetBool("IsLanding", true);
     }
 
-    public override void ExitState(PlayerMovemenManager movement)
+    public override void ExitState(IManager movement)
     {
         movement.Animator.SetBool("IsLanding", false);
     }
 
-    public override void UpdateState(PlayerMovemenManager movement)
+    public override void UpdateState(IManager movement)
     {
-        if(movement.isOnGround) 
+        if(movement.IsOnGround) 
         {
             ExitState(movement);
             if(Input.GetKey(KeyCode.LeftShift)) 
-                movement.SwitchState(movement.RealMovementState.RunningState);
+                movement.SwitchState(movement.StateSwitcher.RunningState.Value);
             else
-                movement.SwitchState(movement.RealMovementState.WalkingState);
+                movement.SwitchState(movement.StateSwitcher.WalkingState.Value);
         }
 
     }

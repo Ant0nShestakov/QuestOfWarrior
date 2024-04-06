@@ -1,22 +1,28 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerAttackManager : MonoBehaviour
+public class PlayerAttackManager : MonoBehaviour, IManager
 {
     [SerializeField] private float RegenerationInSeconds;
 
     private PlayerAttackSoundController _soundManager;
-    private AttackStateSwitcher _attackStateSwitcher;
+    private StateSwitcher _stateSwitcher;
+    private PlayerModel _playerModel;
+    private CharacterController _characterController;
+    private bool _isOnGround;
 
     public Animator Animator { get; private set; }
-    public PlayerModel PlayerModel { get; private set; }
-    public AttackStateSwitcher AttackStateSwitcher { get => _attackStateSwitcher; }
+    public PlayerModel PlayerModel { get => _playerModel; }
+    public StateSwitcher StateSwitcher { get => _stateSwitcher; }
+    public CharacterController CharacterController { get => _characterController; }
+    public bool IsOnGround { get => _isOnGround; }
 
     private void Start()
     {
-        _attackStateSwitcher = new AttackStateSwitcher();
+        _stateSwitcher = new StateSwitcher(new IdleState());
         Animator = GetComponent<Animator>();
-        PlayerModel = GetComponent<PlayerModel>();
+        _playerModel = GetComponent<PlayerModel>();
+        _characterController = GetComponent<CharacterController>();
         StartCoroutine(RegenarationStamina());
         _soundManager = GetComponentInChildren<PlayerAttackSoundController>();
     }
@@ -24,7 +30,7 @@ public class PlayerAttackManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        _attackStateSwitcher.UpdateState(this);
+        _stateSwitcher.UpdateState(this);
     }
 
     private IEnumerator RegenarationStamina()
@@ -36,7 +42,7 @@ public class PlayerAttackManager : MonoBehaviour
         }
     }
 
-    public void SwitchState(AttackState state) => _attackStateSwitcher.SwitchState(this, state);
+    public void SwitchState(IState state) => _stateSwitcher.SwitchState(this, state);
 
     public void PlayAttackSound() => _soundManager.PlayRageSound();
 }

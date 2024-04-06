@@ -2,41 +2,41 @@ using UnityEngine;
 
 public class BlockState : AttackState
 {
-    public override void EnterState(PlayerAttackManager manager)
+    public override void EnterState(IManager manager)
     {
         manager.PlayerModel.IsBlocked = true;
         manager.Animator.SetBool("isBlock", true);
     }
 
-    public void ExitState(PlayerAttackManager manager)
+    public override void ExitState(IManager manager)
     {
         manager.PlayerModel.IsBlocked = false;
         manager.Animator.SetBool("isBlock", false);
     }
 
-    public override void UpdateState(PlayerAttackManager manager)
+    public override void UpdateState(IManager manager)
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
             ExitState(manager);
-            manager.SwitchState(manager.AttackStateSwitcher.AutoAttackState);
+            manager.SwitchState(manager.StateSwitcher.AutoAttackState.Value);
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1) || !IsNotMoving())
         {
             ExitState(manager);
-            manager.SwitchState(manager.AttackStateSwitcher.IdleState);
+            manager.SwitchState(manager.StateSwitcher.IdleState.Value);
         }
         else if (Input.GetKey(KeyCode.F) 
-            && manager.PlayerModel.CheckStaminaForAttack(manager.AttackStateSwitcher.SpecialStrongAttackState))
+            && manager.PlayerModel.CheckStaminaForAttack(manager.StateSwitcher.SpecialStrongAttackState.Value))
         {
             ExitState(manager);
-            manager.SwitchState(manager.AttackStateSwitcher.SpecialStrongAttackState);
+            manager.SwitchState(manager.StateSwitcher.SpecialStrongAttackState.Value);
         }
         else if (Input.GetKey(KeyCode.R) 
-            && manager.PlayerModel.CheckStaminaForAttack(manager.AttackStateSwitcher.SpecialFastAttackState))
+            && manager.PlayerModel.CheckStaminaForAttack(manager.StateSwitcher.SpecialFastAttackState.Value))
         {
             ExitState(manager);
-            manager.SwitchState(manager.AttackStateSwitcher.SpecialFastAttackState);
+            manager.SwitchState(manager.StateSwitcher.SpecialFastAttackState.Value);
         }
     }
 }

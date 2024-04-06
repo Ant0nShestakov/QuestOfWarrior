@@ -4,8 +4,6 @@ public class PlayerModel : MonoBehaviour
 {
     [SerializeField] private GameModels _playerProperites;
 
-    private HealthBar _healthBar;
-
     [field: SerializeField] public int Health { get; private set; }
     [field: SerializeField] public int Stamina { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
@@ -22,7 +20,6 @@ public class PlayerModel : MonoBehaviour
         Stamina = _playerProperites.MaxStamina;
         Speed = _playerProperites.WalkSpeed;
         JumpForce = _playerProperites.JumpForce;
-        _healthBar = Singelton<HealthBar>.Instance;
     }
 
     public void SetAutoAttackDamage() => Damage = _playerProperites.AutoAttackDamage;
@@ -31,14 +28,12 @@ public class PlayerModel : MonoBehaviour
     {
         Stamina -= _playerProperites.UsingStaminaForSpecialFastAttack;
         Damage = _playerProperites.SpecialFastAttackDamage;
-        UpdateUiInfo();
     }
 
     public void SetSpecialStrongAttackDamage() 
     {
         Stamina -= _playerProperites.UsingForStaminaSpecialStrongAttack;
         Damage = _playerProperites.SpecialStrongAttackDamage;
-        UpdateUiInfo();
     }
 
     public void SetWalkSpeedState() 
@@ -75,7 +70,6 @@ public class PlayerModel : MonoBehaviour
             Stamina = _playerProperites.MaxStamina;
         else
             Stamina += _playerProperites.RegenerationStamina;
-        UpdateUiInfo();
     }
 
     public void SetCursorLockState()
@@ -83,8 +77,6 @@ public class PlayerModel : MonoBehaviour
         Time.timeScale = 1.0f;
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    public void UpdateUiInfo() => _healthBar.UpdateInfo();
 
     public void SetCursorFreeState() => Cursor.lockState = CursorLockMode.None;
 
