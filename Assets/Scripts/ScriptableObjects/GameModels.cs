@@ -14,5 +14,6 @@ public class GameModels : ScriptableObject
     [field: SerializeField] public int WalkSpeed { get; private set; }
     [field: SerializeField] public int RunSpeed { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
+    [field: SerializeField] public float Gravity { get; private set; }
 
 }

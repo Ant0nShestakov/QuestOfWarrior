@@ -22,4 +22,5 @@ MonoBehaviour:
   <RegenerationStamina>k__BackingField: 30
   <WalkSpeed>k__BackingField: 6
   <RunSpeed>k__BackingField: 10
-  <JumpForce>k__BackingField: 75
+  <JumpForce>k__BackingField: 7
+  <Gravity>k__BackingField: 10

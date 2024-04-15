@@ -24,7 +24,6 @@ public class RunningState : MovementState
         {
             ExitState(movement);
             movement.SwitchState(movement.StateSwitcher.JumpingState.Value);
-            movement.CharacterController.Move(new Vector3(0, movement.PlayerModel.JumpForce, 0).normalized);
         }
     }
 }

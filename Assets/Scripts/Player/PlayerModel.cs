@@ -9,6 +9,7 @@ public class PlayerModel : MonoBehaviour
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public int Speed { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
+    [field: SerializeField] public float Gravity { get; private set; }
     [field: SerializeField] public bool LockState { get; set; }
     [field: SerializeField] public bool IsBlocked { get; set; }
     [field: SerializeField] public bool IsStay { get; set; }
@@ -20,6 +21,7 @@ public class PlayerModel : MonoBehaviour
         Stamina = _playerProperites.MaxStamina;
         Speed = _playerProperites.WalkSpeed;
         JumpForce = _playerProperites.JumpForce;
+        Gravity = _playerProperites.Gravity;
     }
 
     public void SetAutoAttackDamage() => Damage = _playerProperites.AutoAttackDamage;
