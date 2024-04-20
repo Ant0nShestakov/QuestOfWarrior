@@ -75,7 +75,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         _vInput = Input.GetAxis("Vertical");
         Vector3 inputDiraction = new Vector3(_hInput, 0, _vInput);
         inputDiraction = transform.TransformDirection(inputDiraction);
-        _direction = inputDiraction * PlayerModel.Speed;
+        _direction = inputDiraction.normalized * PlayerModel.Speed;
     }
 
     private void Jump() => _direction.y = PlayerModel.JumpForce;

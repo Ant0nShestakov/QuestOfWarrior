@@ -14,13 +14,24 @@ public class LandingState : MovementState
 
     public override void UpdateState(IManager movement)
     {
-        if(movement.IsOnGround) 
+        if (movement.IsOnGround)
         {
-            ExitState(movement);
-            if(Input.GetKey(KeyCode.LeftShift)) 
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                ExitState(movement);
                 movement.SwitchState(movement.StateSwitcher.RunningState.Value);
+            }
+            else if (Input.GetKey(KeyCode.Space) && movement.IsOnGround)
+            {
+                ExitState(movement);
+                movement.SwitchState(movement.StateSwitcher.JumpingState.Value);
+            }
             else
+            {
+                ExitState(movement);
                 movement.SwitchState(movement.StateSwitcher.WalkingState.Value);
+            }
         }
 
     }

@@ -544,7 +544,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &5075462470207341454
 Transform:
@@ -1227,7 +1227,7 @@ GameObject:
   - component: {fileID: 7256561794761983686}
   - component: {fileID: 5159913055252969466}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: GroundTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1633,7 +1633,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &769641176547762294
 Transform:
@@ -2775,7 +2775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37800002, y: 0.257}
   m_AnchorMax: {x: 0.62200004, y: 0.354}
-  m_AnchoredPosition: {x: 0.5, y: -0.50006104}
+  m_AnchoredPosition: {x: 0.5, y: -0.5}
   m_SizeDelta: {x: -0.42401123, y: 2.7274017}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6770323113122495339
@@ -2985,7 +2985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.016520834, y: 0.87131214}
   m_AnchorMax: {x: 0.275, y: 0.91700006}
-  m_AnchoredPosition: {x: -0.3996582, y: 1.786377}
+  m_AnchoredPosition: {x: -0.39990234, y: 1.786377}
   m_SizeDelta: {x: 1.2007141, y: 4.427307}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &476743123117247932
@@ -3100,12 +3100,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2008960200205317720}
   - component: {fileID: 742070714730239852}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &2008960200205317720
 Transform:
@@ -3178,7 +3178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.016520834, y: 0.79200006}
   m_AnchorMax: {x: 0.275, y: 0.84000003}
-  m_AnchoredPosition: {x: -0.3996582, y: -1}
+  m_AnchoredPosition: {x: -0.39990234, y: -1}
   m_SizeDelta: {x: 1.2007141, y: 2.4273071}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7574607872584956871
@@ -3276,7 +3276,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60.000004
     OrthographicSize: 5
-    NearClipPlane: 0.01
+    NearClipPlane: 0.05
     FarClipPlane: 40
     Dutch: 0
     ModeOverride: 0
@@ -3376,7 +3376,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -3515,7 +3515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3054400943376027948}
   m_Layer: 6
-  m_Name: CameraPos
+  m_Name: CameraPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3908,8 +3908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663735b8adf4bf348b57fff0d033dcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <JumpForce>k__BackingField: 75
-  <isOnGround>k__BackingField: 1
 --- !u!114 &6772759857458844384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3935,7 +3933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraPosition: {fileID: 3054400943376027948}
-  sensetivity: 1
+  _sensetivity: 1
   _vClampMax: 15
   _vClampMin: -25
 --- !u!114 &8084318612938766848
@@ -3967,6 +3965,8 @@ MonoBehaviour:
   <Stamina>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Speed>k__BackingField: 0
+  <JumpForce>k__BackingField: 0
+  <Gravity>k__BackingField: 0
   <LockState>k__BackingField: 0
   <IsBlocked>k__BackingField: 0
   <IsStay>k__BackingField: 0
@@ -4181,7 +4181,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &6863026107402121382
 Transform:
@@ -4480,7 +4480,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &1955276830170233378
 Transform:

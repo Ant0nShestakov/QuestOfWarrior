@@ -351,6 +351,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.0006
       objectReference: {fileID: 0}
+    - target: {fileID: 6466863786778143475, guid: 05b70bb637c1de5458361cdbe2cab1a2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8741910233246317594, guid: 05b70bb637c1de5458361cdbe2cab1a2, type: 3}
       propertyPath: m_Name
       value: Metal Grate Parent 001
@@ -445,6 +449,14 @@ PrefabInstance:
     - target: {fileID: 3761438998714599932, guid: 28047f3684a02404f814f84ece650a52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400744591663427785, guid: 28047f3684a02404f814f84ece650a52, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517524778260518090, guid: 28047f3684a02404f814f84ece650a52, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 6462126970929630587, guid: 28047f3684a02404f814f84ece650a52, type: 3}
       propertyPath: m_IsTrigger

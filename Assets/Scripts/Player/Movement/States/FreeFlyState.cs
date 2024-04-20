@@ -16,7 +16,7 @@ public class FreeFlyState : MovementState
         if(movement.IsOnGround) 
         {
             ExitState(movement);
-            movement.SwitchState(movement.StateSwitcher.LandingState.Value);
+            movement.SwitchState(movement.StateSwitcher.WalkingState.Value);
         }
     }
 }
