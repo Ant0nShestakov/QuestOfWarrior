@@ -12,9 +12,9 @@ public class StateSwitcher
 
     public Lazy<WalkingState> WalkingState { get; private set; }
     public Lazy<RunningState> RunningState { get; private set; }
-    public Lazy<JumpingState> JumpingState { get; private set; }
     public Lazy<FreeFlyState> FreeFlyState { get; private set; }
-    public Lazy<LandingState> LandingState { get; private set; }
+
+    public IState Current { get => _currentState; }
 
     public StateSwitcher(IState state)
     {
@@ -26,9 +26,7 @@ public class StateSwitcher
 
         WalkingState = new();
         RunningState = new();
-        JumpingState = new();
         FreeFlyState = new();
-        LandingState = new();
 
         _currentState = state;
     }

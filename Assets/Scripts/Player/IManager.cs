@@ -7,6 +7,5 @@ public interface IManager
     public StateSwitcher StateSwitcher { get; }
     public CharacterController CharacterController { get; }
     public bool IsOnGround { get; }
-
     public void SwitchState(IState state);
 }

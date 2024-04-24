@@ -20,10 +20,10 @@ public class RunningState : MovementState
             ExitState(movement);
             movement.SwitchState(movement.StateSwitcher.WalkingState.Value);
         }
-        else if (Input.GetKey(KeyCode.Space) && movement.IsOnGround) 
+        else if (Input.GetKey(KeyCode.Space) && !movement.IsOnGround) 
         {
             ExitState(movement);
-            movement.SwitchState(movement.StateSwitcher.JumpingState.Value);
+            movement.SwitchState(movement.StateSwitcher.FreeFlyState.Value);
         }
     }
 }

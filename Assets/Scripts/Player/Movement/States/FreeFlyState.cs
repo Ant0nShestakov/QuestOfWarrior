@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class FreeFlyState : MovementState
 {
 
@@ -16,6 +18,11 @@ public class FreeFlyState : MovementState
         if(movement.IsOnGround) 
         {
             ExitState(movement);
+            if(Input.GetKey(KeyCode.LeftShift)) 
+            {
+                movement.SwitchState(movement.StateSwitcher.RunningState.Value);
+                return;
+            }
             movement.SwitchState(movement.StateSwitcher.WalkingState.Value);
         }
     }

@@ -23,7 +23,6 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
     public CharacterController CharacterController { get => _characterController;}
     public Animator Animator { get => _animator; }
 
-
     private void Start()
     {
         _animator = GetComponent<Animator>();

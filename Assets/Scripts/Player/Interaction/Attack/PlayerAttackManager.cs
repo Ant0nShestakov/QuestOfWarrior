@@ -45,4 +45,5 @@ public class PlayerAttackManager : MonoBehaviour, IManager
     public void SwitchState(IState state) => _stateSwitcher.SwitchState(this, state);
 
     public void PlayAttackSound() => _soundManager.PlayRageSound();
+
 }
