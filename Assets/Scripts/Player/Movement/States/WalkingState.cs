@@ -22,7 +22,7 @@ public class WalkingState : MovementState
             ExitState(movement);
             movement.SwitchState(movement.StateSwitcher.RunningState.Value);
         }
-        else if (Input.GetKey(KeyCode.Space) && !movement.IsOnGround && !movement.PlayerModel.IsStay) 
+        else if ((Input.GetKey(KeyCode.Space) && !movement.PlayerModel.IsOnGround) || movement.PlayerModel.IsFreeFly) 
         {
             ExitState(movement);
             movement.SwitchState(movement.StateSwitcher.FreeFlyState.Value);

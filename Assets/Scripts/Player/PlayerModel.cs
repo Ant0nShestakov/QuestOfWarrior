@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerModel : MonoBehaviour
@@ -13,6 +15,11 @@ public class PlayerModel : MonoBehaviour
     [field: SerializeField] public bool LockState { get; set; }
     [field: SerializeField] public bool IsBlocked { get; set; }
     [field: SerializeField] public bool IsStay { get; set; }
+    [field: SerializeField] public List<Cooldown> Cooldowns { get; set; }
+
+    public bool IsOnGround { get; set; }
+    public bool IsFreeFly { get; set; }
+    public bool IsAttack { get; private set; }
 
     private void Awake()
     {
@@ -24,18 +31,65 @@ public class PlayerModel : MonoBehaviour
         Gravity = _playerProperites.Gravity;
     }
 
-    public void SetAutoAttackDamage() => Damage = _playerProperites.AutoAttackDamage;
+    private bool CheckStaminaForAttack(CooldownTypes types)
+    {
+        if (types == CooldownTypes.SpecialFastAttack)
+            if (Stamina - _playerProperites.UsingStaminaForSpecialFastAttack < 0)
+                return false;
+        if (types == CooldownTypes.SpecialStrongAttack)
+            if (Stamina - _playerProperites.UsingForStaminaSpecialStrongAttack < 0)
+                return false;
+        return true;
+    }
+
+    private bool TryGetCooldownForType(CooldownTypes cooldownTypes, out Cooldown cooldown)
+    {
+        cooldown = Cooldowns.SingleOrDefault(cd => cd.Type == cooldownTypes);
+
+        if(cooldown is null) 
+            return false;
+
+        return true;
+    }
+
+    public bool IsCast(CooldownTypes cooldownTypes, float time)
+    {
+        if(!IsOnGround)
+            return false;
+
+        if (IsAttack)
+            return false;
+
+        if (!CheckStaminaForAttack(cooldownTypes))
+            return false;
+
+        if (!TryGetCooldownForType(cooldownTypes, out Cooldown cooldown))
+            return false;
+
+        if (!cooldown.CheckCooldownStemp(time))
+            return false;
+
+        return true;
+    }
+
+    public void SetAutoAttackDamage()
+    {
+        Damage = _playerProperites.AutoAttackDamage;
+        IsAttack = false;
+    }
 
     public void SetSpecialFastAttackDamage()
     {
         Stamina -= _playerProperites.UsingStaminaForSpecialFastAttack;
         Damage = _playerProperites.SpecialFastAttackDamage;
+        IsAttack = true;
     }
 
     public void SetSpecialStrongAttackDamage() 
     {
         Stamina -= _playerProperites.UsingForStaminaSpecialStrongAttack;
         Damage = _playerProperites.SpecialStrongAttackDamage;
+        IsAttack = true;
     }
 
     public void SetWalkSpeedState() 
@@ -50,17 +104,6 @@ public class PlayerModel : MonoBehaviour
     {
         IsStay = true;
         Speed = 0; 
-    }
-
-    public bool CheckStaminaForAttack(AttackState state)
-    {
-        if (state is SpecialFastAttackState)
-            if (Stamina - _playerProperites.UsingStaminaForSpecialFastAttack < 0)
-                return false;
-        if (state is SpecialStrongAttackState)
-            if (Stamina - _playerProperites.UsingForStaminaSpecialStrongAttack < 0)
-                return false;
-        return true;
     }
 
     public bool CheckRegenerationStamina() => 

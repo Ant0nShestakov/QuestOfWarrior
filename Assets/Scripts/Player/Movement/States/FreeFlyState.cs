@@ -15,7 +15,7 @@ public class FreeFlyState : MovementState
 
     public override void UpdateState(IManager movement)
     {
-        if(movement.IsOnGround) 
+        if(movement.PlayerModel.IsOnGround && !movement.PlayerModel.IsFreeFly) 
         {
             ExitState(movement);
             if(Input.GetKey(KeyCode.LeftShift)) 

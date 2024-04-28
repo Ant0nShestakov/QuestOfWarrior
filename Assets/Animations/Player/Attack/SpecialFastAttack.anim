@@ -87063,13 +87063,6 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: Stay
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0
     functionName: SetSpecialFastAttackDamage
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -87078,6 +87071,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0
     functionName: UpdateUiInfo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
+    functionName: Stay
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -87105,14 +87105,14 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 1.1166667
-    functionName: SetAutoAttackDamage
+    functionName: SetWalkSpeedState
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1166667
-    functionName: SetWalkSpeedState
+  - time: 1.2
+    functionName: SetAutoAttackDamage
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -10,17 +10,17 @@ public class SpecialStrongAttackState : AttackState
 
     public override void UpdateState(IManager manager)
     {
-        if (Input.GetKeyUp(KeyCode.F) || !manager.PlayerModel.CheckStaminaForAttack(manager.StateSwitcher.SpecialStrongAttackState.Value))
+        if (Input.GetKeyUp(KeyCode.F) && !manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttack, Time.time))
         {
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.IdleState.Value);
         }
-        else if (Input.GetKey(KeyCode.Mouse0))
+        else if (Input.GetKey(KeyCode.Mouse0) && manager.PlayerModel.IsCast(CooldownTypes.AutoAttack, Time.time))
         {
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.AutoAttackState.Value);
         }
-        else if (Input.GetKey(KeyCode.R))
+        else if (Input.GetKey(KeyCode.R) && manager.PlayerModel.IsCast(CooldownTypes.SpecialFastAttack, Time.time)) 
         {
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.SpecialFastAttackState.Value);

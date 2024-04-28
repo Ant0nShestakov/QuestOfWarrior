@@ -27,7 +27,6 @@ public class PlayerAttackManager : MonoBehaviour, IManager
         _soundManager = GetComponentInChildren<PlayerAttackSoundController>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         _stateSwitcher.UpdateState(this);
@@ -45,5 +44,4 @@ public class PlayerAttackManager : MonoBehaviour, IManager
     public void SwitchState(IState state) => _stateSwitcher.SwitchState(this, state);
 
     public void PlayAttackSound() => _soundManager.PlayRageSound();
-
 }

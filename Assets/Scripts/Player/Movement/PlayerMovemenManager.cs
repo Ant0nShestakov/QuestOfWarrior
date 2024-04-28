@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovemenManager : MonoBehaviour, IManager
@@ -5,9 +6,10 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
     #region movement stats
     private float _hInput;
     private float _vInput;
-    private bool _isOnGround;
     private Vector3 _direction;
     #endregion
+
+    [SerializeField] private float CDJump;
 
     private PlayerModel _playerModel;
     private StateSwitcher _stateSwitcher;
@@ -16,10 +18,8 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
     private Animator _animator;
     private CharacterController _characterController;
 
-    public bool IsOnGround { get => _isOnGround; }
     public PlayerModel PlayerModel { get => _playerModel; }
     public StateSwitcher StateSwitcher { get => _stateSwitcher; }
-
     public CharacterController CharacterController { get => _characterController;}
     public Animator Animator { get => _animator; }
 
@@ -30,7 +30,6 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         _playerModel = GetComponent<PlayerModel>();
         _soundManager = GetComponentInChildren<PlayerMovementSoundController>();
         _stateSwitcher = new StateSwitcher(new WalkingState());
-        //_isOnGround = true;
     }
 
     private void Update()
@@ -38,10 +37,10 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         if (PlayerModel.LockState)
             return;
 
-        if(IsOnGround) 
+        if(PlayerModel.IsOnGround) 
         {
             SetMoveDiraction();
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && !PlayerModel.IsAttack)
                 Jump();
         }
 
@@ -55,17 +54,29 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     private void OnTriggerStay(Collider other)
     {
-        if (IsOnGround)
-            return;
-
         if (other.gameObject.layer == 8)
-            _isOnGround = true;
+        {
+            PlayerModel.IsOnGround = true;
+            PlayerModel.IsFreeFly = false;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == 8)
-            _isOnGround = false;
+        {
+            PlayerModel.IsOnGround = false;
+            StartCoroutine(FreeFlyCorroutine());
+        }
+    }
+
+    private IEnumerator FreeFlyCorroutine()
+    {
+        yield return new WaitForSeconds(CDJump); 
+        if(!PlayerModel.IsOnGround)
+           PlayerModel.IsFreeFly = true;
+        else
+            PlayerModel.IsFreeFly = false;
     }
 
     private void SetMoveDiraction()
@@ -82,6 +93,9 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
     public void SwitchState(IState state) =>
         _stateSwitcher.SwitchState(this, state);
 
-    public void PlayWalkSound(int indexPan) => 
-        _soundManager.PlayWalkSound(indexPan);
+    public void PlayWalkSound(int indexPan) 
+    {
+        if (!PlayerModel.IsAttack)
+            _soundManager.PlayWalkSound(indexPan);
+    }
 }
