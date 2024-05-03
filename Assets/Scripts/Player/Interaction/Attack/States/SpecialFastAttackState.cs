@@ -25,5 +25,11 @@ public class SpecialFastAttackState : AttackState
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.AutoAttackState.Value);
         }
+        else if (Input.GetKey(KeyCode.Q)
+            && manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttackWithJump, Time.time))
+        {
+            ExitState(manager);
+            manager.SwitchState(manager.StateSwitcher.SpecialStrongAttackWithJump.Value);
+        }
     }
 }

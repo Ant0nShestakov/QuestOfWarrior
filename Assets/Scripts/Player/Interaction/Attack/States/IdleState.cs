@@ -18,5 +18,7 @@ public class IdleState : AttackState
             manager.SwitchState(manager.StateSwitcher.SpecialStrongAttackState.Value);
         else if (Input.GetKey(KeyCode.R) && manager.PlayerModel.IsCast(CooldownTypes.SpecialFastAttack, Time.time))
             manager.SwitchState(manager.StateSwitcher.SpecialFastAttackState.Value);
+        else if (Input.GetKey(KeyCode.Q) && manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttackWithJump, Time.time))
+            manager.SwitchState(manager.StateSwitcher.SpecialStrongAttackWithJump.Value);
     }
 }

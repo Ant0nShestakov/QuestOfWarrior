@@ -1348,8 +1348,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6855331, y: 0.22424868, z: 1.3073541}
-  m_Center: {x: 0.024833886, y: 0.057651073, z: -0.004987597}
+  m_Size: {x: 0.6855331, y: 0.3548841, z: 1.3073541}
+  m_Center: {x: 0.024833888, y: -0.0076666474, z: -0.0049875975}
 --- !u!1 &2833669042374602868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,10 +1982,10 @@ RectTransform:
   - {fileID: 8004259276870148058}
   m_Father: {fileID: 5809387912242350702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -233.1, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0.14073087, y: 0.048616603}
+  m_AnchorMax: {x: 0.26900002, y: 0.9513834}
+  m_AnchoredPosition: {x: -0.6000061, y: 0}
+  m_SizeDelta: {x: -1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &773385706523942416
 CanvasRenderer:
@@ -3495,10 +3495,10 @@ RectTransform:
   - {fileID: 6581704197293273145}
   m_Father: {fileID: 1475305371679818445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -400.5359}
-  m_SizeDelta: {x: -1132.0225, y: -869.0544}
+  m_AnchorMin: {x: 0.29431248, y: 0.03031963}
+  m_AnchorMax: {x: 0.7052293, y: 0.141}
+  m_AnchoredPosition: {x: 0.5, y: 0.88391113}
+  m_SizeDelta: {x: -1.0219727, y: -2.2150269}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &10492888411286209
 CanvasRenderer:
@@ -3952,10 +3952,10 @@ RectTransform:
   - {fileID: 5907234252008568378}
   m_Father: {fileID: 5809387912242350702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -338.3, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0.008730866, y: 0.048616603}
+  m_AnchorMax: {x: 0.13319261, y: 0.9513834}
+  m_AnchoredPosition: {x: 0.2000122, y: 0}
+  m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4139993745721058058
 CanvasRenderer:
@@ -4398,7 +4398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663735b8adf4bf348b57fff0d033dcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CDJump: 1.5
+  _timeBeforeFall: 0.5
 --- !u!114 &6772759857458844384
 MonoBehaviour:
   m_ObjectHideFlags: 0

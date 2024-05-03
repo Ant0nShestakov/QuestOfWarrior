@@ -12,11 +12,11 @@ public class PlayerInteractionManager : MonoBehaviour
     private void Start()
     {
         PlayerModel = GetComponent<PlayerModel>();
-        _healthBar = GetComponentInChildren<HealthBar>();
     }
 
     private void OnEnable()
     {
+        _healthBar = GetComponentInChildren<HealthBar>();
         _healthAndStaminaEvent += UpdateUiInfo;
     }
 
@@ -39,7 +39,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
     public void TakeDamage(int Damage)
     {
-        if (PlayerModel.GetDamage(Damage) <= 0 && !PlayerModel.LockState)
+        if (PlayerModel.GetDamage(Damage) <= 0)
         {
             PlayerModel.SetCursorFreeState();
             SceneManager.LoadScene(2);

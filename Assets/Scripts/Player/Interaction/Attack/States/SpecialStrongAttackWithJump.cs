@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class SpecialStrongAttackState : AttackState
+public class SpecialStrongAttackWithJump : AttackState
 {
     public override void EnterState(IManager manager) =>        
-        manager.Animator.SetBool("isSpecialAttack", true);
+        manager.Animator.SetBool("isSpecialStrongAttackWithJump", true);
 
     public override void ExitState(IManager manager) =>
-        manager.Animator.SetBool("isSpecialAttack", false);
+        manager.Animator.SetBool("isSpecialStrongAttackWithJump", false);
 
     public override void UpdateState(IManager manager)
     {
-        if (Input.GetKeyUp(KeyCode.F) && !manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttack, Time.time))
+        if (Input.GetKeyUp(KeyCode.Q) && !manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttackWithJump, Time.time))
         {
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.IdleState.Value);
@@ -25,11 +25,10 @@ public class SpecialStrongAttackState : AttackState
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.SpecialFastAttackState.Value);
         }
-        else if (Input.GetKey(KeyCode.Q)
-            && manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttackWithJump, Time.time))
+        else if(Input.GetKey(KeyCode.F) && manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttack, Time.time))
         {
             ExitState(manager);
-            manager.SwitchState(manager.StateSwitcher.SpecialStrongAttackWithJump.Value);
+            manager.SwitchState(manager.StateSwitcher.SpecialStrongAttackState.Value);
         }
     }
 }

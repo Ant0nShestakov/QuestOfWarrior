@@ -9,7 +9,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
     private Vector3 _direction;
     #endregion
 
-    [SerializeField] private float CDJump;
+    [SerializeField] private float _timeBeforeFall;
 
     private PlayerModel _playerModel;
     private StateSwitcher _stateSwitcher;
@@ -72,7 +72,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     private IEnumerator FreeFlyCorroutine()
     {
-        yield return new WaitForSeconds(CDJump); 
+        yield return new WaitForSeconds(_timeBeforeFall); 
         if(!PlayerModel.IsOnGround)
            PlayerModel.IsFreeFly = true;
         else

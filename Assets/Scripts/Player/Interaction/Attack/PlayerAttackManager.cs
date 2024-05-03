@@ -9,6 +9,7 @@ public class PlayerAttackManager : MonoBehaviour, IManager
     private StateSwitcher _stateSwitcher;
     private PlayerModel _playerModel;
     private CharacterController _characterController;
+    private PlayerInteractionManager _interactionManager;
     private bool _isOnGround;
 
     public Animator Animator { get; private set; }
@@ -23,6 +24,7 @@ public class PlayerAttackManager : MonoBehaviour, IManager
         Animator = GetComponent<Animator>();
         _playerModel = GetComponent<PlayerModel>();
         _characterController = GetComponent<CharacterController>();
+        _interactionManager = GetComponent<PlayerInteractionManager>();
         StartCoroutine(RegenarationStamina());
         _soundManager = GetComponentInChildren<PlayerAttackSoundController>();
     }
@@ -36,7 +38,11 @@ public class PlayerAttackManager : MonoBehaviour, IManager
     {
         while (true)
         {
-            PlayerModel.RegenerationStamina();
+            if (!PlayerModel.LockState)
+            {
+                PlayerModel.RegenerationStamina();
+                _interactionManager.UpdateUiInfo();
+            }
             yield return new WaitForSecondsRealtime(RegenerationInSeconds);
         }
     }

@@ -5,8 +5,8 @@ public class SpamerController : MonoBehaviour
     [SerializeField] private Transform _spamerTransform;
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private int _enemyCount;
-    [SerializeField] float _xSpread;
-    [SerializeField] float _zSpread;
+    [SerializeField] private float _xSpread;
+    [SerializeField] private float _zSpread;
 
     private void OnTriggerEnter(Collider collision)
     {

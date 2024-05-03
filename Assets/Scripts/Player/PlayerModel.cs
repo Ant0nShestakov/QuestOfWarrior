@@ -36,7 +36,7 @@ public class PlayerModel : MonoBehaviour
         if (types == CooldownTypes.SpecialFastAttack)
             if (Stamina - _playerProperites.UsingStaminaForSpecialFastAttack < 0)
                 return false;
-        if (types == CooldownTypes.SpecialStrongAttack)
+        if (types == CooldownTypes.SpecialStrongAttack || types == CooldownTypes.SpecialStrongAttackWithJump)
             if (Stamina - _playerProperites.UsingForStaminaSpecialStrongAttack < 0)
                 return false;
         return true;
