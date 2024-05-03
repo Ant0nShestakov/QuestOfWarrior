@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameModels : ScriptableObject
 {
     [field: SerializeField] public int AutoAttackDamage { get; private set; }
+    [field: SerializeField] public int SpecialStrongAttackWithJumpDamage { get; private set; }
+    [field: SerializeField] public int UsingStaminaForSpecialStrongAttackWithJump { get; private set; }
     [field: SerializeField] public int SpecialStrongAttackDamage { get; private set; }
     [field: SerializeField] public int UsingForStaminaSpecialStrongAttack { get; private set; }
     [field: SerializeField] public int SpecialFastAttackDamage { get; private set; }

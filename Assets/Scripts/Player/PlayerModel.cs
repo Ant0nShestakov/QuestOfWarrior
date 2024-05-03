@@ -36,8 +36,11 @@ public class PlayerModel : MonoBehaviour
         if (types == CooldownTypes.SpecialFastAttack)
             if (Stamina - _playerProperites.UsingStaminaForSpecialFastAttack < 0)
                 return false;
-        if (types == CooldownTypes.SpecialStrongAttack || types == CooldownTypes.SpecialStrongAttackWithJump)
+        if (types == CooldownTypes.SpecialStrongAttack)
             if (Stamina - _playerProperites.UsingForStaminaSpecialStrongAttack < 0)
+                return false;
+        if (types == CooldownTypes.SpecialStrongAttackWithJump)
+            if(Stamina - _playerProperites.UsingStaminaForSpecialStrongAttackWithJump < 0)
                 return false;
         return true;
     }
@@ -89,6 +92,13 @@ public class PlayerModel : MonoBehaviour
     {
         Stamina -= _playerProperites.UsingForStaminaSpecialStrongAttack;
         Damage = _playerProperites.SpecialStrongAttackDamage;
+        IsAttack = true;
+    }
+
+    public void SetSpecialStrongAttackWithJumpDamage()
+    {
+        Stamina -= _playerProperites.UsingStaminaForSpecialStrongAttackWithJump;
+        Damage = _playerProperites.SpecialStrongAttackWithJumpDamage;
         IsAttack = true;
     }
 

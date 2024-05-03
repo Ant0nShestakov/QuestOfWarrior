@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpecialStrongAttackWithJump
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 3
-  <CooldownTime>k__BackingField: 15
+  <CooldownTime>k__BackingField: 20
