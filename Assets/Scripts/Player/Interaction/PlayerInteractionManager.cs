@@ -4,7 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
+    [SerializeField] GameObject _inventory;
+
     private event Action _healthAndStaminaEvent;
+    private InventoryManager _inventoryManager;
     private HealthBar _healthBar;
 
     public PlayerModel PlayerModel { get; private set; }
@@ -12,12 +15,32 @@ public class PlayerInteractionManager : MonoBehaviour
     private void Start()
     {
         PlayerModel = GetComponent<PlayerModel>();
+        _inventoryManager = GetComponent<InventoryManager>();
     }
 
     private void OnEnable()
     {
         _healthBar = GetComponentInChildren<HealthBar>();
         _healthAndStaminaEvent += UpdateUiInfo;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (!_inventory.activeSelf)
+            {
+                _inventory.SetActive(true);
+                PlayerModel.SetCursorFreeState();
+                _inventoryManager.ShowInventory();
+            }
+            else
+            {
+                _inventory.SetActive(false);
+                PlayerModel.SetCursorLockState();
+                _inventoryManager.CloseInventory();
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -27,6 +50,19 @@ public class PlayerInteractionManager : MonoBehaviour
             if (Input.GetKey(KeyCode.E) && !PlayerModel.LockState)
                 door.OpenDoor();
             return;
+        }
+        if(other.TryGetComponent<ChestManager>(out ChestManager chest))
+        {
+            Debug.Log("Chest");
+            if (Input.GetKey(KeyCode.E) && !PlayerModel.LockState)
+            {
+                Item item;
+                if(chest.TryGetItems(out item))
+                    _inventoryManager.Add(item);
+                Debug.Log("add");
+
+            }
+
         }
     }
 

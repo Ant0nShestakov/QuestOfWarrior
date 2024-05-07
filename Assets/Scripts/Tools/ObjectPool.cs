@@ -32,6 +32,8 @@ public class ObjectPool<T> where T : MonoBehaviour
     private void SetDefaultStateObject(T returnedObject) =>
         returnedObject.gameObject.SetActive(false);
 
+    public int GetCount() => _count;
+
     public bool TryGetObject(out T getingObject, Vector3 position)
     {
         if (_stackObject.Count == 0 && !_isEnded)

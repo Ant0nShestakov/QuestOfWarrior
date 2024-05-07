@@ -34,8 +34,6 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     private void Update()
     {
-        if (PlayerModel.LockState)
-            return;
 
         if(PlayerModel.IsOnGround) 
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerModel : MonoBehaviour
 {
     [SerializeField] private GameModels _playerProperites;
+    private HealthBar _healthBar;
 
     [field: SerializeField] public int Health { get; private set; }
     [field: SerializeField] public int Stamina { get; private set; }
@@ -29,6 +30,7 @@ public class PlayerModel : MonoBehaviour
         Speed = _playerProperites.WalkSpeed;
         JumpForce = _playerProperites.JumpForce;
         Gravity = _playerProperites.Gravity;
+        _healthBar = GetComponentInChildren<HealthBar>();
     }
 
     private bool CheckStaminaForAttack(CooldownTypes types)
@@ -117,11 +119,11 @@ public class PlayerModel : MonoBehaviour
     }
 
     public bool CheckRegenerationStamina() => 
-        Stamina + _playerProperites.RegenerationStamina < _playerProperites.MaxStamina;
+        Stamina + _playerProperites.RegenerationStamina < _playerProperites.Health;
 
     public void RegenerationStamina() 
     {
-        if (Stamina + _playerProperites.RegenerationStamina >= _playerProperites.MaxStamina)
+        if (Stamina + _playerProperites.RegenerationStamina >= _playerProperites.Health)
             Stamina = _playerProperites.MaxStamina;
         else
             Stamina += _playerProperites.RegenerationStamina;
@@ -131,9 +133,30 @@ public class PlayerModel : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         Cursor.lockState = CursorLockMode.Locked;
+        LockState = false;
     }
 
-    public void SetCursorFreeState() => Cursor.lockState = CursorLockMode.None;
+    public void HelthSelf(int points)
+    {
+        Health += points;
+        if (Health > _playerProperites.Health)
+            Health = _playerProperites.Health;
+        _healthBar.UpdateInfo();
+    }
+
+    public void EnergyRegen(int points)
+    {
+        Stamina += points;
+        if (Stamina > _playerProperites.MaxStamina)
+            Stamina = _playerProperites.MaxStamina;
+        _healthBar.UpdateInfo();
+    }
+
+    public void SetCursorFreeState()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        LockState = true;
+    }
 
     public int GetDamage(int Damage)
     {

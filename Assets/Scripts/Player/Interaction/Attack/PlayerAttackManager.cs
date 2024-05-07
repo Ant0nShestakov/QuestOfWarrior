@@ -31,6 +31,8 @@ public class PlayerAttackManager : MonoBehaviour, IManager
 
     private void Update()
     {
+        if (PlayerModel.LockState)
+            return;
         _stateSwitcher.UpdateState(this);
     }
 
