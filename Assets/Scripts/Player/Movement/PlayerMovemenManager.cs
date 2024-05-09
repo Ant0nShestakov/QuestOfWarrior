@@ -10,7 +10,6 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
     #endregion
 
     [SerializeField] private float _timeBeforeFall;
-
     private PlayerModel _playerModel;
     private StateSwitcher _stateSwitcher;
     private PlayerMovementSoundController _soundManager;
@@ -20,7 +19,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     public PlayerModel PlayerModel { get => _playerModel; }
     public StateSwitcher StateSwitcher { get => _stateSwitcher; }
-    public CharacterController CharacterController { get => _characterController;}
+    public CharacterController CharacterController { get => _characterController; }
     public Animator Animator { get => _animator; }
 
     private void Start()
@@ -29,20 +28,23 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         _characterController = GetComponent<CharacterController>();
         _playerModel = GetComponent<PlayerModel>();
         _soundManager = GetComponentInChildren<PlayerMovementSoundController>();
-        _stateSwitcher = new StateSwitcher(new WalkingState());
+        WalkingState ws = new WalkingState();
+        _stateSwitcher = new StateSwitcher(ws);
+        ws.EnterState(this);
     }
 
     private void Update()
     {
-
-        if(PlayerModel.IsOnGround) 
+        if (PlayerModel.IsOnGround || PlayerModel.IsSwim)
         {
             SetMoveDiraction();
-            if (Input.GetKey(KeyCode.Space) && !PlayerModel.IsAttack)
+            if (Input.GetKey(KeyCode.Space))
                 Jump();
         }
 
-        _direction.y -= PlayerModel.Gravity * Time.deltaTime;
+        if (!PlayerModel.IsSwim)
+            _direction.y -= PlayerModel.Gravity * Time.deltaTime;
+
         _characterController.Move(_direction * Time.deltaTime);
 
         _stateSwitcher.UpdateState(this);
@@ -52,10 +54,19 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             PlayerModel.IsOnGround = true;
             PlayerModel.IsFreeFly = false;
+            return;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            if(_animator.applyRootMotion)
+                _animator.applyRootMotion = false;
+            PlayerModel.IsOnGround = false;
+            PlayerModel.IsFreeFly = false;
+            PlayerModel.IsSwim = true;
         }
     }
 
@@ -65,14 +76,22 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         {
             PlayerModel.IsOnGround = false;
             StartCoroutine(FreeFlyCorroutine());
+            return;
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            _animator.applyRootMotion = true;
+            PlayerModel.IsOnGround = true;
+            PlayerModel.IsSwim = false;
         }
     }
 
     private IEnumerator FreeFlyCorroutine()
     {
-        yield return new WaitForSeconds(_timeBeforeFall); 
-        if(!PlayerModel.IsOnGround)
-           PlayerModel.IsFreeFly = true;
+        yield return new WaitForSeconds(_timeBeforeFall);
+        if (!PlayerModel.IsOnGround)
+            PlayerModel.IsFreeFly = true;
         else
             PlayerModel.IsFreeFly = false;
     }
@@ -83,10 +102,15 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         _vInput = Input.GetAxis("Vertical");
         Vector3 inputDiraction = new Vector3(_hInput, 0, _vInput);
         inputDiraction = transform.TransformDirection(inputDiraction);
+
         _direction = inputDiraction.normalized * PlayerModel.Speed;
     }
 
-    private void Jump() => _direction.y = PlayerModel.JumpForce;
+    private void Jump()
+    {
+        if (!PlayerModel.IsAttack && !PlayerModel.IsSwim)
+            _direction.y = PlayerModel.JumpForce;
+    }
 
     public void SwitchState(IState state) =>
         _stateSwitcher.SwitchState(this, state);

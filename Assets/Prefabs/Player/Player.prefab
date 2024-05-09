@@ -2838,7 +2838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1387158845310905367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4229,6 +4229,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2817225223598756272}
+        m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
+        m_MethodName: CloseInventory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7629841444182463364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,11 +4766,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemPrefab: {fileID: 3278186790311777290, guid: 3ebc67839f0c65849984e30e2c0a0b81, type: 3}
   _transformItem: {fileID: 9020027647211898726}
-  _count: 3
+  _maxCount: 30
+  _minCount: 1
+  _isAdded: 1
   _items:
   - {fileID: 11400000, guid: 47ff84a9bf4df9545a0882ef4a215e43, type: 2}
-  - {fileID: 11400000, guid: 47ff84a9bf4df9545a0882ef4a215e43, type: 2}
-  - {fileID: 11400000, guid: 47ff84a9bf4df9545a0882ef4a215e43, type: 2}
+  - {fileID: 11400000, guid: 1516138d528ed594d8477d07a49d4ee6, type: 2}
 --- !u!1 &7973218272713360465
 GameObject:
   m_ObjectHideFlags: 0
@@ -4889,7 +4902,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8810572305832993217
 MonoBehaviour:

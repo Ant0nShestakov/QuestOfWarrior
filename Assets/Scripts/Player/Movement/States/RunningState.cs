@@ -25,5 +25,10 @@ public class RunningState : MovementState
             ExitState(movement);
             movement.SwitchState(movement.StateSwitcher.FreeFlyState.Value);
         }
+        else if (movement.PlayerModel.IsSwim)
+        {
+            ExitState(movement);
+            movement.SwitchState(movement.StateSwitcher.SwimyState.Value);
+        }
     }
 }

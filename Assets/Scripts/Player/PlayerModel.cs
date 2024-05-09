@@ -19,6 +19,7 @@ public class PlayerModel : MonoBehaviour
     [field: SerializeField] public List<Cooldown> Cooldowns { get; set; }
 
     public bool IsOnGround { get; set; }
+    public bool IsSwim { get; set; }
     public bool IsFreeFly { get; set; }
     public bool IsAttack { get; private set; }
 
@@ -111,6 +112,8 @@ public class PlayerModel : MonoBehaviour
     }
 
     public void SetRunSpeedState() => Speed = _playerProperites.RunSpeed;
+
+    public void SetSwimSpeedState() => Speed = _playerProperites.SwimSpeed;
 
     public void Stay() 
     {
