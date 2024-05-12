@@ -741,6 +741,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 15006036026355377, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: CameraDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 136359086656177181, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -764,6 +768,10 @@ PrefabInstance:
     - target: {fileID: 136359086656177181, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 761932392056874502, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_CollideAgainst.m_Bits
+      value: 2825
       objectReference: {fileID: 0}
     - target: {fileID: 2059399277686713552, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -799,7 +807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2299390735762435464, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.8989258
+      value: -4.898926
       objectReference: {fileID: 0}
     - target: {fileID: 2872772684053366408, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -889,6 +897,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5113834783212248161, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.83206
+      objectReference: {fileID: 0}
+    - target: {fileID: 5113834783212248161, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7379041
+      objectReference: {fileID: 0}
+    - target: {fileID: 5113834783212248161, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.83206
+      objectReference: {fileID: 0}
     - target: {fileID: 6398873341806585444, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -919,7 +939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6609029202319791584, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.8989258
+      value: -4.898926
       objectReference: {fileID: 0}
     - target: {fileID: 7259757116099802357, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1626,7 +1646,7 @@ GameObject:
   - component: {fileID: 1674020844}
   - component: {fileID: 1674020843}
   - component: {fileID: 1674020842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

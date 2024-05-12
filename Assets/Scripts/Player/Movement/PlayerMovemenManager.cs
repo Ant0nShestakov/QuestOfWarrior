@@ -39,7 +39,16 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         {
             SetMoveDiraction();
             if (Input.GetKey(KeyCode.Space))
-                Jump();
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(this.transform.position, Vector3.down, out hit, Mathf.Infinity))
+                {
+                    if (Vector3.Angle(hit.normal, Vector3.up) >= _characterController.slopeLimit)
+                        return;
+                    Jump();
+                }
+            }
+
         }
 
         if (!PlayerModel.IsSwim)
