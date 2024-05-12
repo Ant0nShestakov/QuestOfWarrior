@@ -122,11 +122,11 @@ public class PlayerModel : MonoBehaviour
     }
 
     public bool CheckRegenerationStamina() => 
-        Stamina + _playerProperites.RegenerationStamina < _playerProperites.Health;
+        Stamina + _playerProperites.RegenerationStamina < _playerProperites.MaxStamina;
 
     public void RegenerationStamina() 
     {
-        if (Stamina + _playerProperites.RegenerationStamina >= _playerProperites.Health)
+        if (Stamina + _playerProperites.RegenerationStamina >= _playerProperites.MaxStamina)
             Stamina = _playerProperites.MaxStamina;
         else
             Stamina += _playerProperites.RegenerationStamina;
