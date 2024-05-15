@@ -22,8 +22,8 @@ TagManager:
   - GroundTrigger
   - EnemyTopTrigger
   - Rock
-  - 
-  - 
+  - Ceiling
+  - EnemyIconInMap
   - 
   - 
   - 

@@ -1092,6 +1092,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2299390735762435464, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2299390735762435464, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6470032
+      objectReference: {fileID: 0}
+    - target: {fileID: 2299390735762435464, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.898926
+      objectReference: {fileID: 0}
     - target: {fileID: 2872772684053366408, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1203,6 +1215,14 @@ PrefabInstance:
     - target: {fileID: 6398873341806585444, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6609029202319791584, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6470032
+      objectReference: {fileID: 0}
+    - target: {fileID: 6609029202319791584, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.898926
       objectReference: {fileID: 0}
     - target: {fileID: 7259757116099802357, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2138,7 +2158,7 @@ Terrain:
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
   m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
+  m_PreserveTreePrototypeLayers: 1
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
   m_ScaleInLightmap: 0.00512
