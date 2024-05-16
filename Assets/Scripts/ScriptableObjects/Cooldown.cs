@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public enum CooldownTypes
@@ -11,7 +10,11 @@ public class Cooldown: ScriptableObject
 {
     [field: SerializeField] public CooldownTypes Type { get; private set; }
     [field: SerializeField] public int CooldownTime { get; private set; }
+    [field: SerializeField] public int Damage { get; private set; }
+    [field: SerializeField] public int Stamina { get; private set; }
+
     public float CooldownCurrentTime { get; private set; }
+
 
     private void OnEnable()
     {

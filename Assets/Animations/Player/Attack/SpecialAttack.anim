@@ -121605,13 +121605,6 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: SetSpecialStrongAttackWithJumpDamage
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0
     functionName: Stay
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -121640,7 +121633,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.3
-    functionName: SetAutoAttackDamage
+    functionName: NoAttacking
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

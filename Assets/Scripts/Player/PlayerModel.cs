@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,11 +6,12 @@ using UnityEngine;
 public class PlayerModel : MonoBehaviour
 {
     [SerializeField] private GameModels _playerProperites;
-    private HealthBar _healthBar;
+    private HealthBar _healthBar; 
+    private Dictionary<CooldownTypes, float> _cooldowns;
 
     [field: SerializeField] public int Health { get; private set; }
     [field: SerializeField] public int Stamina { get; private set; }
-    [field: SerializeField] public int Damage { get; private set; }
+    [field: SerializeField] public int Damage { get; set; }
     [field: SerializeField] public int Speed { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float Gravity { get; private set; }
@@ -21,7 +23,7 @@ public class PlayerModel : MonoBehaviour
     public bool IsOnGround { get; set; }
     public bool IsSwim { get; set; }
     public bool IsFreeFly { get; set; }
-    public bool IsAttack { get; private set; }
+    [field: SerializeField] public bool IsAttack { get; private set; }
 
     private void Awake()
     {
@@ -32,6 +34,14 @@ public class PlayerModel : MonoBehaviour
         JumpForce = _playerProperites.JumpForce;
         Gravity = _playerProperites.Gravity;
         _healthBar = GetComponentInChildren<HealthBar>();
+
+        _cooldowns = new ();
+
+        //foreach(var item in Cooldowns)
+        //{
+        //    _cooldowns.Add(item.Type, )
+        //}
+
     }
 
     private void OnDisable()
@@ -40,17 +50,10 @@ public class PlayerModel : MonoBehaviour
             cooldown.SetDefaultState();
     }
 
-    private bool CheckStaminaForAttack(CooldownTypes types)
+    private bool CheckStaminaForAttack(Cooldown cd)
     {
-        if (types == CooldownTypes.SpecialFastAttack)
-            if (Stamina - _playerProperites.UsingStaminaForSpecialFastAttack < 0)
-                return false;
-        if (types == CooldownTypes.SpecialStrongAttack)
-            if (Stamina - _playerProperites.UsingForStaminaSpecialStrongAttack < 0)
-                return false;
-        if (types == CooldownTypes.SpecialStrongAttackWithJump)
-            if(Stamina - _playerProperites.UsingStaminaForSpecialStrongAttackWithJump < 0)
-                return false;
+        if (Stamina - cd.Stamina < 0)
+            return false;
         return true;
     }
 
@@ -64,51 +67,23 @@ public class PlayerModel : MonoBehaviour
         return true;
     }
 
-    public bool IsCast(CooldownTypes cooldownTypes, float time)
+    public bool TryCast(CooldownTypes cooldownTypes, float time)
     {
-        if(!IsOnGround)
-            return false;
-
-        if (IsAttack)
-            return false;
-
-        if (!CheckStaminaForAttack(cooldownTypes))
+        if (!IsOnGround || IsAttack)
             return false;
 
         if (!TryGetCooldownForType(cooldownTypes, out Cooldown cooldown))
             return false;
 
+        if (!CheckStaminaForAttack(cooldown))
+            return false;
+
         if (!cooldown.CheckCooldownStemp(time))
             return false;
 
+        Damage = cooldown.Damage;
+        Stamina -= cooldown.Stamina;
         return true;
-    }
-
-    public void SetAutoAttackDamage()
-    {
-        Damage = _playerProperites.AutoAttackDamage;
-        IsAttack = false;
-    }
-
-    public void SetSpecialFastAttackDamage()
-    {
-        Stamina -= _playerProperites.UsingStaminaForSpecialFastAttack;
-        Damage = _playerProperites.SpecialFastAttackDamage;
-        IsAttack = true;
-    }
-
-    public void SetSpecialStrongAttackDamage() 
-    {
-        Stamina -= _playerProperites.UsingForStaminaSpecialStrongAttack;
-        Damage = _playerProperites.SpecialStrongAttackDamage;
-        IsAttack = true;
-    }
-
-    public void SetSpecialStrongAttackWithJumpDamage()
-    {
-        Stamina -= _playerProperites.UsingStaminaForSpecialStrongAttackWithJump;
-        Damage = _playerProperites.SpecialStrongAttackWithJumpDamage;
-        IsAttack = true;
     }
 
     public void SetWalkSpeedState() 
@@ -116,6 +91,9 @@ public class PlayerModel : MonoBehaviour
         IsStay = false;
         Speed = _playerProperites.WalkSpeed;
     }
+
+    public bool Attacking() => IsAttack = true;
+    public bool NoAttacking() => IsAttack = false;
 
     public void SetRunSpeedState() => Speed = _playerProperites.RunSpeed;
 
@@ -136,6 +114,8 @@ public class PlayerModel : MonoBehaviour
             Stamina = _playerProperites.MaxStamina;
         else
             Stamina += _playerProperites.RegenerationStamina;
+
+        _healthBar.UpdateInfo();
     }
 
     public void SetCursorLockState()

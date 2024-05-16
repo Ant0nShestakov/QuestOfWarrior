@@ -33,13 +33,12 @@ public class PlayerInteractionManager : MonoBehaviour
                 _inventory.SetActive(true);
                 PlayerModel.SetCursorFreeState();
                 _inventoryManager.ShowInventory();
+                return;
             }
-            else
-            {
-                _inventory.SetActive(false);
-                PlayerModel.SetCursorLockState();
-                _inventoryManager.CloseInventory();
-            }
+
+            _inventory.SetActive(false);
+            PlayerModel.SetCursorLockState();
+            _inventoryManager.CloseInventory();
         }
     }
 
@@ -53,7 +52,6 @@ public class PlayerInteractionManager : MonoBehaviour
         }
         if(other.TryGetComponent<ChestManager>(out ChestManager chest))
         {
-            Debug.Log("Chest");
             if (Input.GetKey(KeyCode.E) && !PlayerModel.LockState)
             {
                 Item item;

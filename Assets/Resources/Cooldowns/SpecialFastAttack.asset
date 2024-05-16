@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
   <CooldownTime>k__BackingField: 5
+  <Damage>k__BackingField: 30
+  <Stamina>k__BackingField: 50

@@ -20,18 +20,18 @@ public class AutoAttackState : AttackState
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.IdleState.Value);
         }
-        else if (Input.GetKey(KeyCode.F) && manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttack, Time.time))
+        else if (Input.GetKey(KeyCode.F) && manager.PlayerModel.TryCast(CooldownTypes.SpecialStrongAttack, Time.time))
         {
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.SpecialStrongAttackState.Value);
         }
-        else if (Input.GetKey(KeyCode.R) && manager.PlayerModel.IsCast(CooldownTypes.SpecialFastAttack, Time.time))
+        else if (Input.GetKey(KeyCode.R) && manager.PlayerModel.TryCast(CooldownTypes.SpecialFastAttack, Time.time))
         {
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.SpecialFastAttackState.Value);
         }
         else if (Input.GetKey(KeyCode.Q)
-            && manager.PlayerModel.IsCast(CooldownTypes.SpecialStrongAttackWithJump, Time.time))
+            && manager.PlayerModel.TryCast(CooldownTypes.SpecialStrongAttackWithJump, Time.time))
         {
             ExitState(manager);
             manager.SwitchState(manager.StateSwitcher.SpecialStrongAttackWithJump.Value);
