@@ -9,7 +9,7 @@ public class EnemyModel : MonoBehaviour
 
     private void Start()
     {
-        Health = _EnemyProperites.Health;
+        Health = _EnemyProperites.CurrentHealth;
         Damage = _EnemyProperites.AutoAttackDamage;
     }
 
@@ -21,7 +21,7 @@ public class EnemyModel : MonoBehaviour
 
     public void SetDefaultState()
     {
-        Health = _EnemyProperites.Health;
+        Health = _EnemyProperites.CurrentHealth;
         Damage = _EnemyProperites.AutoAttackDamage;
     }
 }

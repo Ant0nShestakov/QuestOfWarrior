@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: EnemyModel
   m_EditorClassIdentifier: 
   <AutoAttackDamage>k__BackingField: 5
-  <SpecialStrongAttackDamage>k__BackingField: 0
-  <SpecialFastAttackDamage>k__BackingField: 0
-  <Health>k__BackingField: 100
+  <MaxHealth>k__BackingField: 100
+  <MaxStamina>k__BackingField: 0
+  <RegenerationStaminaOnTick>k__BackingField: 0
+  <TickRegenerationInSeconds>k__BackingField: 0
   <WalkSpeed>k__BackingField: 0
   <RunSpeed>k__BackingField: 0
+  <SwimSpeed>k__BackingField: 0
+  <JumpForce>k__BackingField: 0
+  <Gravity>k__BackingField: 0

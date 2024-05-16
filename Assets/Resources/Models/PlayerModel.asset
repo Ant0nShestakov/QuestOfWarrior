@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerModel
   m_EditorClassIdentifier: 
   <AutoAttackDamage>k__BackingField: 20
-  <Health>k__BackingField: 200
+  <MaxHealth>k__BackingField: 200
   <MaxStamina>k__BackingField: 350
-  <RegenerationStamina>k__BackingField: 30
-  <RegenerationCooldownInSeconds>k__BackingField: 5
+  <RegenerationStaminaOnTick>k__BackingField: 30
+  <TickRegenerationInSeconds>k__BackingField: 3
   <WalkSpeed>k__BackingField: 6
   <RunSpeed>k__BackingField: 10
   <SwimSpeed>k__BackingField: 5

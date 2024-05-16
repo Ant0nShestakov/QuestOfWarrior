@@ -52,7 +52,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         }
 
         if (!PlayerModel.IsSwim)
-            _direction.y -= PlayerModel.Gravity * Time.deltaTime;
+            _direction.y -= PlayerModel.PlayerProperites.Gravity * Time.deltaTime;
 
         _characterController.Move(_direction * Time.deltaTime);
 
@@ -112,13 +112,13 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         Vector3 inputDiraction = new Vector3(_hInput, 0, _vInput);
         inputDiraction = transform.TransformDirection(inputDiraction);
 
-        _direction = inputDiraction.normalized * PlayerModel.Speed;
+        _direction = inputDiraction.normalized * PlayerModel.PlayerProperites.CurrentSpeed;
     }
 
     private void Jump()
     {
         if (!PlayerModel.IsAttack && !PlayerModel.IsSwim)
-            _direction.y = PlayerModel.JumpForce;
+            _direction.y = PlayerModel.PlayerProperites.JumpForce;
     }
 
     public void SwitchState(IState state) =>

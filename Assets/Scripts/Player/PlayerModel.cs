@@ -1,40 +1,28 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerModel : MonoBehaviour
 {
-    [SerializeField] private GameModels _playerProperites;
-    
-    private HealthBar _healthBar; 
+    private HealthBar _healthBar;
 
-    [field: SerializeField] public int Health { get; private set; }
-    [field: SerializeField] public int Stamina { get; private set; }
+    [field: SerializeField] public GameModels PlayerProperites { get; private set; }
     [field: SerializeField] public int Damage { get; set; }
-    [field: SerializeField] public int Speed { get; private set; }
-    [field: SerializeField] public float JumpForce { get; private set; }
-    [field: SerializeField] public float Gravity { get; private set; }
-    [field: SerializeField] public bool LockState { get; set; }
-    [field: SerializeField] public bool IsBlocked { get; set; }
-    [field: SerializeField] public bool IsStay { get; set; }
+    [field: SerializeField] public bool IsAttack { get; private set; }
     [field: SerializeField] public List<Skill> Cooldowns { get; set; }
-    [field: SerializeField] public float RegenerationCooldownInSeconds { get; private set; }
+
+    public bool LockState { get; set; }
+    public bool IsBlocked { get; set; }
+    public bool IsStay { get; set; }
 
     public bool IsOnGround { get; set; }
     public bool IsSwim { get; set; }
     public bool IsFreeFly { get; set; }
-    [field: SerializeField] public bool IsAttack { get; private set; }
+
 
     private void Awake()
     {
-        RegenerationCooldownInSeconds = _playerProperites.RegenerationCooldownInSeconds;
-        Health = _playerProperites.Health;
-        Damage = _playerProperites.AutoAttackDamage;
-        Stamina = _playerProperites.MaxStamina;
-        Speed = _playerProperites.WalkSpeed;
-        JumpForce = _playerProperites.JumpForce;
-        Gravity = _playerProperites.Gravity;
+        Damage = PlayerProperites.AutoAttackDamage;
         _healthBar = GetComponentInChildren<HealthBar>();
     }
 
@@ -46,7 +34,7 @@ public class PlayerModel : MonoBehaviour
 
     private bool CheckStaminaForAttack(Skill cd)
     {
-        if (Stamina - cd.Stamina < 0)
+        if (PlayerProperites.CurrentStamina - cd.Stamina < 0)
             return false;
         return true;
     }
@@ -76,39 +64,38 @@ public class PlayerModel : MonoBehaviour
             return false;
 
         Damage = cooldown.Damage;
-        Stamina -= cooldown.Stamina;
+        PlayerProperites.CurrentStamina -= cooldown.Stamina;
         return true;
     }
 
     public void SetWalkSpeedState() 
     {
         IsStay = false;
-        Speed = _playerProperites.WalkSpeed;
+        PlayerProperites.SetWalkSpeed();
     }
 
     public bool Attacking() => IsAttack = true;
     public bool NoAttacking() => IsAttack = false;
 
-    public void SetRunSpeedState() => Speed = _playerProperites.RunSpeed;
+    public void SetRunSpeedState() => PlayerProperites.SetRunSpeed();
 
-    public void SetSwimSpeedState() => Speed = _playerProperites.SwimSpeed;
+    public void SetSwimSpeedState() => PlayerProperites.SetSwimSpeed();
 
     public void Stay() 
     {
         IsStay = true;
-        Speed = 0; 
+        PlayerProperites.CurrentSpeed = 0;
     }
-
-    public bool CheckRegenerationStamina() => 
-        Stamina + _playerProperites.RegenerationStamina < _playerProperites.MaxStamina;
 
     public void RegenerationStamina() 
     {
-        if (Stamina + _playerProperites.RegenerationStamina >= _playerProperites.MaxStamina)
-            Stamina = _playerProperites.MaxStamina;
-        else
-            Stamina += _playerProperites.RegenerationStamina;
+        PlayerProperites.RegenerationStamina();
+        _healthBar.UpdateInfo();
+    }
 
+    public void RegenerationStamina(int points)
+    {
+        PlayerProperites.RegenerationStamina(points);
         _healthBar.UpdateInfo();
     }
 
@@ -119,19 +106,9 @@ public class PlayerModel : MonoBehaviour
         LockState = false;
     }
 
-    public void HelthSelf(int points)
+    public void HealthSelf(int points)
     {
-        Health += points;
-        if (Health > _playerProperites.Health)
-            Health = _playerProperites.Health;
-        _healthBar.UpdateInfo();
-    }
-
-    public void EnergyRegen(int points)
-    {
-        Stamina += points;
-        if (Stamina > _playerProperites.MaxStamina)
-            Stamina = _playerProperites.MaxStamina;
+        PlayerProperites.RegenerationHealth(points);
         _healthBar.UpdateInfo();
     }
 
@@ -144,7 +121,7 @@ public class PlayerModel : MonoBehaviour
     public int GetDamage(int Damage)
     {
         if(!IsBlocked)
-            Health -= Damage;
-        return Health;
+            PlayerProperites.CurrentHealth -= Damage;
+        return PlayerProperites.CurrentHealth;
     }
 }

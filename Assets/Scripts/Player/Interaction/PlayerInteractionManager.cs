@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
-    [SerializeField] GameObject _inventory;
+    [SerializeField] private GameObject _inventory;
 
     private event Action _healthAndStaminaEvent;
     private InventoryManager _inventoryManager;

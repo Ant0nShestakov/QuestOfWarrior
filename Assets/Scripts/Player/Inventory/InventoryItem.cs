@@ -15,12 +15,12 @@ public class InventoryItem : MonoBehaviour
     {
         if (item.Type == TypeItem.health)
         {
-            _playerModel.HelthSelf(item.Value);
+            _playerModel.HealthSelf(item.Value);
             _inventoryManager.Remove(item);
         }
         else if (item.Type == TypeItem.energy)
         {
-            _playerModel.EnergyRegen(item.Value);
+            _playerModel.RegenerationStamina(item.Value);
             _inventoryManager.Remove(item);
         }
     }

@@ -41,7 +41,7 @@ public class PlayerAttackManager : MonoBehaviour, IManager
                 PlayerModel.RegenerationStamina();
                 _interactionManager.UpdateInfoInUI();
             }
-            yield return new WaitForSecondsRealtime(PlayerModel.RegenerationCooldownInSeconds);
+            yield return new WaitForSecondsRealtime(PlayerModel.PlayerProperites.TickRegenerationInSeconds);
         }
     }
 

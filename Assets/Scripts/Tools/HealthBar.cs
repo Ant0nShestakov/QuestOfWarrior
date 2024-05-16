@@ -23,14 +23,14 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {
         _playerModel = GetComponentInParent<PlayerModel>();
-        _maxHP = _playerModel.Health;
-        _maxStamina = _playerModel.Stamina;
+        _maxHP = _playerModel.PlayerProperites.MaxHealth;
+        _maxStamina = _playerModel.PlayerProperites.MaxStamina;
         UpdateInfo();
     }
 
     public void UpdateInfo() 
     {
-        _textOnImageHpBar.text = _playerModel.Health.ToString() + " / " + _maxHP.ToString();
-        _textOnImageStaminaBar.text = _playerModel.Stamina.ToString() + " / " + _maxStamina.ToString();
+        _textOnImageHpBar.text = _playerModel.PlayerProperites.CurrentHealth.ToString() + " / " + _maxHP.ToString();
+        _textOnImageStaminaBar.text = _playerModel.PlayerProperites.CurrentStamina.ToString() + " / " + _maxStamina.ToString();
     }
 }

@@ -2364,11 +2364,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91fed7a997e90fb4c8876d0e72c1ffe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills:
+  _skills:
   - {fileID: 3850734429529300439}
   - {fileID: 3269662427698231915}
   - {fileID: 365162312458205312}
-  cooldowns:
+  _cooldowns:
   - {fileID: 11400000, guid: cf93922f74b566b4187d1a425df86c4e, type: 2}
   - {fileID: 11400000, guid: d60b529bb0761134fab41114f83c1801, type: 2}
   - {fileID: 11400000, guid: 2b9e91dfe8aefc84f9186e31e7f107df, type: 2}
@@ -2984,7 +2984,7 @@ Transform:
   m_GameObject: {fileID: 5072374957560855173}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.0260236, y: 1.6685611, z: -8.507476}
+  m_LocalPosition: {x: 0, y: 1.6491746, z: -4.827476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5389,23 +5389,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16dbe01fbd18be34d817115199e559d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerProperites: {fileID: 11400000, guid: 38387b1de3f3ea64bbc4a291b0388103, type: 2}
-  <Health>k__BackingField: 0
-  <Stamina>k__BackingField: 0
+  <PlayerProperites>k__BackingField: {fileID: 11400000, guid: 38387b1de3f3ea64bbc4a291b0388103, type: 2}
   <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 0
-  <JumpForce>k__BackingField: 0
-  <Gravity>k__BackingField: 0
-  <LockState>k__BackingField: 0
-  <IsBlocked>k__BackingField: 0
-  <IsStay>k__BackingField: 0
+  <IsAttack>k__BackingField: 0
   <Cooldowns>k__BackingField:
   - {fileID: 11400000, guid: 03af01ab97c32be44b54e5653064dee7, type: 2}
   - {fileID: 11400000, guid: cf93922f74b566b4187d1a425df86c4e, type: 2}
   - {fileID: 11400000, guid: d60b529bb0761134fab41114f83c1801, type: 2}
   - {fileID: 11400000, guid: 2b9e91dfe8aefc84f9186e31e7f107df, type: 2}
-  <RegenerationCooldownInSeconds>k__BackingField: 0
-  <IsAttack>k__BackingField: 0
 --- !u!114 &5742571619284809620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5593,7 +5584,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8810572305832993217
 MonoBehaviour:
