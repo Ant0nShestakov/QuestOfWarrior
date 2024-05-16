@@ -21,7 +21,7 @@ public class PlayerInteractionManager : MonoBehaviour
     private void OnEnable()
     {
         _healthBar = GetComponentInChildren<HealthBar>();
-        _healthAndStaminaEvent += UpdateUiInfo;
+        _healthAndStaminaEvent += _healthBar.UpdateInfo;
     }
 
     private void Update()
@@ -59,19 +59,19 @@ public class PlayerInteractionManager : MonoBehaviour
                 Item item;
                 if(chest.TryGetItems(out item))
                     _inventoryManager.Add(item);
-                Debug.Log("add");
-
             }
-
         }
     }
 
     private void OnDisable()
     {
-        _healthAndStaminaEvent -= UpdateUiInfo;        
+        _healthAndStaminaEvent -= _healthBar.UpdateInfo;        
     }
 
-    public void UpdateUiInfo() => _healthBar.UpdateInfo();
+    public void UpdateInfoInUI()
+    {
+        _healthAndStaminaEvent?.Invoke();
+    }
 
     public void TakeDamage(int Damage)
     {
@@ -80,6 +80,7 @@ public class PlayerInteractionManager : MonoBehaviour
             PlayerModel.SetCursorFreeState();
             SceneManager.LoadScene(2);
         }
-        _healthAndStaminaEvent.Invoke();
+
+        UpdateInfoInUI();
     }
 }

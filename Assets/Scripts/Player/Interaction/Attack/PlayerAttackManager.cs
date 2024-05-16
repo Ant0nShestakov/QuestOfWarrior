@@ -10,13 +10,11 @@ public class PlayerAttackManager : MonoBehaviour, IManager
     private PlayerModel _playerModel;
     private CharacterController _characterController;
     private PlayerInteractionManager _interactionManager;
-    private bool _isOnGround;
 
     public Animator Animator { get; private set; }
     public PlayerModel PlayerModel { get => _playerModel; }
     public StateSwitcher StateSwitcher { get => _stateSwitcher; }
     public CharacterController CharacterController { get => _characterController; }
-    public bool IsOnGround { get => _isOnGround; }
 
     private void Start()
     {
@@ -43,7 +41,7 @@ public class PlayerAttackManager : MonoBehaviour, IManager
             if (!PlayerModel.LockState)
             {
                 PlayerModel.RegenerationStamina();
-                _interactionManager.UpdateUiInfo();
+                _interactionManager.UpdateInfoInUI();
             }
             yield return new WaitForSecondsRealtime(RegenerationInSeconds);
         }

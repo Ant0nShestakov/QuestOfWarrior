@@ -21,6 +21,7 @@ public class ChestManager : MonoBehaviour
             item = _stack.Pop();
             return true;
         }
+
         item = null;
         return false;
     }

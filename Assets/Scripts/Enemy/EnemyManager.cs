@@ -1,6 +1,7 @@
 using UnityEngine;
 using Pathfinding;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class EnemyManager : MonoBehaviour
         _aiPath.maxSpeed = _speed;
         _enemyPool = Singelton<EnemyPool>.Instance;
         _destinationSetter = GetComponent<AIDestinationSetter>();
-        _player = GameObject.FindWithTag("Player");
+        _player = Singelton<PlayerModel>.Instance.gameObject;
         _characterController = GetComponent<CharacterController>();
         _audioSource = GetComponentInChildren<AudioSource>();
 
@@ -47,9 +48,7 @@ public class EnemyManager : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.collider.TryGetComponent<PlayerInteractionManager>(out PlayerInteractionManager _))
-        {
             _animator.SetBool("isAttack", true);
-        }
         else
             _animator.SetBool("isAttack", false);
     }

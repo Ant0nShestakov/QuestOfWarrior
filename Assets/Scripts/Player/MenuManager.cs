@@ -28,6 +28,5 @@ public class MenuManager : MonoBehaviour
                 _menu.SetActive(true);
             }
         }
-        //_playerModel.LockState = _menu.activeSelf;
     }
 }

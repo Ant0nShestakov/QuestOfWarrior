@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum CooldownTypes
@@ -28,4 +29,6 @@ public class Cooldown: ScriptableObject
         CooldownCurrentTime = time;
         return true;
     }
+
+    public void SetDefaultState() => CooldownCurrentTime = -CooldownTime;
 }

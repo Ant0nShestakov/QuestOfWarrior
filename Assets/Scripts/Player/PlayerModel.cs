@@ -34,6 +34,12 @@ public class PlayerModel : MonoBehaviour
         _healthBar = GetComponentInChildren<HealthBar>();
     }
 
+    private void OnDisable()
+    {
+        foreach(var cooldown in Cooldowns)
+            cooldown.SetDefaultState();
+    }
+
     private bool CheckStaminaForAttack(CooldownTypes types)
     {
         if (types == CooldownTypes.SpecialFastAttack)
