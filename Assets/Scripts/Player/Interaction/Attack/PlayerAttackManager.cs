@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerAttackManager : MonoBehaviour, IManager
 {
-    [SerializeField] private float RegenerationInSeconds;
-
     private PlayerAttackSoundController _soundManager;
     private StateSwitcher _stateSwitcher;
     private PlayerModel _playerModel;
@@ -43,7 +41,7 @@ public class PlayerAttackManager : MonoBehaviour, IManager
                 PlayerModel.RegenerationStamina();
                 _interactionManager.UpdateInfoInUI();
             }
-            yield return new WaitForSecondsRealtime(RegenerationInSeconds);
+            yield return new WaitForSecondsRealtime(PlayerModel.RegenerationCooldownInSeconds);
         }
     }
 

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CooldownUI : MonoBehaviour
 {
-    [SerializeField] private List<Text> skills;
-    [SerializeField] private List<Cooldown> cooldowns;
+    [SerializeField] private List<TMP_Text> skills;
+    [SerializeField] private List<Skill> cooldowns;
 
     // Update is called once per frame
     private void Start()

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4396bdd00314b0b4cbda1a61d543dc18, type: 3}
-  m_Name: CooldownFor SpecialStrongAttack
+  m_Script: {fileID: 11500000, guid: 8d72108b799752949b4fe1544b30ba85, type: 3}
+  m_Name: SpecialStrongAttack
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <CooldownTime>k__BackingField: 10
-  <Damage>k__BackingField: 50
+  <Damage>k__BackingField: 30
   <Stamina>k__BackingField: 100

@@ -5,8 +5,8 @@ public enum CooldownTypes
     SpecialStrongAttack, SpecialFastAttack, AutoAttack, SpecialStrongAttackWithJump
 }
 
-[CreateAssetMenu(fileName = "Cooldown", menuName = "ScritableObjects/Cooldowns")]
-public class Cooldown: ScriptableObject
+[CreateAssetMenu(fileName = "Skill", menuName = "ScritableObjects/Skill")]
+public class Skill : ScriptableObject
 {
     [field: SerializeField] public CooldownTypes Type { get; private set; }
     [field: SerializeField] public int CooldownTime { get; private set; }
@@ -23,7 +23,7 @@ public class Cooldown: ScriptableObject
 
     public bool CheckCooldownStemp(float time)
     {
-        if(Type == CooldownTypes.AutoAttack)
+        if (Type == CooldownTypes.AutoAttack)
             return true;
 
         if (time < CooldownCurrentTime + CooldownTime)

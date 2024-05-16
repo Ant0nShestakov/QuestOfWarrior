@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerModel : MonoBehaviour
 {
     [SerializeField] private GameModels _playerProperites;
+    
     private HealthBar _healthBar; 
-    private Dictionary<CooldownTypes, float> _cooldowns;
 
     [field: SerializeField] public int Health { get; private set; }
     [field: SerializeField] public int Stamina { get; private set; }
@@ -18,7 +18,8 @@ public class PlayerModel : MonoBehaviour
     [field: SerializeField] public bool LockState { get; set; }
     [field: SerializeField] public bool IsBlocked { get; set; }
     [field: SerializeField] public bool IsStay { get; set; }
-    [field: SerializeField] public List<Cooldown> Cooldowns { get; set; }
+    [field: SerializeField] public List<Skill> Cooldowns { get; set; }
+    [field: SerializeField] public float RegenerationCooldownInSeconds { get; private set; }
 
     public bool IsOnGround { get; set; }
     public bool IsSwim { get; set; }
@@ -27,6 +28,7 @@ public class PlayerModel : MonoBehaviour
 
     private void Awake()
     {
+        RegenerationCooldownInSeconds = _playerProperites.RegenerationCooldownInSeconds;
         Health = _playerProperites.Health;
         Damage = _playerProperites.AutoAttackDamage;
         Stamina = _playerProperites.MaxStamina;
@@ -34,14 +36,6 @@ public class PlayerModel : MonoBehaviour
         JumpForce = _playerProperites.JumpForce;
         Gravity = _playerProperites.Gravity;
         _healthBar = GetComponentInChildren<HealthBar>();
-
-        _cooldowns = new ();
-
-        //foreach(var item in Cooldowns)
-        //{
-        //    _cooldowns.Add(item.Type, )
-        //}
-
     }
 
     private void OnDisable()
@@ -50,18 +44,18 @@ public class PlayerModel : MonoBehaviour
             cooldown.SetDefaultState();
     }
 
-    private bool CheckStaminaForAttack(Cooldown cd)
+    private bool CheckStaminaForAttack(Skill cd)
     {
         if (Stamina - cd.Stamina < 0)
             return false;
         return true;
     }
 
-    private bool TryGetCooldownForType(CooldownTypes cooldownTypes, out Cooldown cooldown)
+    private bool TryGetCooldownForType(CooldownTypes cooldownTypes, out Skill skill)
     {
-        cooldown = Cooldowns.SingleOrDefault(cd => cd.Type == cooldownTypes);
+        skill = Cooldowns.SingleOrDefault(cd => cd.Type == cooldownTypes);
 
-        if(cooldown is null) 
+        if(skill is null) 
             return false;
 
         return true;
@@ -72,7 +66,7 @@ public class PlayerModel : MonoBehaviour
         if (!IsOnGround || IsAttack)
             return false;
 
-        if (!TryGetCooldownForType(cooldownTypes, out Cooldown cooldown))
+        if (!TryGetCooldownForType(cooldownTypes, out Skill cooldown))
             return false;
 
         if (!CheckStaminaForAttack(cooldown))

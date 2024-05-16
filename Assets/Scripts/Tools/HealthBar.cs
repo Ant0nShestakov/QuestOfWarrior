@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +11,13 @@ public class HealthBar : MonoBehaviour
     private float _maxHP;
     private float _maxStamina;
 
-    private Text _textOnImageHpBar;
-    private Text _textOnImageStaminaBar;
+    private TMP_Text _textOnImageHpBar;
+    private TMP_Text _textOnImageStaminaBar;
 
     private void Awake()
     {
-        _textOnImageHpBar = _healthBar.GetComponentInChildren<Text>();
-        _textOnImageStaminaBar = _staminaBar.GetComponentInChildren<Text>();
+        _textOnImageHpBar = _healthBar.GetComponentInChildren<TMP_Text>();
+        _textOnImageStaminaBar = _staminaBar.GetComponentInChildren<TMP_Text>();
     }
 
     private void Start()

@@ -13,15 +13,10 @@ MonoBehaviour:
   m_Name: PlayerModel
   m_EditorClassIdentifier: 
   <AutoAttackDamage>k__BackingField: 20
-  <SpecialStrongAttackWithJumpDamage>k__BackingField: 100
-  <UsingStaminaForSpecialStrongAttackWithJump>k__BackingField: 200
-  <SpecialStrongAttackDamage>k__BackingField: 40
-  <UsingForStaminaSpecialStrongAttack>k__BackingField: 100
-  <SpecialFastAttackDamage>k__BackingField: 30
-  <UsingStaminaForSpecialFastAttack>k__BackingField: 70
   <Health>k__BackingField: 200
   <MaxStamina>k__BackingField: 350
   <RegenerationStamina>k__BackingField: 30
+  <RegenerationCooldownInSeconds>k__BackingField: 5
   <WalkSpeed>k__BackingField: 6
   <RunSpeed>k__BackingField: 10
   <SwimSpeed>k__BackingField: 5
