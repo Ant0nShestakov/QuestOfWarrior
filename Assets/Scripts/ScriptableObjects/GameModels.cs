@@ -4,8 +4,8 @@ using UnityEngine;
 public class GameModels : ScriptableObject
 {
     [field: SerializeField] public int AutoAttackDamage { get; private set; }
-    [field: SerializeField] public int MaxHealth { get; private set; }
-    [field: SerializeField] public int MaxStamina { get; private set; }
+    [field: SerializeField] public int MaxHealth { get; set; }
+    [field: SerializeField] public int MaxStamina { get; set; }
     [field: SerializeField] public int RegenerationStaminaOnTick { get; private set; }
     [field: SerializeField] public float TickRegenerationInSeconds { get; private set; }
     [field: SerializeField] public int WalkSpeed { get; private set; }
@@ -53,4 +53,11 @@ public class GameModels : ScriptableObject
     public void SetSwimSpeed() => CurrentSpeed = SwimSpeed;
 
     public void SetRunSpeed() => CurrentSpeed = RunSpeed;
+
+    public void SetDefaultState()
+    {
+        CurrentHealth = MaxHealth;
+        CurrentStamina = MaxStamina;
+        CurrentSpeed = WalkSpeed;
+    }
 }

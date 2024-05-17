@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 585663192277834568}
   - component: {fileID: 2621976410052159555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,8 +105,7 @@ GameObject:
   - component: {fileID: 3994842828817003202}
   - component: {fileID: 7227250914304209759}
   - component: {fileID: 736505233476375932}
-  - component: {fileID: 1433595394673518746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water Grate Variation 001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,27 +180,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1433595394673518746
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3620597295345458400}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.968997, y: 0.46500385, z: 4.0379124}
-  m_Center: {x: 0.040846895, y: 0.09800848, z: 0.0062929406}
 --- !u!1 &6703871679423678342
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142945493960527291}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water Grate Parent 001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

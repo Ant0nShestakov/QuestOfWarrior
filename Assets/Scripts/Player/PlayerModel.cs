@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerModel : MonoBehaviour
+public class PlayerModel : MonoBehaviour, IDataPersistance
 {
     private HealthBar _healthBar;
 
@@ -24,6 +24,15 @@ public class PlayerModel : MonoBehaviour
     {
         Damage = PlayerProperites.AutoAttackDamage;
         _healthBar = GetComponentInChildren<HealthBar>();
+
+        DataPersistanceManager data = Singelton<DataPersistanceManager>.Instance;
+        data.SetPersistances();
+        data.LoadGame();
+    }
+
+    private void OnEnable()
+    {
+
     }
 
     private void OnDisable()
@@ -123,5 +132,28 @@ public class PlayerModel : MonoBehaviour
         if(!IsBlocked)
             PlayerProperites.CurrentHealth -= Damage;
         return PlayerProperites.CurrentHealth;
+    }
+
+    public void LoadData(GameData data)
+    {
+        Debug.Log("С чаем бутерброд");
+        if (data.PlayerModel is null)
+        {
+            Debug.Log("Булочка с сосикою");
+            return;
+        }
+
+        PlayerProperites.MaxHealth = data.PlayerModel.MaxHealth;
+        PlayerProperites.MaxStamina = data.PlayerModel.MaxStamina;
+        PlayerProperites.CurrentHealth = data.PlayerModel.CurrentHealth;
+        PlayerProperites.CurrentStamina = data.PlayerModel.CurrentStamina;
+
+        transform.position = data.PlayerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.PlayerModel = new PlayerDataModel(PlayerProperites);
+        data.PlayerPosition = this.transform.position;
     }
 }
