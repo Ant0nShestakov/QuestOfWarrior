@@ -35,7 +35,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     private void Update()
     {
-        if (PlayerModel.IsOnGround || PlayerModel.IsSwim)
+        if (Mathf.Round(CharacterController.velocity.normalized.y) == 0)
         {
             SetMoveDiraction();
             if (Input.GetKey(KeyCode.Space))
@@ -55,7 +55,6 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
             _direction.y -= PlayerModel.PlayerProperites.Gravity * Time.deltaTime;
 
         _characterController.Move(_direction * Time.deltaTime);
-
         _stateSwitcher.UpdateState(this);
         _animator.SetFloat("hInput", _hInput);
         _animator.SetFloat("vInput", _vInput);
