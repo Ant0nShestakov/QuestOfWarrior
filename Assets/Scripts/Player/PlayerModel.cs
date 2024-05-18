@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerModel : MonoBehaviour, IDataPersistance
 {
@@ -30,15 +31,11 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
         data.LoadGame();
     }
 
-    private void OnEnable()
-    {
-
-    }
-
     private void OnDisable()
     {
         foreach(var cooldown in Cooldowns)
             cooldown.SetDefaultState();
+        PlayerProperites.SetDefaultState();
     }
 
     private bool CheckStaminaForAttack(Skill cd)
@@ -137,7 +134,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     public void LoadData(GameData data)
     {
         Debug.Log("С чаем бутерброд");
-        if (data.PlayerModel is null)
+        if (data.PlayerModel.MaxHealth == 0)
         {
             Debug.Log("Булочка с сосикою");
             return;
@@ -155,5 +152,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     {
         data.PlayerModel = new PlayerDataModel(PlayerProperites);
         data.PlayerPosition = this.transform.position;
+        data.SceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
     }
 }

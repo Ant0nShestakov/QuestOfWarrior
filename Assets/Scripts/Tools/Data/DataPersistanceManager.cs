@@ -31,19 +31,18 @@ public class DataPersistanceManager : MonoBehaviour
     public void NewGame()
     {
         _gameData = new GameData();
+        SaveGame();
     }
 
     public void LoadGame()
     {
-        Debug.Log("I load");
         _gameData = _fileHandler.Load();
 
         if (_gameData == null)
         {
-            Debug.Log("Булочка с сосикою");
             NewGame();
         }
-
+            
         foreach(IDataPersistance persistance in _persistances)
         {
             persistance.LoadData(_gameData);

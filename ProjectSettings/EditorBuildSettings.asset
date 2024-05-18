@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Modular Dungeon.unity
     guid: 27915ac565aadf048b89a94d619c501d
   - enabled: 1
+    path: Assets/Scenes/Scene.unity
+    guid: 0f7e5eb7a488d4f4abee1ad0d44f355c
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 8730747cd72f1174382c2bc45b7749fe
   - enabled: 1

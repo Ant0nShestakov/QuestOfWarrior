@@ -57,7 +57,14 @@ public class PlayerInteractionManager : MonoBehaviour
                 Item item;
                 if(chest.TryGetItems(out item))
                     _inventoryManager.Add(item);
+                return;
             }
+        }
+        if (other.TryGetComponent<LoadLvL>(out LoadLvL lvl))
+        {
+            if (Input.GetKey(KeyCode.E) && !PlayerModel.LockState)
+                lvl.LoadSceneByDefaultIndex();
+            return;
         }
     }
 
