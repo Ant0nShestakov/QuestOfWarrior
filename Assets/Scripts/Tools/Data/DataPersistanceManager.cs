@@ -12,7 +12,7 @@ public class DataPersistanceManager : MonoBehaviour
 
     public static DataPersistanceManager Instance;
 
-    private void Start()
+    private void Awake()
     {
         _fileHandler = new FileDataHandler(Application.persistentDataPath, _fileName);
         _persistances = FindAllDataPersistances();
@@ -20,18 +20,18 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void SetPersistances()
     {
-        Debug.Log("I alive");
+        Debug.Log("Set Persistances");
         _persistances = FindAllDataPersistances();
-        foreach(IDataPersistance p in  _persistances)
-        {
-            Debug.Log(p.ToString());
-        }
+        //foreach(IDataPersistance p in  _persistances)
+        //{
+        //    Debug.Log(p.ToString());
+        //}
     }
 
     public void NewGame()
     {
         _gameData = new GameData();
-        SaveGame();
+        SaveGame(); //!!!
     }
 
     public void LoadGame()
@@ -40,12 +40,15 @@ public class DataPersistanceManager : MonoBehaviour
 
         if (_gameData == null)
         {
+            Debug.Log("GameData is null. New Game");
             NewGame();
         }
-            
+
+        Debug.Log("LoadGame");
         foreach(IDataPersistance persistance in _persistances)
         {
             persistance.LoadData(_gameData);
+            Debug.Log("DataLoading");
         }
     }
 

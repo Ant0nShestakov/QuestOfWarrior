@@ -4,7 +4,7 @@ public class RunningState : MovementState
 {
     public override void EnterState(IManager movement)
     {
-        movement.PlayerModel.SetRunSpeedState();
+        movement.PlayerModel.PlayerProperites.SetRunSpeed();
         movement.Animator.SetBool("isRun", true);
     }
 

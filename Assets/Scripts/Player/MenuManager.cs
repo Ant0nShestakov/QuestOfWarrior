@@ -10,10 +10,10 @@ public class MenuManager : MonoBehaviour
     private DataPersistanceManager _presistanceManager;
     private LoadLvL _loadLvL;
 
-    private void OnEnable()
+    private void Awake()
     {
         _presistanceManager = Singelton<DataPersistanceManager>.Instance;
-        _loadLvL = GetComponent<LoadLvL>();
+        _loadLvL = GetComponentInChildren<LoadLvL>();
         _presistanceManager.SetPersistances();
     }
 
@@ -57,5 +57,12 @@ public class MenuManager : MonoBehaviour
         DontDestroyOnLoad(_presistanceManager);
         _presistanceManager.NewGame();
         _loadLvL.LoadSceneByDefaultIndex();
+    }
+
+    public void OnMainMenu()
+    {
+        Time.timeScale = 1;
+        Destroy(_presistanceManager.gameObject);
+        SceneManager.LoadScene(0);
     }
 }

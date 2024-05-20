@@ -8,12 +8,14 @@ public class LoadLvL : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data)
     {
+        Debug.Log(data.SceneIndex);
         _index = data.SceneIndex;
     }
 
     public void LoadSceneByIndex()
     {
         Time.timeScale = 1;
+        Debug.Log(_index);
         SceneManager.LoadScene(_index);
     }
 

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerModel : MonoBehaviour, IDataPersistance
 {
     private HealthBar _healthBar;
+    private CharacterController _characterController;
+    private DataPersistanceManager _data;
 
     [field: SerializeField] public GameModels PlayerProperites { get; private set; }
     [field: SerializeField] public int Damage { get; set; }
@@ -23,12 +25,19 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
 
     private void Awake()
     {
+        Debug.Log($"Transform before {transform.position}");
+        _characterController = GetComponent<CharacterController>();
+        _data = Singelton<DataPersistanceManager>.Instance;
+        _data.SetPersistances();
+        _data.LoadGame();
+
         Damage = PlayerProperites.AutoAttackDamage;
         _healthBar = GetComponentInChildren<HealthBar>();
+    }
 
-        DataPersistanceManager data = Singelton<DataPersistanceManager>.Instance;
-        data.SetPersistances();
-        data.LoadGame();
+    private void Start()
+    {
+        Debug.Log($"Transform after {transform.position}");
     }
 
     private void OnDisable()
@@ -83,10 +92,6 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     public bool Attacking() => IsAttack = true;
     public bool NoAttacking() => IsAttack = false;
 
-    public void SetRunSpeedState() => PlayerProperites.SetRunSpeed();
-
-    public void SetSwimSpeedState() => PlayerProperites.SetSwimSpeed();
-
     public void Stay() 
     {
         IsStay = true;
@@ -133,10 +138,9 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data)
     {
-        Debug.Log("С чаем бутерброд");
         if (data.PlayerModel.MaxHealth == 0)
         {
-            Debug.Log("Булочка с сосикою");
+            Debug.Log("Load data with PlayerModel");
             return;
         }
 
@@ -145,14 +149,38 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
         PlayerProperites.CurrentHealth = data.PlayerModel.CurrentHealth;
         PlayerProperites.CurrentStamina = data.PlayerModel.CurrentStamina;
 
-        transform.position = data.PlayerPosition;
+        int index = SceneManager.GetActiveScene().buildIndex;
+
+        ObjectPosition positionInfo = data.PlayerPosition.Find(op => op.IndexScene == index);
+
+        if (positionInfo == null)
+        {
+            Debug.Log("Possition is null");
+            return;
+        }
+
+        _characterController.enabled = false;
+        this.gameObject.transform.position = positionInfo.Position;
+        _characterController.enabled = true;
+        Debug.Log("Possition loadied");
+        Debug.Log(transform.position);
     }
 
     public void SaveData(ref GameData data)
     {
+        Debug.Log("Save data");
         data.PlayerModel = new PlayerDataModel(PlayerProperites);
-        data.PlayerPosition = this.transform.position;
-        data.SceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+
+        int index = SceneManager.GetActiveScene().buildIndex;
+        data.SceneIndex = index;
+
+        if (data.PlayerPosition.Count != index)
+        {
+            data.PlayerPosition.Add(new ObjectPosition(index, this.transform.position));
+            return;
+        }
+
+        index--;
+        data.PlayerPosition[index] = new ObjectPosition(index+1, this.transform.position);
     }
 }

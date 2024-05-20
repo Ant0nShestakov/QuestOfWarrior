@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class SwimState : MovementState
 {
-
     public override void EnterState(IManager movement)
     {
-        movement.PlayerModel.SetSwimSpeedState();
+        movement.PlayerModel.PlayerProperites.SetSwimSpeed();
         movement.Animator.SetBool("isSwim", true);
     }
 

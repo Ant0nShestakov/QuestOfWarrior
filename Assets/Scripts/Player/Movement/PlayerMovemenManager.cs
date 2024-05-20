@@ -35,7 +35,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     private void Update()
     {
-        if (Mathf.Round(CharacterController.velocity.normalized.y) == 0)
+        if (PlayerModel.IsOnGround)
         {
             SetMoveDiraction();
             if (Input.GetKey(KeyCode.Space))

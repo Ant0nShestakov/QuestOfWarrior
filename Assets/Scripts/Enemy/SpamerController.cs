@@ -1,12 +1,25 @@
+using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
-public class SpamerController : MonoBehaviour
+public class SpamerController : MonoBehaviour, IDataPersistance
 {
     [SerializeField] private Transform _spamerTransform;
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private int _enemyCount;
     [SerializeField] private float _xSpread;
     [SerializeField] private float _zSpread;
+
+    [SerializeField] private long _id;
+
+    private long GetLocalIdentifierInFile()
+    {
+        PropertyInfo inspectorModeInfo = typeof(SerializedObject).GetProperty("inspectorMode", BindingFlags.NonPublic | BindingFlags.Instance);
+        SerializedObject serializedObject = new SerializedObject(this);
+        inspectorModeInfo.SetValue(serializedObject, InspectorMode.Debug, null);
+        SerializedProperty localIdProp = serializedObject.FindProperty("m_LocalIdentfierInFile"); // Note the misspelling!
+        return localIdProp.longValue;
+    }
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -24,5 +37,37 @@ public class SpamerController : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
+    }
+
+
+    public void LoadData(GameData data)
+    {
+        _id = GetLocalIdentifierInFile();
+
+        var spamer = data.SpamersSelfAcitve.Find(spamer => spamer.SpamerID == _id);
+        if (spamer == null)
+        {
+            Debug.Log($"Spamer {_id} not found. Load default value");
+            return;
+        }
+        this.gameObject.SetActive(spamer.AcitveSelf);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        bool acitve = this.gameObject.activeSelf;
+        Debug.Log($"Active: {acitve}");
+
+        var spamer = data.SpamersSelfAcitve.Find(spamer => spamer.SpamerID == _id);
+
+        if (spamer == null)
+        {
+            Debug.Log($"Spamer {_id} not found. Add Spamer tu list");
+            data.SpamersSelfAcitve.Add(new SpamerInfoData(_id, acitve));
+            return;
+        }
+        int index = data.SpamersSelfAcitve.IndexOf(spamer);
+        Debug.Log($"Spamer {_id} found for index {index}. Update value)");
+        data.SpamersSelfAcitve[index] = new SpamerInfoData(_id, acitve);
     }
 }
