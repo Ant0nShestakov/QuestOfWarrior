@@ -140,7 +140,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     {
         if (data.PlayerModel.MaxHealth == 0)
         {
-            Debug.Log("Load data with PlayerModel");
+            Debug.Log("Load default data with PlayerModel");
             return;
         }
 
