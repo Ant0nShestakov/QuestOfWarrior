@@ -8,6 +8,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     private HealthBar _healthBar;
     private CharacterController _characterController;
     private DataPersistanceManager _data;
+    private Rigidbody _rigidbody;
 
     [field: SerializeField] public GameModels PlayerProperites { get; private set; }
     [field: SerializeField] public int Damage { get; set; }
@@ -15,6 +16,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     [field: SerializeField] public List<Skill> Cooldowns { get; set; }
 
     public bool LockState { get; set; }
+    public Vector3 SavePosition { get; set; }
     public bool IsBlocked { get; set; }
     public bool IsStay { get; set; }
 
@@ -30,7 +32,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
         _data = Singelton<DataPersistanceManager>.Instance;
         _data.SetPersistances();
         _data.LoadGame();
-
+        _rigidbody = GetComponent<Rigidbody>();
         Damage = PlayerProperites.AutoAttackDamage;
         _healthBar = GetComponentInChildren<HealthBar>();
     }
@@ -160,6 +162,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
         }
 
         _characterController.enabled = false;
+        Debug.Log($"Character off");
         this.gameObject.transform.position = positionInfo.Position;
         _characterController.enabled = true;
         Debug.Log("Possition loadied");
@@ -168,19 +171,30 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
 
     public void SaveData(ref GameData data)
     {
-        Debug.Log("Save data");
         data.PlayerModel = new PlayerDataModel(PlayerProperites);
 
         int index = SceneManager.GetActiveScene().buildIndex;
         data.SceneIndex = index;
 
-        if (data.PlayerPosition.Count != index)
+        Debug.Log($"CC pos: {_characterController.transform.position}");
+
+        ObjectPosition positionInfo = data.PlayerPosition.Find(op => op.IndexScene == index);
+
+        if(positionInfo == null) 
         {
-            data.PlayerPosition.Add(new ObjectPosition(index, this.transform.position));
+            data.PlayerPosition.Add(new ObjectPosition(index, SavePosition));
             return;
         }
 
+        //if (data.PlayerPosition.Count != index)
+        //{
+        //    Debug.Log($"GObject position in save: {SavePosition}");
+        //    data.PlayerPosition.Add(new ObjectPosition(index, SavePosition));
+        //    return;
+        //}
+        Debug.Log($"GObject position in save: {SavePosition}");
         index--;
-        data.PlayerPosition[index] = new ObjectPosition(index+1, this.transform.position);
+        data.PlayerPosition[index] = new ObjectPosition(index+1, SavePosition);
     }
+
 }

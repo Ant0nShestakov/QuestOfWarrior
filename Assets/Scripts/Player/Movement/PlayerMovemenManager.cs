@@ -10,10 +10,10 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
     #endregion
 
     [SerializeField] private float _timeBeforeFall;
+
     private PlayerModel _playerModel;
     private StateSwitcher _stateSwitcher;
     private PlayerMovementSoundController _soundManager;
-
     private Animator _animator;
     private CharacterController _characterController;
 
@@ -56,13 +56,16 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
         _characterController.Move(_direction * Time.deltaTime);
         _stateSwitcher.UpdateState(this);
+
+        PlayerModel.SavePosition = this.transform.position;
+
         _animator.SetFloat("hInput", _hInput);
         _animator.SetFloat("vInput", _vInput);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("GroundRock"))
         {
             PlayerModel.IsOnGround = true;
             PlayerModel.IsFreeFly = false;
@@ -80,7 +83,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("GroundRock"))
         {
             PlayerModel.IsOnGround = false;
             StartCoroutine(FreeFlyCorroutine());

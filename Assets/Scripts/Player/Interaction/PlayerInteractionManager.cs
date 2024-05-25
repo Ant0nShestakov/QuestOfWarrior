@@ -40,6 +40,7 @@ public class PlayerInteractionManager : MonoBehaviour
             PlayerModel.SetCursorLockState();
             _inventoryManager.CloseInventory();
         }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -59,6 +60,7 @@ public class PlayerInteractionManager : MonoBehaviour
                     _inventoryManager.Add(item);
                 return;
             }
+            return;
         }
         if (other.TryGetComponent<LoadLvL>(out LoadLvL lvl))
         {

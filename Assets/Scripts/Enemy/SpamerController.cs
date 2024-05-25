@@ -9,16 +9,21 @@ public class SpamerController : MonoBehaviour, IDataPersistance
     [SerializeField] private int _enemyCount;
     [SerializeField] private float _xSpread;
     [SerializeField] private float _zSpread;
-
     [SerializeField] private long _id;
+
 
     private long GetLocalIdentifierInFile()
     {
+        #if UNITY_EDITOR
         PropertyInfo inspectorModeInfo = typeof(SerializedObject).GetProperty("inspectorMode", BindingFlags.NonPublic | BindingFlags.Instance);
         SerializedObject serializedObject = new SerializedObject(this);
         inspectorModeInfo.SetValue(serializedObject, InspectorMode.Debug, null);
         SerializedProperty localIdProp = serializedObject.FindProperty("m_LocalIdentfierInFile"); // Note the misspelling!
         return localIdProp.longValue;
+        #else
+            int instanceID = GetInstanceID();
+            return instanceID;
+        #endif
     }
 
     private void OnTriggerEnter(Collider collision)

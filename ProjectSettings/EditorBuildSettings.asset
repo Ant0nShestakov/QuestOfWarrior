@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Dangeon.unity
     guid: 36f482b22718f72419665c2f6a262200
   - enabled: 1
+    path: Assets/Scenes/Dangeon2.unity
+    guid: ac0c848103d068247af48b015d276054
+  - enabled: 1
     path: Assets/Scenes/Scene.unity
     guid: 0f7e5eb7a488d4f4abee1ad0d44f355c
   - enabled: 1

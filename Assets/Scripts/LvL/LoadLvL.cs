@@ -6,6 +6,13 @@ public class LoadLvL : MonoBehaviour, IDataPersistance
     [SerializeField] private int _defIndex;
     private int _index;
 
+    private DataPersistanceManager _manager;
+
+    private void Start()
+    {
+        _manager = Singelton<DataPersistanceManager>.Instance;
+    }
+    
     public void LoadData(GameData data)
     {
         Debug.Log(data.SceneIndex);
@@ -21,6 +28,7 @@ public class LoadLvL : MonoBehaviour, IDataPersistance
 
     public void LoadSceneByDefaultIndex()
     {
+        _manager.SaveGame();
         Time.timeScale = 1;
         SceneManager.LoadScene(_defIndex);
     }
