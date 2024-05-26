@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ChestManager : MonoBehaviour
 {
-
     [SerializeField] private List<Item> _items;
     private Stack<Item> _stack;
 

@@ -6,6 +6,8 @@ public class DataPersistanceManager : MonoBehaviour
 {
     [SerializeField] private string _fileName;
 
+    private readonly string _defaultFileName = "PlayerData.json";
+
     private GameData _gameData;
     private FileDataHandler _fileHandler;
     private List<IDataPersistance> _persistances;
@@ -14,6 +16,8 @@ public class DataPersistanceManager : MonoBehaviour
 
     private void Awake()
     {
+        _fileName ??= _defaultFileName;
+
         _fileHandler = new FileDataHandler(Application.persistentDataPath, _fileName);
         _persistances = FindAllDataPersistances();
     }

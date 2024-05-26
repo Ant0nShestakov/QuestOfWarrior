@@ -23,7 +23,7 @@ public class Singelton <T> : MonoBehaviour where T : MonoBehaviour
                     return _instance = instances[0];
                 }
                 Debug.Log($"Объекта типа {typeof(T)} нет сцене");
-                return _instance = null;
+                return _instance = new GameObject($"({nameof(T)}){typeof(T)}").AddComponent<T>(); 
             }
         }
         private set => Instance = value;

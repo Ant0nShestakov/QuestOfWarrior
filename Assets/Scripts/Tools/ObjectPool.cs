@@ -32,7 +32,9 @@ public class ObjectPool<T> where T : MonoBehaviour
     private void SetDefaultStateObject(T returnedObject) =>
         returnedObject.gameObject.SetActive(false);
 
-    public int GetCount() => _count;
+    public int GetCurrentCount() => _stackObject.Count;
+
+    public int GetMaxCount() => _count;
 
     public bool TryGetObject(out T getingObject, Vector3 position)
     {
@@ -43,6 +45,8 @@ public class ObjectPool<T> where T : MonoBehaviour
         }
         if (_stackObject.Count == 0 && _isEnded)
         {
+            Debug.Log("Instatiate");
+            _count++;
             getingObject = GameObject.Instantiate(_instantiatingObject);
             getingObject.transform.position = position;
             getingObject.gameObject.SetActive(true);
@@ -57,8 +61,12 @@ public class ObjectPool<T> where T : MonoBehaviour
     public void ReturnObjectToPool(T returnedObject)
     {
         if (returnedObject is not T)
+        {
+            Debug.Log($"{nameof(returnedObject)} is not {typeof(T)}");
             return;
+        }
         SetDefaultStateObject(returnedObject);
+        Debug.Log($"{nameof(returnedObject)} return to Pool");
         _stackObject.Push(returnedObject);
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -9,22 +10,33 @@ public class SpamerController : MonoBehaviour, IDataPersistance
     [SerializeField] private int _enemyCount;
     [SerializeField] private float _xSpread;
     [SerializeField] private float _zSpread;
-    [SerializeField] private long _id;
 
+    [SerializeField] private string _id;
 
-    private long GetLocalIdentifierInFile()
+    [ContextMenu("Generate guid for id")]
+    private void GenerateGuid()
     {
+        _id = Guid.NewGuid().ToString();
+
         #if UNITY_EDITOR
-        PropertyInfo inspectorModeInfo = typeof(SerializedObject).GetProperty("inspectorMode", BindingFlags.NonPublic | BindingFlags.Instance);
-        SerializedObject serializedObject = new SerializedObject(this);
-        inspectorModeInfo.SetValue(serializedObject, InspectorMode.Debug, null);
-        SerializedProperty localIdProp = serializedObject.FindProperty("m_LocalIdentfierInFile"); // Note the misspelling!
-        return localIdProp.longValue;
-        #else
-            int instanceID = GetInstanceID();
-            return instanceID;
+                UnityEditor.EditorUtility.SetDirty(this);
         #endif
     }
+
+
+    //private long GetLocalIdentifierInFile()
+    //{
+    //    #if UNITY_EDITOR
+    //    PropertyInfo inspectorModeInfo = typeof(SerializedObject).GetProperty("inspectorMode", BindingFlags.NonPublic | BindingFlags.Instance);
+    //    SerializedObject serializedObject = new SerializedObject(this);
+    //    inspectorModeInfo.SetValue(serializedObject, InspectorMode.Debug, null);
+    //    SerializedProperty localIdProp = serializedObject.FindProperty("m_LocalIdentfierInFile"); // Note the misspelling!
+    //    return localIdProp.longValue;
+    //    #else
+    //        int instanceID = GetInstanceID();
+    //        return instanceID;
+    //    #endif
+    //}
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -47,7 +59,6 @@ public class SpamerController : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data)
     {
-        _id = GetLocalIdentifierInFile();
 
         var spamer = data.SpamersSelfAcitve.Find(spamer => spamer.SpamerID == _id);
         if (spamer == null)

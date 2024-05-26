@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,8 +24,10 @@ public class InventoryManager : MonoBehaviour
 
     public void Add(Item item)
     {
-        if(_pool.GetCount() < _maxCount)
+        if(_pool.GetCurrentCount() < _maxCount)
             _items.Add(item);
+
+        _items.OrderBy(item => item.Name);
     }
 
     public void Remove(Item item)
@@ -36,6 +39,7 @@ public class InventoryManager : MonoBehaviour
 
     public void ShowInventory()
     {
+        Debug.Log(_pool.GetCurrentCount());
         foreach (var item in _items) 
         {
             if (_pool.TryGetObject(out InventoryItem inventoryItem, _transformItem.position))
@@ -64,5 +68,6 @@ public class InventoryManager : MonoBehaviour
             itemButton.onClick.RemoveAllListeners();
             _pool.ReturnObjectToPool(item);
         }
+        _inventoryCache.Clear();
     }
 }
