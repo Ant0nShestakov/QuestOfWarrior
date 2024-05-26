@@ -19,7 +19,7 @@ public class PlayerAimManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_playerModel.LockState)
+        if (!_playerModel.IsNotLocked)
         {
             _hInput += Input.GetAxis("Mouse X") * _sensetivity;
             _vInput += Input.GetAxis("Mouse Y") * _sensetivity;
@@ -30,7 +30,7 @@ public class PlayerAimManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!_playerModel.LockState)
+        if (!_playerModel.IsNotLocked)
         {
             //_cameraPosition.localEulerAngles = new Vector3(-_vInput, _cameraPosition.localEulerAngles.y, _cameraPosition.localEulerAngles.z);
 

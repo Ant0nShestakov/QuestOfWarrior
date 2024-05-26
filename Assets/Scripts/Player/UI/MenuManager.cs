@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _menu;
+    [SerializeField] private GameObject[] _hideObject;
 
     private PlayerModel _playerModel;
 
@@ -37,6 +38,9 @@ public class MenuManager : MonoBehaviour
                 Time.timeScale = 0;
                 _playerModel.SetCursorFreeState();
                 _menu.SetActive(true);
+
+                foreach(var item in _hideObject)
+                    item.SetActive(false);
             }
         }
     }

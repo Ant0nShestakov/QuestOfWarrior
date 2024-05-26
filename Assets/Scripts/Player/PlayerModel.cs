@@ -15,7 +15,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     [field: SerializeField] public bool IsAttack { get; private set; }
     [field: SerializeField] public List<Skill> Cooldowns { get; set; }
 
-    public bool LockState { get; set; }
+    public bool IsNotLocked { get; set; }
     public Vector3 SavePosition { get; set; }
     public bool IsBlocked { get; set; }
     public bool IsStay { get; set; }
@@ -116,7 +116,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     {
         Time.timeScale = 1.0f;
         Cursor.lockState = CursorLockMode.Locked;
-        LockState = false;
+        IsNotLocked = false;
     }
 
     public void HealthSelf(int points)
@@ -128,7 +128,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     public void SetCursorFreeState()
     {
         Cursor.lockState = CursorLockMode.None;
-        LockState = true;
+        IsNotLocked = true;
     }
 
     public int GetDamage(int Damage)

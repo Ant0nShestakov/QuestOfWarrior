@@ -55,6 +55,14 @@ public class InventoryManager : MonoBehaviour
                 var itemButton = inventoryItem.GetComponent<Button>();
                 itemButton.onClick.AddListener(() => inventoryItem.UseItem(item));
 
+                var childernButton = inventoryItem.transform.Find("Close").GetComponent<Button>();
+
+                childernButton.onClick.AddListener(() =>
+                {
+                    Remove(item);
+                    Debug.Log("Removed");
+                });
+
                 _inventoryCache.Add(inventoryItem);
             }
         }
@@ -66,6 +74,8 @@ public class InventoryManager : MonoBehaviour
         {
             var itemButton = item.GetComponent<Button>();
             itemButton.onClick.RemoveAllListeners();
+            var childernButton = item.GetComponent<Button>();
+            childernButton.onClick.RemoveAllListeners();
             _pool.ReturnObjectToPool(item);
         }
         _inventoryCache.Clear();

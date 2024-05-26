@@ -27,7 +27,7 @@ public class PlayerAttackManager : MonoBehaviour, IManager
 
     private void Update()
     {
-        if (PlayerModel.LockState)
+        if (PlayerModel.IsNotLocked)
             return;
         _stateSwitcher.UpdateState(this);
     }
@@ -36,7 +36,7 @@ public class PlayerAttackManager : MonoBehaviour, IManager
     {
         while (true)
         {
-            if (!PlayerModel.LockState)
+            if (!PlayerModel.IsNotLocked)
             {
                 PlayerModel.RegenerationStamina();
                 _interactionManager.UpdateInfoInUI();

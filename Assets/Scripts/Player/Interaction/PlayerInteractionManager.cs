@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PlayerInteractionManager : MonoBehaviour
 {
     [SerializeField] private GameObject _inventory;
+    [SerializeField] private GameObject _skillBuilder;
 
     private event Action _healthAndStaminaEvent;
     private InventoryManager _inventoryManager;
@@ -30,15 +31,36 @@ public class PlayerInteractionManager : MonoBehaviour
         {
             if (!_inventory.activeSelf)
             {
-                _inventory.SetActive(true);
-                PlayerModel.SetCursorFreeState();
-                _inventoryManager.ShowInventory();
+                if (!PlayerModel.IsNotLocked)
+                {
+                    _inventory.SetActive(true);
+                    PlayerModel.SetCursorFreeState();
+                    _inventoryManager.ShowInventory();
+                }
                 return;
             }
 
             _inventory.SetActive(false);
             PlayerModel.SetCursorLockState();
             _inventoryManager.CloseInventory();
+            return;
+        }
+        
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            if (!_skillBuilder.activeSelf)
+            {
+                if (!PlayerModel.IsNotLocked)
+                {
+                    _skillBuilder.SetActive(true);
+                    PlayerModel.SetCursorFreeState();
+                }
+                return;
+            }
+
+            _skillBuilder.SetActive(false);
+            PlayerModel.SetCursorLockState();
+            return;
         }
 
     }
@@ -47,13 +69,13 @@ public class PlayerInteractionManager : MonoBehaviour
     {
         if (other.TryGetComponent<DoorManager>(out DoorManager door))
         {
-            if (Input.GetKey(KeyCode.E) && !PlayerModel.LockState)
+            if (Input.GetKey(KeyCode.E) && !PlayerModel.IsNotLocked)
                 door.OpenDoor();
             return;
         }
         if(other.TryGetComponent<ChestManager>(out ChestManager chest))
         {
-            if (Input.GetKey(KeyCode.E) && !PlayerModel.LockState)
+            if (Input.GetKey(KeyCode.E) && !PlayerModel.IsNotLocked)
             {
                 Item item;
                 if(chest.TryGetItems(out item))
@@ -64,7 +86,7 @@ public class PlayerInteractionManager : MonoBehaviour
         }
         if (other.TryGetComponent<LoadLvL>(out LoadLvL lvl))
         {
-            if (Input.GetKey(KeyCode.E) && !PlayerModel.LockState)
+            if (Input.GetKey(KeyCode.E) && !PlayerModel.IsNotLocked)
                 lvl.LoadSceneByDefaultIndex();
             return;
         }
