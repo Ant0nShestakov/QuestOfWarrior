@@ -3,12 +3,12 @@ using UnityEngine;
 public class InventoryItem : MonoBehaviour
 {
     private PlayerModel _playerModel;
-    private InventoryManager _inventoryManager;
+    //private InventoryManager _inventoryManager;
 
     private void OnEnable()
     {
         _playerModel = Singelton<PlayerModel>.Instance;
-        _inventoryManager = Singelton<InventoryManager>.Instance;
+        //_inventoryManager = Singelton<InventoryManager>.Instance;
     }
 
     public void UseItem(Item item)
@@ -16,12 +16,12 @@ public class InventoryItem : MonoBehaviour
         if (item.Type == TypeItem.health)
         {
             _playerModel.HealthSelf(item.Value);
-            _inventoryManager.Remove(item);
+            _playerModel.InventoryManager.Remove(item);
         }
         else if (item.Type == TypeItem.energy)
         {
             _playerModel.RegenerationStamina(item.Value);
-            _inventoryManager.Remove(item);
+            _playerModel.InventoryManager.Remove(item);
         }
     }
 }

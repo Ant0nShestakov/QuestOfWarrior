@@ -15,6 +15,8 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     [field: SerializeField] public bool IsAttack { get; private set; }
     [field: SerializeField] public List<Skill> Cooldowns { get; set; }
 
+
+    public InventoryManager InventoryManager { get; private set; }
     public bool IsNotLocked { get; set; }
     public Vector3 SavePosition { get; set; }
     public bool IsBlocked { get; set; }
@@ -34,6 +36,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
         _data.LoadGame();
         Damage = PlayerProperites.AutoAttackDamage;
         _healthBar = GetComponentInChildren<HealthBar>();
+        InventoryManager = GetComponent<InventoryManager>();
     }
 
     private void Start()

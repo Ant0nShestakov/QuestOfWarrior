@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: OneHandClubCombo
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 4
-  <CooldownTime>k__BackingField: 10
-  <Damage>k__BackingField: 25
-  <Stamina>k__BackingField: 90
+  <CooldownTime>k__BackingField: 15
+  <Damage>k__BackingField: 50
+  <Stamina>k__BackingField: 100

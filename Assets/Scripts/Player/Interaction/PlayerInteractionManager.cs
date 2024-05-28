@@ -8,7 +8,7 @@ public class PlayerInteractionManager : MonoBehaviour
     [SerializeField] private GameObject _skillBuilder;
 
     private event Action _healthAndStaminaEvent;
-    private InventoryManager _inventoryManager;
+    //private InventoryManager _inventoryManager;
     private HealthBar _healthBar;
 
     public PlayerModel PlayerModel { get; private set; }
@@ -16,7 +16,7 @@ public class PlayerInteractionManager : MonoBehaviour
     private void Start()
     {
         PlayerModel = GetComponent<PlayerModel>();
-        _inventoryManager = GetComponent<InventoryManager>();
+        //_inventoryManager = GetComponent<InventoryManager>();
     }
 
     private void OnEnable()
@@ -35,14 +35,14 @@ public class PlayerInteractionManager : MonoBehaviour
                 {
                     _inventory.SetActive(true);
                     PlayerModel.SetCursorFreeState();
-                    _inventoryManager.ShowInventory();
+                    PlayerModel.InventoryManager.ShowInventory();
                 }
                 return;
             }
 
             _inventory.SetActive(false);
             PlayerModel.SetCursorLockState();
-            _inventoryManager.CloseInventory();
+            PlayerModel.InventoryManager.CloseInventory();
             return;
         }
         
@@ -79,7 +79,7 @@ public class PlayerInteractionManager : MonoBehaviour
             {
                 Item item;
                 if(chest.TryGetItems(out item))
-                    _inventoryManager.Add(item);
+                    PlayerModel.InventoryManager.Add(item);
                 return;
             }
             return;

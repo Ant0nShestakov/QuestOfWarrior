@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SwordAndShieldSpecialAttack
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 5
-  <CooldownTime>k__BackingField: 10
+  <CooldownTime>k__BackingField: 5
   <Damage>k__BackingField: 50
   <Stamina>k__BackingField: 70
