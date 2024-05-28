@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +9,6 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     private HealthBar _healthBar;
     private CharacterController _characterController;
     private DataPersistanceManager _data;
-    private Rigidbody _rigidbody;
 
     [field: SerializeField] public GameModels PlayerProperites { get; private set; }
     [field: SerializeField] public int Damage { get; set; }
@@ -32,7 +32,6 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
         _data = Singelton<DataPersistanceManager>.Instance;
         _data.SetPersistances();
         _data.LoadGame();
-        _rigidbody = GetComponent<Rigidbody>();
         Damage = PlayerProperites.AutoAttackDamage;
         _healthBar = GetComponentInChildren<HealthBar>();
     }
@@ -140,38 +139,58 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data)
     {
-        if (data.PlayerModel.MaxHealth == 0)
+        if (data.PlayerModel.MaxHealth != 0)
         {
-            Debug.Log("Load default data with PlayerModel");
-            return;
+            PlayerProperites.MaxHealth = data.PlayerModel.MaxHealth;
+            PlayerProperites.MaxStamina = data.PlayerModel.MaxStamina;
+            PlayerProperites.CurrentHealth = data.PlayerModel.CurrentHealth;
+            PlayerProperites.CurrentStamina = data.PlayerModel.CurrentStamina;
         }
-
-        PlayerProperites.MaxHealth = data.PlayerModel.MaxHealth;
-        PlayerProperites.MaxStamina = data.PlayerModel.MaxStamina;
-        PlayerProperites.CurrentHealth = data.PlayerModel.CurrentHealth;
-        PlayerProperites.CurrentStamina = data.PlayerModel.CurrentStamina;
 
         int index = SceneManager.GetActiveScene().buildIndex;
 
         ObjectPosition positionInfo = data.PlayerPosition.Find(op => op.IndexScene == index);
 
-        if (positionInfo == null)
+        if (positionInfo != null)
         {
-            Debug.Log("Possition is null");
-            return;
+            _characterController.enabled = false;
+            Debug.Log($"Character off");
+            this.gameObject.transform.position = positionInfo.Position;
+            _characterController.enabled = true;
+            Debug.Log("Possition loadied");
+            Debug.Log(transform.position);
         }
 
-        _characterController.enabled = false;
-        Debug.Log($"Character off");
-        this.gameObject.transform.position = positionInfo.Position;
-        _characterController.enabled = true;
-        Debug.Log("Possition loadied");
-        Debug.Log(transform.position);
+        if(data.PlayerModel.Skills.Count != 0)
+        {
+            foreach (SkillData skill in data.PlayerModel.Skills)
+            {
+                Skill currentSkill = (Skill)ScriptableObject.CreateInstance(typeof(Skill));
+
+                currentSkill.name = skill.Name;
+                currentSkill.Type = skill.CooldownType;
+                currentSkill.Damage = skill.Damage;
+                currentSkill.Stamina = skill.Stamina;
+                currentSkill.CooldownTime = skill.CooldownTime;
+                currentSkill.CooldownCurrentTime = skill.CooldownCurrentTime;
+                if (Cooldowns.Find(skill => skill.name == currentSkill.name) != null)
+                {
+                    Debug.LogError($"Skill {skill} in Cooldowns");
+                    continue;
+                }
+
+                Cooldowns.Add(currentSkill);
+            }
+
+        }
     }
 
     public void SaveData(ref GameData data)
     {
         data.PlayerModel = new PlayerDataModel(PlayerProperites);
+
+        foreach(var skill in Cooldowns)
+            data.PlayerModel.Skills.Add(new SkillData(skill));
 
         int index = SceneManager.GetActiveScene().buildIndex;
         data.SceneIndex = index;
@@ -186,12 +205,6 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
             return;
         }
 
-        //if (data.PlayerPosition.Count != index)
-        //{
-        //    Debug.Log($"GObject position in save: {SavePosition}");
-        //    data.PlayerPosition.Add(new ObjectPosition(index, SavePosition));
-        //    return;
-        //}
         Debug.Log($"GObject position in save: {SavePosition}");
         index--;
         data.PlayerPosition[index] = new ObjectPosition(index+1, SavePosition);

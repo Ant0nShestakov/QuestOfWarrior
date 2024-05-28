@@ -23,7 +23,6 @@ public class SpamerController : MonoBehaviour, IDataPersistance
         #endif
     }
 
-
     //private long GetLocalIdentifierInFile()
     //{
     //    #if UNITY_EDITOR

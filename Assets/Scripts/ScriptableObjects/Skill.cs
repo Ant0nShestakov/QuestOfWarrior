@@ -15,12 +15,12 @@ public enum CooldownTypes
 [CreateAssetMenu(fileName = "Skill", menuName = "ScritableObjects/Skill")]
 public class Skill : ScriptableObject
 {
-    [field: SerializeField] public CooldownTypes Type { get; private set; }
-    [field: SerializeField] public int CooldownTime { get; private set; }
-    [field: SerializeField] public int Damage { get; private set; }
-    [field: SerializeField] public int Stamina { get; private set; }
+    [field: SerializeField] public CooldownTypes Type { get; set; }
+    [field: SerializeField] public int CooldownTime { get; set; }
+    [field: SerializeField] public int Damage { get; set; }
+    [field: SerializeField] public int Stamina { get; set; }
 
-    public float CooldownCurrentTime { get; private set; }
+    public float CooldownCurrentTime { get; set; }
 
 
     private void OnEnable()
