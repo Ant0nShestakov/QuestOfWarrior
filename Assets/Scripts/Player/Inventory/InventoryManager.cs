@@ -33,6 +33,7 @@ public class InventoryManager : MonoBehaviour
     public void Remove(Item item)
     {
         _items.Remove(item);
+        _items.OrderBy(item => item.Name);
         CloseInventory();
         ShowInventory();
     }
