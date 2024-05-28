@@ -87063,14 +87063,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: UpdateInfoInUI
+    functionName: Stay
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0
-    functionName: Stay
+    functionName: UpdateInfoInUI
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -87104,7 +87104,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2
+  - time: 1.2833333
     functionName: NoAttacking
     data: 
     objectReferenceParameter: {fileID: 0}
