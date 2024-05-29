@@ -7222,6 +7222,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2352984321476333565, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: _rageSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352984321476333565, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
+      propertyPath: _rageSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3daf8a45de0f6d54389c1df96c3c1552, type: 3}
     - target: {fileID: 2691149253308151705, guid: 940d0d030cf45ac469087453719c7dd6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
