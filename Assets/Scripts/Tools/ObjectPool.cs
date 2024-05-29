@@ -4,9 +4,9 @@ using UnityEngine;
 public class ObjectPool<T> where T : MonoBehaviour
 {
     private int _count;
-    private T _instantiatingObject;
+    private readonly T _instantiatingObject;
     private Stack<T> _stackObject;
-    private bool _isEnded;
+    private readonly bool _isEnded;
 
     public ObjectPool(int count, T instantiatingObject)
     {

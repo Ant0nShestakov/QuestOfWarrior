@@ -32,15 +32,8 @@ public class PlayerAimManager : MonoBehaviour
     {
         if (!_playerModel.IsNotLocked)
         {
-            //_cameraPosition.localEulerAngles = new Vector3(-_vInput, _cameraPosition.localEulerAngles.y, _cameraPosition.localEulerAngles.z);
-
-            //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, _hInput, transform.eulerAngles.z);
-
-            Quaternion newCameraRotation = Quaternion.Euler(-_vInput, _cameraPosition.localEulerAngles.y, _cameraPosition.localEulerAngles.z);
-            _cameraPosition.localRotation = newCameraRotation;
-
-            Quaternion newPlayerRotation = Quaternion.Euler(this.transform.eulerAngles.x, _hInput, transform.eulerAngles.z);
-            transform.rotation = newPlayerRotation;
+            _cameraPosition.localEulerAngles = new Vector3(-_vInput, _cameraPosition.localEulerAngles.y, _cameraPosition.localEulerAngles.z);
+            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, _hInput, transform.eulerAngles.z);
         }
     }
 }

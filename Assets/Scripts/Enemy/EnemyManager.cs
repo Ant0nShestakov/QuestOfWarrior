@@ -1,7 +1,6 @@
 using UnityEngine;
 using Pathfinding;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -14,8 +13,6 @@ public class EnemyManager : MonoBehaviour
     private EnemyModel _enemyModel;
     private CharacterController _characterController;
     private bool _isDeath;
-
-    private AudioSource _audioSource;
 
     private GameObject _player;
     private AIDestinationSetter _destinationSetter;
@@ -30,8 +27,6 @@ public class EnemyManager : MonoBehaviour
         _destinationSetter = GetComponent<AIDestinationSetter>();
         _player = Singelton<PlayerModel>.Instance.gameObject;
         _characterController = GetComponent<CharacterController>();
-        _audioSource = GetComponentInChildren<AudioSource>();
-
     }
 
     private void OnEnable()
@@ -91,11 +86,5 @@ public class EnemyManager : MonoBehaviour
             _animator.SetBool("isDeath", _isDeath);
             StartCoroutine(DeathEnemy());
         }
-    }
-
-    public void PlayWalkSound(int indexPan)
-    {
-        _audioSource.panStereo = indexPan;
-        _audioSource.Play();
     }
 }

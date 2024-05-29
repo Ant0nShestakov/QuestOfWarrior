@@ -11,8 +11,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int _maxCount;
     [SerializeField] private int _minCount;
     [SerializeField] private bool _isAdded;
-    [SerializeField] private List<Item> _items;
 
+    [SerializeField] private List<Item> _items;
     private ObjectPool<InventoryItem> _pool;
     private List<InventoryItem> _inventoryCache;
 

@@ -13,6 +13,10 @@ PrefabInstance:
       value: Chest Particle
       objectReference: {fileID: 0}
     - target: {fileID: 114582624261767518, guid: 237af5e05f68e5d418e1c0067027f586, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114582624261767518, guid: 237af5e05f68e5d418e1c0067027f586, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -105,6 +109,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 237af5e05f68e5d418e1c0067027f586, type: 3}
+--- !u!1 &4683990851544880023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 114582624261767518, guid: 237af5e05f68e5d418e1c0067027f586, type: 3}
+  m_PrefabInstance: {fileID: 4654457669238461129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8100540724790641057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3529997783789884264, guid: 237af5e05f68e5d418e1c0067027f586, type: 3}
@@ -212,6 +221,7 @@ MonoBehaviour:
   _items:
   - {fileID: 11400000, guid: 47ff84a9bf4df9545a0882ef4a215e43, type: 2}
   - {fileID: 11400000, guid: 1516138d528ed594d8477d07a49d4ee6, type: 2}
+  _effect: {fileID: 4683990851544880023}
 --- !u!65 &3924412060612411083
 BoxCollider:
   m_ObjectHideFlags: 0

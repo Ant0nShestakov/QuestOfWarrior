@@ -26,10 +26,6 @@ public class DataPersistanceManager : MonoBehaviour
     {
         Debug.Log("Set Persistances");
         _persistances = FindAllDataPersistances();
-        //foreach(IDataPersistance p in  _persistances)
-        //{
-        //    Debug.Log(p.ToString());
-        //}
     }
 
     public void NewGame()
@@ -70,9 +66,4 @@ public class DataPersistanceManager : MonoBehaviour
 
         return new List<IDataPersistance>(dataPersistances);
     }
-
-    //private void OnApplicationQuit()
-    //{
-    //    SaveGame();
-    //}
 }

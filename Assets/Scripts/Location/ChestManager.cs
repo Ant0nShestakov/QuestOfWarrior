@@ -4,6 +4,7 @@ using UnityEngine;
 public class ChestManager : MonoBehaviour
 {
     [SerializeField] private List<Item> _items;
+    [SerializeField] private GameObject _effect;
     private Stack<Item> _stack;
 
     private void Start()
@@ -20,7 +21,7 @@ public class ChestManager : MonoBehaviour
             item = _stack.Pop();
             return true;
         }
-
+        _effect.SetActive(false);
         item = null;
         return false;
     }

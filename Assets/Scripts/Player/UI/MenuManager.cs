@@ -7,7 +7,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject[] _hideObject;
 
     private PlayerModel _playerModel;
-
     private DataPersistanceManager _presistanceManager;
     private LoadLvL _loadLvL;
 

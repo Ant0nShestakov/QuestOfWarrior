@@ -8,21 +8,13 @@ public class PlayerInteractionManager : MonoBehaviour
     [SerializeField] private GameObject _skillBuilder;
 
     private event Action _healthAndStaminaEvent;
-    //private InventoryManager _inventoryManager;
-    private HealthBar _healthBar;
 
     public PlayerModel PlayerModel { get; private set; }
 
     private void Start()
     {
         PlayerModel = GetComponent<PlayerModel>();
-        //_inventoryManager = GetComponent<InventoryManager>();
-    }
-
-    private void OnEnable()
-    {
-        _healthBar = GetComponentInChildren<HealthBar>();
-        _healthAndStaminaEvent += _healthBar.UpdateInfo;
+        _healthAndStaminaEvent += PlayerModel.HealthBar.UpdateInfo;
     }
 
     private void Update()
@@ -94,7 +86,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
     private void OnDisable()
     {
-        _healthAndStaminaEvent -= _healthBar.UpdateInfo;        
+        _healthAndStaminaEvent -= PlayerModel.HealthBar.UpdateInfo;        
     }
 
     public void UpdateInfoInUI()
@@ -109,7 +101,6 @@ public class PlayerInteractionManager : MonoBehaviour
             PlayerModel.SetCursorFreeState();
             SceneManager.LoadScene(6);
         }
-
         UpdateInfoInUI();
     }
 }

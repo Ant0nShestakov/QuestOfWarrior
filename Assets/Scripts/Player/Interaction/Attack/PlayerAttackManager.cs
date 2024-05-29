@@ -12,7 +12,7 @@ public class PlayerAttackManager : MonoBehaviour, IManager
     public Animator Animator { get; private set; }
     public PlayerModel PlayerModel { get => _playerModel; }
     public StateSwitcher StateSwitcher { get => _stateSwitcher; }
-    public CharacterController CharacterController { get => _characterController; }
+    //public CharacterController CharacterController { get => _characterController; }
 
     private void Start()
     {

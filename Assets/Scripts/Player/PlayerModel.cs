@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerModel : MonoBehaviour, IDataPersistance
 {
-    private HealthBar _healthBar;
     private CharacterController _characterController;
     private DataPersistanceManager _data;
 
@@ -15,8 +14,8 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     [field: SerializeField] public bool IsAttack { get; private set; }
     [field: SerializeField] public List<Skill> Cooldowns { get; set; }
 
-
     public InventoryManager InventoryManager { get; private set; }
+    public HealthBar HealthBar { get; private set; }    
     public bool IsNotLocked { get; set; }
     public Vector3 SavePosition { get; set; }
     public bool IsBlocked { get; set; }
@@ -26,7 +25,6 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     public bool IsSwim { get; set; }
     public bool IsFreeFly { get; set; }
 
-
     private void Awake()
     {
         Debug.Log($"Transform before {transform.position}");
@@ -35,13 +33,8 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
         _data.SetPersistances();
         _data.LoadGame();
         Damage = PlayerProperites.AutoAttackDamage;
-        _healthBar = GetComponentInChildren<HealthBar>();
+        HealthBar = GetComponentInChildren<HealthBar>();
         InventoryManager = GetComponent<InventoryManager>();
-    }
-
-    private void Start()
-    {
-        Debug.Log($"Transform after {transform.position}");
     }
 
     private void OnDisable()
@@ -105,13 +98,13 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     public void RegenerationStamina() 
     {
         PlayerProperites.RegenerationStamina();
-        _healthBar.UpdateInfo();
+        HealthBar.UpdateInfo();
     }
 
     public void RegenerationStamina(int points)
     {
         PlayerProperites.RegenerationStamina(points);
-        _healthBar.UpdateInfo();
+        HealthBar.UpdateInfo();
     }
 
     public void SetCursorLockState()
@@ -124,7 +117,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
     public void HealthSelf(int points)
     {
         PlayerProperites.RegenerationHealth(points);
-        _healthBar.UpdateInfo();
+        HealthBar.UpdateInfo();
     }
 
     public void SetCursorFreeState()

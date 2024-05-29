@@ -13,7 +13,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
 
     private PlayerModel _playerModel;
     private StateSwitcher _stateSwitcher;
-    private PlayerMovementSoundController _soundManager;
+    private MovementSoundController _soundManager;
     private Animator _animator;
     private CharacterController _characterController;
 
@@ -27,7 +27,7 @@ public class PlayerMovemenManager : MonoBehaviour, IManager
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
         _playerModel = GetComponent<PlayerModel>();
-        _soundManager = GetComponentInChildren<PlayerMovementSoundController>();
+        _soundManager = GetComponentInChildren<MovementSoundController>();
         WalkingState ws = new WalkingState();
         _stateSwitcher = new StateSwitcher(ws);
         ws.EnterState(this);

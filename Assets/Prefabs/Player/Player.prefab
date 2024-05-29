@@ -3047,7 +3047,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5797789914129016198}
   - component: {fileID: 3432983668120509894}
-  - component: {fileID: 6017917109475031265}
   m_Layer: 6
   m_Name: WalkSound
   m_TagString: Untagged
@@ -3166,18 +3165,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6017917109475031265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4354193039917632492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94bc3ae66a5ca947a932893375e9bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4362821387735611622
 GameObject:
   m_ObjectHideFlags: 0
@@ -6337,6 +6324,7 @@ GameObject:
   - component: {fileID: 8084318612938766848}
   - component: {fileID: 8915283897290558584}
   - component: {fileID: 2817225223598756272}
+  - component: {fileID: 1305453911647726458}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -6412,7 +6400,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!54 &2849259988828689978
 Rigidbody:
@@ -6561,6 +6549,19 @@ MonoBehaviour:
   _items:
   - {fileID: 11400000, guid: 1516138d528ed594d8477d07a49d4ee6, type: 2}
   - {fileID: 11400000, guid: 1516138d528ed594d8477d07a49d4ee6, type: 2}
+--- !u!114 &1305453911647726458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7930128217420386539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53fcbc7b4495b444db31e091c2367f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 3432983668120509894}
 --- !u!1 &7973218272713360465
 GameObject:
   m_ObjectHideFlags: 0

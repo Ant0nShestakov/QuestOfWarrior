@@ -6,6 +6,7 @@ public class SkillManager : MonoBehaviour
 
     private PlayerModel _playerModel;
     private Animator _animator;
+
     private void Awake()
     {
         _playerModel = GetComponentInParent<PlayerModel>();
