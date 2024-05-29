@@ -107,7 +107,7 @@ public class PlayerInteractionManager : MonoBehaviour
         if (PlayerModel.GetDamage(Damage) <= 0)
         {
             PlayerModel.SetCursorFreeState();
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(6);
         }
 
         UpdateInfoInUI();
