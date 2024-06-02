@@ -1,13 +1,13 @@
 using UnityEngine;
 using Pathfinding;
 using System.Collections;
+using System;
 
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _animationDeathTime;
 
-    private EnemyPool _enemyPool;
     private Animator _animator;
     private AIPath _aiPath;
     private EnemyModel _enemyModel;
@@ -17,13 +17,14 @@ public class EnemyManager : MonoBehaviour
     private GameObject _player;
     private AIDestinationSetter _destinationSetter;
 
+    public event Action<EnemyManager> PushEvent;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _aiPath = GetComponent<AIPath>();
         _enemyModel = GetComponent<EnemyModel>();
         _aiPath.maxSpeed = _speed;
-        _enemyPool = Singelton<EnemyPool>.Instance;
         _destinationSetter = GetComponent<AIDestinationSetter>();
         _player = Singelton<PlayerModel>.Instance.gameObject;
         _characterController = GetComponent<CharacterController>();
@@ -32,6 +33,11 @@ public class EnemyManager : MonoBehaviour
     private void OnEnable()
     {
         SetTarget();
+    }
+
+    private void OnDisable()
+    {
+        PushEvent = null;
     }
 
     private void Update()
@@ -69,7 +75,7 @@ public class EnemyManager : MonoBehaviour
                 _animator.SetBool("isDeath", _isDeath);
                 _enemyModel.SetDefaultState();
                 _characterController.excludeLayers = default;
-                _enemyPool.ObjectPoolEnemy.ReturnObjectToPool(this);
+                PushEvent?.Invoke(this);
                 break;
             }
             yield return new WaitForSeconds(_animationDeathTime);

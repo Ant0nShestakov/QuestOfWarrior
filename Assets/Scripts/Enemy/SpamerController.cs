@@ -37,6 +37,7 @@ public class SpamerController : MonoBehaviour, IDataPersistance
                 {
                     _xSpread += 1;
                     _zSpread += 1;
+                    enemy.PushEvent += _enemyPool.ObjectPoolEnemy.ReturnObjectToPool;
                 }
             }
             gameObject.SetActive(false);

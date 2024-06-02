@@ -191,8 +191,6 @@ public class PlayerModel : MonoBehaviour, IDataPersistance
         int index = SceneManager.GetActiveScene().buildIndex;
         data.SceneIndex = index;
 
-        Debug.Log($"CC pos: {_characterController.transform.position}");
-
         ObjectPosition positionInfo = data.PlayerPosition.Find(op => op.IndexScene == index);
 
         if(positionInfo == null) 
