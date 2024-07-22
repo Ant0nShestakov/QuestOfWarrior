@@ -1,16 +1,19 @@
-using System;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerModel), typeof(IUIVisitor))]
 public class PlayerInteractionManager : MonoBehaviour
 {
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _skillBuilder;
 
+    private IUIVisitor _playerUIManger;
+    
     public PlayerModel PlayerModel { get; private set; }
 
     private void Start()
     {
         PlayerModel = GetComponent<PlayerModel>();
+        _playerUIManger = GetComponent<PlayerUIManger>();
     }
 
     private void Update()
@@ -57,12 +60,14 @@ public class PlayerInteractionManager : MonoBehaviour
     {
         if (other.TryGetComponent<DoorManager>(out DoorManager door))
         {
+            _playerUIManger.Visit(door);
             if (Input.GetKey(KeyCode.E) && !PlayerModel.IsLocked)
                 door.OpenDoor();
             return;
         }
-        if(other.TryGetComponent<ChestManager>(out ChestManager chest))
+        else if(other.TryGetComponent<ChestManager>(out ChestManager chest))
         {
+            _playerUIManger.Visit(chest);
             if (Input.GetKey(KeyCode.E) && !PlayerModel.IsLocked)
             {
                 Item item;
@@ -72,12 +77,15 @@ public class PlayerInteractionManager : MonoBehaviour
             }
             return;
         }
-        if (other.TryGetComponent<LoadLvL>(out LoadLvL lvl))
+        else if(other.TryGetComponent<LoadLvL>(out LoadLvL lvl))
         {
+            _playerUIManger.Visit(lvl);
             if (Input.GetKey(KeyCode.E) && !PlayerModel.IsLocked)
                 lvl.LoadSceneByDefaultIndex();
             return;
         }
+        else
+            _playerUIManger.Visit();
     }
 
 }
