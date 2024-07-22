@@ -20,11 +20,11 @@ public class SkillData
 
     public SkillData(Skill skill)
     {
-        this._cooldownType = skill.Type;
-        this._damage = skill.Damage;
-        this._stamina = skill.Stamina;
-        this._cooldownTime = skill.CooldownTime;
-        this._name = skill.name;
-        this._cooldownCurrentTime -= this._cooldownTime;
+        _cooldownType = skill.Type;
+        _damage = skill.Damage;
+        _stamina = skill.Stamina;
+        _cooldownTime = skill.CooldownTime;
+        _name = skill.name;
+        _cooldownCurrentTime -= this._cooldownTime;
     }
 }

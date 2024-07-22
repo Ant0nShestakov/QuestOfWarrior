@@ -12,7 +12,7 @@ public class SpamerInfoData
 
     public SpamerInfoData(string id, bool isActive)
     {
-        this._spamerId = id;
-        this._activeSelf = isActive;
+        _spamerId = id;
+        _activeSelf = isActive;
     }
 }
