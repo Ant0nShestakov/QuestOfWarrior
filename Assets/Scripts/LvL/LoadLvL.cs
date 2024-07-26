@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class LoadLvL : MonoBehaviour, IDataPersistance
 {
@@ -8,9 +9,15 @@ public class LoadLvL : MonoBehaviour, IDataPersistance
 
     private DataPersistanceManager _manager;
 
+    [Inject]
+    public void Construct(DataPersistanceManager manager)
+    {
+        _manager = manager;
+    }
+
     private void Start()
     {
-        _manager = Singelton<DataPersistanceManager>.Instance;
+        _manager = Singleton<DataPersistanceManager>.Instance;
     }
     
     public void LoadData(GameData data)

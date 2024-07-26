@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6332653469905272892}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lava Grate Parent 001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4473770889212284002}
   - component: {fileID: 2123081355000281319}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,8 @@ GameObject:
   - component: {fileID: 212757755222557187}
   - component: {fileID: 434580683063011180}
   - component: {fileID: 3794308875225615197}
-  m_Layer: 0
+  - component: {fileID: 8852746562675450706}
+  m_Layer: 8
   m_Name: Lava Grate Variation 001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,3 +213,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8852746562675450706
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785175211523428769}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.968996, y: 0.46500385, z: 4.0379114}
+  m_Center: {x: 0.040846884, y: 0.09800848, z: 0.006292939}

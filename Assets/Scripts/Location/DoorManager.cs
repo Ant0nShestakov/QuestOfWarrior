@@ -1,8 +1,9 @@
 using UnityEngine;
+using Zenject;
 
 public class DoorManager : MonoBehaviour
 {
-    [SerializeField] private EnemyPool _enemyPool;
+    [Inject] private IObjectPool<EnemyManager> _enemyPool;
 
     private Animator _animator;
 
@@ -13,7 +14,7 @@ public class DoorManager : MonoBehaviour
 
     public void OpenDoor()
     {
-        if(!_enemyPool.ObjectPoolEnemy.ÑheckingForActive())
+        if(!_enemyPool.ÑheckingForActive())
             _animator.SetBool("isOpen", true);
     }
 }

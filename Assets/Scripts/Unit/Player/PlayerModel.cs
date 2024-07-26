@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
+[RequireComponent(typeof(CharacterController), typeof(InventoryManager))]
 public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
 {
     private CharacterController _characterController;
@@ -16,23 +18,28 @@ public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
     [field: SerializeField] public int Damage { get; set; }
     [field: SerializeField] public bool IsAttack { get; private set; }
     [field: SerializeField] public List<Skill> Cooldowns { get; private set; }
-
+    public CharacterController CharacterController => _characterController;
     public InventoryManager InventoryManager { get; private set; } 
     public bool IsLocked { get; set; }
     public Vector3 SavePosition { get; set; }
     public bool IsBlocked { get; set; }
     public bool IsStay { get; set; }
 
-    public bool IsOnGround { get; set; }
+    public bool IsGrounded { get; set; }
     public bool IsSwim { get; set; }
     public bool IsFreeFly { get; set; }
+
+    [Inject]
+    public void Construct(DataPersistanceManager dataPersistance)
+    {
+        _data = dataPersistance;
+    }
 
     private void Awake()
     {
         IsLocked = true;
         Debug.Log($"Transform before {transform.position}");
         _characterController = GetComponent<CharacterController>();
-        _data = Singelton<DataPersistanceManager>.Instance;
         _data.SetPersistances();
         _data.LoadGame();
         Damage = PlayerProperites.AutoAttackDamage;
@@ -71,7 +78,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
 
     public bool TryCast(CooldownTypes cooldownTypes, float time)
     {
-        if (!IsOnGround || IsAttack)
+        if (!IsGrounded || IsAttack)
             return false;
 
         if (!TryGetCooldownForType(cooldownTypes, out Skill cooldown))

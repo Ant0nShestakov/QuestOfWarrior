@@ -15,7 +15,6 @@ public class EnemyModel : MonoBehaviour, IDamageable
     public float Speed { get => _enemyProperites.WalkSpeed; }
     public float DistancePerAttack { get => _enemyProperites.DistancePerAttack; }
     public float Damage { get => _enemyProperites.Damage; }
-
     public Animator Animator { get; private set; }
 
     private void Awake()

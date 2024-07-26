@@ -17,7 +17,7 @@ public class StateSwitcher
     public Lazy<SwordAndShieldSpecialAttackState> SwordAndShieldSpecialAttackState { get; private set; }
     #endregion
 
-    #region smashStates
+    #region moveStates
     public Lazy<WalkingState> WalkingState { get; private set; }
     public Lazy<RunningState> RunningState { get; private set; }
     public Lazy<FreeFlyState> FreeFlyState { get; private set; }

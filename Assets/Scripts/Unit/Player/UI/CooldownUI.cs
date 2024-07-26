@@ -11,7 +11,7 @@ public class CooldownUI : MonoBehaviour
 
     private void Start()
     {
-        _playerModel = Singelton<PlayerModel>.Instance;
+        _playerModel = Singleton<PlayerModel>.Instance;
         i = 0;
         StartCoroutine(CheckCooldown());
     }

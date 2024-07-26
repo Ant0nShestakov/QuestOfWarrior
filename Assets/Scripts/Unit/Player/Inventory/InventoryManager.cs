@@ -43,7 +43,7 @@ public class InventoryManager : MonoBehaviour
         Debug.Log(_pool.GetCurrentCount());
         foreach (var item in _items) 
         {
-            if (_pool.TryGetObject(out InventoryItem inventoryItem, _transformItem.position))
+            if (_pool.TryPop(out InventoryItem inventoryItem, _transformItem.position))
             { 
                 inventoryItem.transform.SetParent(_transformItem);
                 inventoryItem.transform.localScale = Vector3.one;
@@ -77,7 +77,7 @@ public class InventoryManager : MonoBehaviour
             itemButton.onClick.RemoveAllListeners();
             var childernButton = item.GetComponent<Button>();
             childernButton.onClick.RemoveAllListeners();
-            _pool.ReturnObjectToPool(item);
+            _pool.Push(item);
         }
         _inventoryCache.Clear();
     }

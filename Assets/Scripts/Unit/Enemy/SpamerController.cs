@@ -1,12 +1,12 @@
 using System;
-using System.Reflection;
-using UnityEditor;
 using UnityEngine;
+using Zenject;
 
 public class SpamerController : MonoBehaviour, IDataPersistance
 {
+    [Inject] private readonly IObjectPool<EnemyManager> _enemyPool;
+
     [SerializeField] private Transform _spamerTransform;
-    [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private int _enemyCount;
     [SerializeField] private float _xSpread;
     [SerializeField] private float _zSpread;
@@ -33,12 +33,13 @@ public class SpamerController : MonoBehaviour, IDataPersistance
             {
                 Vector3 spamPosition = new Vector3(_spamerTransform.position.x + _xSpread,
                     _spamerTransform.position.y, _spamerTransform.position.z + _zSpread);
-                if (_enemyPool.ObjectPoolEnemy.TryGetObject(out EnemyManager enemy, spamPosition))
+                if (_enemyPool.TryPop(out EnemyManager enemy, spamPosition))
                 {
                     _xSpread += 1;
                     _zSpread += 1;
-                    enemy.PushEvent += _enemyPool.ObjectPoolEnemy.ReturnObjectToPool;
                 }
+                else
+                    Debug.LogError("Not Pop");
             }
             gameObject.SetActive(false);
         }

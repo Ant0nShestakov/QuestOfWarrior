@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 
-public class InventoryItem : MonoBehaviour
+public class InventoryItem : MonoBehaviour, IPooledObject<InventoryItem>
 {
     private PlayerModel _playerModel;
 
+    public event Action<InventoryItem> PushEvent;
+
     private void OnEnable()
     {
-        _playerModel = Singelton<PlayerModel>.Instance;
+        _playerModel = Singleton<PlayerModel>.Instance;
     }
 
     public void UseItem(Item item)

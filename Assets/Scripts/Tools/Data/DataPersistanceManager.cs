@@ -31,7 +31,7 @@ public class DataPersistanceManager : MonoBehaviour
     public void NewGame()
     {
         _gameData = new GameData();
-        SaveGame(); //!!!
+        SaveGame();
     }
 
     public void LoadGame()

@@ -15,7 +15,7 @@ public class SwimState : MovementState
 
     public override void UpdateState(IManager movement)
     {
-        if(movement.PlayerModel.IsOnGround) 
+        if(movement.PlayerModel.IsGrounded) 
         {
             ExitState(movement);
             if(Input.GetKey(KeyCode.LeftShift)) 

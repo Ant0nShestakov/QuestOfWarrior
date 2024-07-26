@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerModel), typeof(IUIVisitor))]
 public class PlayerInteractionManager : MonoBehaviour
 {
+    [SerializeField] private float _interactionDistance;
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _skillBuilder;
 
@@ -54,38 +55,38 @@ public class PlayerInteractionManager : MonoBehaviour
             return;
         }
 
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.TryGetComponent<DoorManager>(out DoorManager door))
+        if (Input.GetKeyDown(KeyCode.E) && !PlayerModel.IsLocked)
         {
-            _playerUIManger.Visit(door);
-            if (Input.GetKey(KeyCode.E) && !PlayerModel.IsLocked)
-                door.OpenDoor();
-            return;
-        }
-        else if(other.TryGetComponent<ChestManager>(out ChestManager chest))
-        {
-            _playerUIManger.Visit(chest);
-            if (Input.GetKey(KeyCode.E) && !PlayerModel.IsLocked)
+            if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _interactionDistance))
             {
-                Item item;
-                if(chest.TryGetItems(out item))
-                    PlayerModel.InventoryManager.Add(item);
-                return;
+                if (hit.collider.TryGetComponent<DoorManager>(out DoorManager door))
+                    door.OpenDoor();
+                else if (hit.collider.TryGetComponent<ChestManager>(out ChestManager chest))
+                {
+                    Item item;
+                    if (chest.TryGetItems(out item))
+                        PlayerModel.InventoryManager.Add(item);
+                }
+                else if (hit.collider.TryGetComponent<LoadLvL>(out LoadLvL lvl))
+                    lvl.LoadSceneByDefaultIndex();
             }
             return;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<DoorManager>(out DoorManager door))
+            _playerUIManger.Visit(door);
+        else if(other.TryGetComponent<ChestManager>(out ChestManager chest))
+            _playerUIManger.Visit(chest);
         else if(other.TryGetComponent<LoadLvL>(out LoadLvL lvl))
-        {
             _playerUIManger.Visit(lvl);
-            if (Input.GetKey(KeyCode.E) && !PlayerModel.IsLocked)
-                lvl.LoadSceneByDefaultIndex();
-            return;
-        }
-        else
-            _playerUIManger.Visit();
+    }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        _playerUIManger.Visit();
     }
 
 }

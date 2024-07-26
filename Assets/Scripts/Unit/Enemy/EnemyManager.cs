@@ -4,7 +4,7 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(EnemyModel))]
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour, IPooledObject<EnemyManager>
 {
     [SerializeField] private float _animationTimeOfDeath;
     [SerializeField] private Transform _lookTransform;
@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
         _aiPath.maxSpeed = _enemyModel.Speed;
 
         _destinationSetter = GetComponent<AIDestinationSetter>();
-        _player = Singelton<PlayerModel>.Instance.gameObject;
+        _player = Singleton<PlayerModel>.Instance.gameObject;
     }
 
     private void OnEnable()

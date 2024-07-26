@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5634531735248912728}
   - component: {fileID: 5041844080247792253}
   - component: {fileID: 2982975380504382392}
-  m_Layer: 0
+  - component: {fileID: 8196765198948184499}
+  m_Layer: 8
   m_Name: Floor Rock Variation 003
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -84,6 +85,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8196765198948184499
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481517520826918446}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 0.02, z: 4}
+  m_Center: {x: 0.10377121, y: 0.01, z: -0.2411406}
 --- !u!1 &7590751936724075852
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4423142290366769996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor Rock Parent 003
   m_TagString: Ground
   m_Icon: {fileID: 0}
