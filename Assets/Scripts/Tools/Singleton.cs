@@ -12,7 +12,7 @@ public class Singleton <T> : MonoBehaviour where T : MonoBehaviour
                 return _instance;
             else
             {
-                var instances = GameObject.FindObjectsOfType<T>();
+                var instances = GameObject.FindObjectsByType<T>(FindObjectsSortMode.None);
                 var count = instances.Length;
                 if (count > 0)
                 {
