@@ -2652,6 +2652,39 @@ Transform:
   - {fileID: 1300121710756725605}
   m_Father: {fileID: 2410000929762519620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3707826642045892323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3158106288119563932}
+  m_Layer: 6
+  m_Name: Checkers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3158106288119563932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3707826642045892323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 248454323895608458}
+  - {fileID: 6914032171173953307}
+  m_Father: {fileID: 3763239511866243644}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3787628264598823187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3752,12 +3785,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4718291820786268486}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.091, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3763239511866243644}
+  m_Father: {fileID: 3158106288119563932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4753782487479707892
 GameObject:
@@ -3830,7 +3863,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 82201
+    m_Bits: 213273
   m_RenderingPath: 0
   m_TargetTexture: {fileID: 8400000, guid: 600b7d75df35e3048af869fa455b70ce, type: 2}
   m_TargetDisplay: 0
@@ -3839,7 +3872,7 @@ Camera:
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!1 &4770812397148322411
@@ -4166,8 +4199,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320420238255097777}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.31356347, y: 1.6663865, z: -7.3969197}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.647, z: -4.899}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4205,14 +4238,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.05
-  far clip plane: 1000
-  field of view: 60.000004
+  far clip plane: 500
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 65535
+    m_Bits: 196607
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5731,8 +5764,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.0080349445, y: 0.72977746, z: 0.052907437}
-  m_Center: {x: 0.20192395, y: 0.5729094, z: 0.15802214}
+  m_Size: {x: 0.11920425, y: 0.7297775, z: 0.09971036}
+  m_Center: {x: 0.19536479, y: 0.57290894, z: 0.15064774}
 --- !u!1 &7091026525545458653
 GameObject:
   m_ObjectHideFlags: 0
@@ -5868,10 +5901,10 @@ MonoBehaviour:
     LookAtTarget: {fileID: 3054400943376027948}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.05
-    FarClipPlane: 1000
+    FarClipPlane: 500
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -6116,6 +6149,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5839472944628190652}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7544293763304420687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6914032171173953307}
+  m_Layer: 6
+  m_Name: InteractionCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6914032171173953307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7544293763304420687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.747, z: 0.348}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3158106288119563932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7569297419388736762
 GameObject:
@@ -6646,7 +6710,7 @@ Transform:
   m_GameObject: {fileID: 7930128217420386539}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.12}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6655,7 +6719,7 @@ Transform:
   - {fileID: 3054400943376027948}
   - {fileID: 2942033394267762478}
   - {fileID: 4540941881954447526}
-  - {fileID: 248454323895608458}
+  - {fileID: 3158106288119563932}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4630846816594665935
@@ -6761,7 +6825,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16dbe01fbd18be34d817115199e559d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PlayerProperites>k__BackingField: {fileID: 11400000, guid: 38387b1de3f3ea64bbc4a291b0388103, type: 2}
   <Damage>k__BackingField: 0
   <IsAttack>k__BackingField: 0
   <Cooldowns>k__BackingField:
@@ -6781,7 +6844,7 @@ MonoBehaviour:
   _radius: 0.2
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 131328
   _groundCheckTransform: {fileID: 248454323895608458}
 --- !u!114 &337742422906226375
 MonoBehaviour:

@@ -44,4 +44,7 @@ public class LoadLvL : MonoBehaviour, IDataPersistance
     {
         return;
     }
+
+    public void LoadMainMenu() =>
+        SceneManager.LoadScene(0);
 }

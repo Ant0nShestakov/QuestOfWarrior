@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour, IPooledObject<EnemyManager>
 {
     [SerializeField] private float _animationTimeOfDeath;
     [SerializeField] private Transform _lookTransform;
+    [SerializeField] private LayerMask _unitMask;
 
     private AIPath _aiPath;
     private EnemyModel _enemyModel;
@@ -44,12 +45,10 @@ public class EnemyManager : MonoBehaviour, IPooledObject<EnemyManager>
 
     private void Update()
     {
-        if(Physics.Raycast(_lookTransform.position, transform.forward, out RaycastHit hit, _enemyModel.DistancePerAttack)) 
+        if(Physics.Raycast(_lookTransform.position, transform.forward, out RaycastHit hit, _enemyModel.DistancePerAttack, _unitMask)) 
         {
             if (hit.collider.TryGetComponent<PlayerInteractionManager>(out PlayerInteractionManager _))
                 _enemyModel.Animator.SetBool("isAttack", true);
-            else
-                _enemyModel.Animator.SetBool("isAttack", false);
         }
 
         _enemyModel.Animator.SetFloat("hInput", _aiPath.velocity.x);

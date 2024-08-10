@@ -7,7 +7,6 @@ public class DataPersistanceInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-
         Container.Bind<DataPersistanceManager>().FromComponentInNewPrefab(_prefab).AsSingle();
     }
 }

@@ -1,3 +1,4 @@
+using ModestTree;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,9 +20,13 @@ public class ChestManager : MonoBehaviour
         if (_stack.Count != 0)
         {
             item = _stack.Pop();
+
+            if (_stack.IsEmpty())
+                _effect.SetActive(false);
+
             return true;
         }
-        _effect.SetActive(false);
+
         item = null;
         return false;
     }

@@ -12,6 +12,11 @@ public class InventoryItem : MonoBehaviour, IPooledObject<InventoryItem>
         _playerModel = Singleton<PlayerModel>.Instance;
     }
 
+    private void OnDisable()
+    {
+        PushEvent = null;
+    }
+
     public void UseItem(Item item)
     {
         if (item.Type == TypeItem.health)
@@ -25,4 +30,6 @@ public class InventoryItem : MonoBehaviour, IPooledObject<InventoryItem>
             _playerModel.InventoryManager.Remove(item);
         }
     }
+
+    public void Pushed() => PushEvent?.Invoke(this);
 }

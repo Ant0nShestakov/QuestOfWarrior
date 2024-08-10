@@ -13,11 +13,13 @@ public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
     private DataPersistanceManager _data;
 
     public event Action UpdateStatsEvent;
-
-    [field: SerializeField] public PlayerStats PlayerProperites { get; private set; }
+    
     [field: SerializeField] public int Damage { get; set; }
     [field: SerializeField] public bool IsAttack { get; private set; }
     [field: SerializeField] public List<Skill> Cooldowns { get; private set; }
+
+    public PlayerStats PlayerProperites { get; private set; }
+
     public CharacterController CharacterController => _characterController;
     public InventoryManager InventoryManager { get; private set; } 
     public bool IsLocked { get; set; }
@@ -30,20 +32,24 @@ public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
     public bool IsFreeFly { get; set; }
 
     [Inject]
-    public void Construct(DataPersistanceManager dataPersistance)
+    public void Construct(DataPersistanceManager dataPersistance, PlayerStats playerStats)
     {
         _data = dataPersistance;
+        PlayerProperites = playerStats;
     }
 
     private void Awake()
     {
-        IsLocked = true;
-        Debug.Log($"Transform before {transform.position}");
         _characterController = GetComponent<CharacterController>();
         _data.SetPersistances();
-        _data.LoadGame();
+;
         Damage = PlayerProperites.AutoAttackDamage;
         InventoryManager = GetComponent<InventoryManager>();
+    }
+
+    private void Start()
+    {
+        _data.LoadGame();
     }
 
     private void OnDisable()
@@ -68,12 +74,6 @@ public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
             return false;
 
         return true;
-    }
-
-    private IEnumerator LoadCoroutine()
-    {
-        yield return new WaitForSeconds(1);
-        IsLocked = false;
     }
 
     public bool TryCast(CooldownTypes cooldownTypes, float time)
@@ -161,14 +161,7 @@ public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
         ObjectPosition positionInfo = data.PlayerPosition.Find(op => op.IndexScene == index);
 
         if (positionInfo != null)
-        {
-            _characterController.enabled = false;
-            Debug.Log($"Character off");
-            this.gameObject.transform.SetPositionAndRotation(positionInfo.Position, positionInfo.Rotation);
-            _characterController.enabled = true;
-            Debug.Log("Possition loadied");
-            Debug.Log(transform.position);
-        }
+            gameObject.transform.SetPositionAndRotation(positionInfo.Position, positionInfo.Rotation);
 
         if(data.PlayerModel.Skills.Count != 0)
         {
@@ -183,16 +176,12 @@ public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
                 currentSkill.CooldownTime = skill.CooldownTime;
                 currentSkill.CooldownCurrentTime = skill.CooldownCurrentTime;
                 if (Cooldowns.Find(skill => skill.name == currentSkill.name) != null)
-                {
-                    Debug.LogError($"Skill {skill} in Cooldowns");
                     continue;
-                }
 
                 Cooldowns.Add(currentSkill);
             }
 
         }
-        StartCoroutine(LoadCoroutine());
     }
 
     public void SaveData(ref GameData data)
@@ -213,7 +202,6 @@ public class PlayerModel : MonoBehaviour, IDataPersistance, IDamageable
             return;
         }
 
-        Debug.Log($"GObject position in save: {SavePosition}");
         index--;
         data.PlayerPosition[index] = new ObjectPosition(index+1, SavePosition, transform.rotation);
     }

@@ -4,11 +4,12 @@ using UnityEngine;
 public class PlayerInteractionManager : MonoBehaviour
 {
     [SerializeField] private float _interactionDistance;
+
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _skillBuilder;
 
     private IUIVisitor _playerUIManger;
-    
+
     public PlayerModel PlayerModel { get; private set; }
 
     private void Start()
@@ -57,6 +58,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && !PlayerModel.IsLocked)
         {
+
             if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _interactionDistance))
             {
                 if (hit.collider.TryGetComponent<DoorManager>(out DoorManager door))
@@ -88,5 +90,4 @@ public class PlayerInteractionManager : MonoBehaviour
     {
         _playerUIManger.Visit();
     }
-
 }
