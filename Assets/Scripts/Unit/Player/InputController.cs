@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,11 +6,21 @@ public class InputController : MonoBehaviour
 {
     private BaseMap _inputActions;
 
+    [SerializeField] private float _sensetivity;
+    
     #region Movement
+    [field: SerializeField] public float MinClampAngle { get; private set; }
+    [field: SerializeField] public float MaxClampAngle { get; private set; }
+
     public Vector2 MoveValue { get; private set; }
     public Vector2 LookValue { get; private set; }
     public float JumpValue { get; private set; }
+    public float RunValue { get; private set; }
+    public float CrouchValue { get; private set; }
     #endregion
+    
+    public float ShowInventoryValue { get; private set; }
+    public float ShowSkillBuildValue { get; private set; }
 
     #region Attack
     public float BlockValue { get; private set; }
@@ -53,6 +64,7 @@ public class InputController : MonoBehaviour
     #region AttackActions
     private void SubscribePerformAttackActions()
     {
+        _inputActions.Player.AutoAttack.performed += AutoAttack;
         _inputActions.Player.FirstSpecialAttack.performed += FirstSpecialAttack;
         _inputActions.Player.SecondSpecialAttack.performed += SecondSpecialAttack;
         _inputActions.Player.ThridSpecialAttack.performed += ThridSpecialAttack;
@@ -65,6 +77,7 @@ public class InputController : MonoBehaviour
 
     private void SubscribeCancelAttackActions()
     {
+        _inputActions.Player.AutoAttack.canceled += AutoAttack;
         _inputActions.Player.FirstSpecialAttack.canceled += FirstSpecialAttack;
         _inputActions.Player.SecondSpecialAttack.canceled += SecondSpecialAttack;
         _inputActions.Player.ThridSpecialAttack.canceled += ThridSpecialAttack;
@@ -73,6 +86,11 @@ public class InputController : MonoBehaviour
         _inputActions.Player.SixSpecialAttack.canceled += SixSpecialAttack;
         _inputActions.Player.SeventhSpecialAttack.canceled += SeventhSpecialAttack;
         _inputActions.Player.EighthSpecialAttack.canceled += EighthSpecialAttack;
+    }
+
+    private void AutoAttack(InputAction.CallbackContext context)
+    {
+        AutoAttackValue = context.action.ReadValue<float>();
     }
 
     private void EighthSpecialAttack(InputAction.CallbackContext context)
@@ -123,6 +141,7 @@ public class InputController : MonoBehaviour
         _inputActions.Player.Move.performed += Move;
         _inputActions.Player.Jump.performed += Jump;
         _inputActions.Player.Look.performed += Look;
+        _inputActions.Player.Run.performed += Run;
     }
 
     private void SubscribeCancelMovementActions()
@@ -130,11 +149,12 @@ public class InputController : MonoBehaviour
         _inputActions.Player.Move.canceled += Move;
         _inputActions.Player.Jump.canceled += Jump;
         _inputActions.Player.Look.canceled += Look;
+        _inputActions.Player.Run.canceled += Run;
     }
 
     private void Look(InputAction.CallbackContext context)
     {
-        LookValue = context.action.ReadValue<Vector2>();
+        LookValue = context.action.ReadValue<Vector2>() * _sensetivity;
     }
 
     private void Jump(InputAction.CallbackContext context)
@@ -145,6 +165,11 @@ public class InputController : MonoBehaviour
     private void Move(InputAction.CallbackContext context)
     {
         MoveValue = context.action.ReadValue<Vector2>();
+    }
+
+    private void Run(InputAction.CallbackContext context)
+    {
+        RunValue = context.action.ReadValue<float>();
     }
     #endregion
 

@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour, IPooledObject<EnemyManager>
         _aiPath.maxSpeed = _enemyModel.Speed;
 
         _destinationSetter = GetComponent<AIDestinationSetter>();
-        _player = Singleton<PlayerModel>.Instance.gameObject;
+        _player = Singleton<UnitController>.Instance.gameObject;
     }
 
     private void OnEnable()

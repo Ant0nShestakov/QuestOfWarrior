@@ -59,7 +59,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""FirstSpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""74eca32c-6ddc-49fb-95b8-a9099db5f8c1"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -68,7 +68,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""SecondSpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""733b8718-54dc-44f1-960f-e194c57aa477"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -77,7 +77,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""ThridSpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""108e14aa-d78a-4c24-979a-83cdb67bd15d"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -86,7 +86,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""FourthSpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""dcef9e7f-9e57-4ece-a611-926dbd734758"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -95,7 +95,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""FifthSpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""2dfbc2e1-6268-4aa5-8181-378d3dc469ac"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -104,7 +104,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""SixSpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""59ed4ad7-0491-4d02-b1d4-b49691093bd3"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -113,7 +113,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""SeventhSpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""33f86c0c-a4c8-4f05-8d27-afa85e80d365"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -122,7 +122,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""EighthSpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""c966b8db-b33b-4422-bd8e-b8e35f0478ee"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -144,6 +144,15 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""2db8be4e-fd1b-4f4b-83f8-e2c57c566a13"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,9 +337,20 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""id"": ""3bcf2b27-baf6-4a4c-925b-80982a8eadf4"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7c92e30-ec3a-4d6c-ac28-c76a4f02e932"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -371,6 +391,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
         m_Player_EighthSpecialAttack = m_Player.FindAction("EighthSpecialAttack", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
     }
 
     ~@BaseMap()
@@ -450,6 +471,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_EighthSpecialAttack;
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_Run;
     public struct PlayerActions
     {
         private @BaseMap m_Wrapper;
@@ -467,6 +489,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
         public InputAction @EighthSpecialAttack => m_Wrapper.m_Player_EighthSpecialAttack;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -515,6 +538,9 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -558,6 +584,9 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -599,5 +628,6 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
         void OnEighthSpecialAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
 }

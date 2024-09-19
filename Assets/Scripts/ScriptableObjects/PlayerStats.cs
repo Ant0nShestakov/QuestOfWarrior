@@ -9,14 +9,14 @@ public class PlayerStats : ScriptableObject
     [field: SerializeField] public int RegenerationStaminaOnTick { get; private set; }
     [field: SerializeField] public float TickRegenerationInSeconds { get; private set; }
     [field: SerializeField] public int WalkSpeed { get; private set; }
-    [field: SerializeField] public int RunSpeed { get; private set; }
-    [field: SerializeField] public int SwimSpeed { get; private set; }
+    [field: SerializeField] public float RunSpeedModificator { get; private set; }
+    [field: SerializeField] public int SwimSpeedModificator { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
-    [field: SerializeField] public float Gravity { get; private set; }
+    [field: SerializeField] public float Mass { get; private set; }
 
     public float CurrentHealth { get; set; }
     public int CurrentStamina { get; set; }
-    public int CurrentSpeed { get; set; }
+    public float CurrentSpeed { get; set; }
 
     private void OnEnable()
     {
@@ -50,9 +50,11 @@ public class PlayerStats : ScriptableObject
 
     public void SetWalkSpeed() => CurrentSpeed = WalkSpeed;
 
-    public void SetSwimSpeed() => CurrentSpeed = SwimSpeed;
+    public void SetSwimSpeed() => CurrentSpeed *= SwimSpeedModificator;
 
-    public void SetRunSpeed() => CurrentSpeed = RunSpeed;
+    public void SetRunSpeed() => CurrentSpeed *= RunSpeedModificator;
+
+    public void SetZeroSpeed() => CurrentSpeed = 0;
 
     public void SetDefaultState()
     {

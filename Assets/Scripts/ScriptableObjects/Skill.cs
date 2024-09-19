@@ -2,14 +2,14 @@ using UnityEngine;
 
 public enum CooldownTypes
 {
-    SpecialStrongAttack, 
-    SpecialFastAttack, 
-    AutoAttack, 
-    SpecialStrongAttackWithJump, 
-    OneHandClubCombo, 
-    SwordAndShieldSpecialAttack,
-    SpecialAttackOnLeft,
-    JumpAttack
+    AutoAttack,
+    FirstSpecialAttack,
+    SecondSpecialAttack,
+    ThirdSpecialAttack,
+    FourthSpecialAttack,
+    FifthSpecialAttack,
+    SixSpecialAttack,
+    SeventhSpecialAttack
 }
 
 [CreateAssetMenu(fileName = "Skill", menuName = "ScritableObjects/Skill")]
