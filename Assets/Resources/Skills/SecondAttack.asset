@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d72108b799752949b4fe1544b30ba85, type: 3}
-  m_Name: SpecialAttackOnLeft
+  m_Name: SecondAttack
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 6
-  <CooldownTime>k__BackingField: 2
-  <Damage>k__BackingField: 35
-  <Stamina>k__BackingField: 20
+  <Type>k__BackingField: 2
+  <CooldownTime>k__BackingField: 15
+  <Damage>k__BackingField: 50
+  <Stamina>k__BackingField: 100

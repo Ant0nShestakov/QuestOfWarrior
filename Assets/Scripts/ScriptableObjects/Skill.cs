@@ -28,15 +28,15 @@ public class Skill : ScriptableObject
         CooldownCurrentTime = -CooldownTime;
     }
 
-    public bool CheckCooldownStemp(float time)
+    public bool CheckCooldownStemp()
     {
         if (Type == CooldownTypes.AutoAttack)
             return true;
 
-        if (time < CooldownCurrentTime + CooldownTime)
+        if (Time.time < CooldownCurrentTime + CooldownTime)
             return false;
 
-        CooldownCurrentTime = time;
+        CooldownCurrentTime = Time.time;
         return true;
     }
 

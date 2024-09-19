@@ -153,6 +153,24 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ede7410-8a9d-4ce9-9e49-6188bbb064e8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Tap,Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowSkillBuild"",
+                    ""type"": ""Button"",
+                    ""id"": ""f54b4de2-0def-462f-a899-c73efb543f59"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -353,6 +371,28 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9475263b-3f99-4be2-9435-2a461e509452"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ShowInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8a1a1ef-754f-4e2f-94c6-463132b913c6"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowSkillBuild"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -392,6 +432,8 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_ShowInventory = m_Player.FindAction("ShowInventory", throwIfNotFound: true);
+        m_Player_ShowSkillBuild = m_Player.FindAction("ShowSkillBuild", throwIfNotFound: true);
     }
 
     ~@BaseMap()
@@ -472,6 +514,8 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_ShowInventory;
+    private readonly InputAction m_Player_ShowSkillBuild;
     public struct PlayerActions
     {
         private @BaseMap m_Wrapper;
@@ -490,6 +534,8 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @ShowInventory => m_Wrapper.m_Player_ShowInventory;
+        public InputAction @ShowSkillBuild => m_Wrapper.m_Player_ShowSkillBuild;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -541,6 +587,12 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @ShowInventory.started += instance.OnShowInventory;
+            @ShowInventory.performed += instance.OnShowInventory;
+            @ShowInventory.canceled += instance.OnShowInventory;
+            @ShowSkillBuild.started += instance.OnShowSkillBuild;
+            @ShowSkillBuild.performed += instance.OnShowSkillBuild;
+            @ShowSkillBuild.canceled += instance.OnShowSkillBuild;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -587,6 +639,12 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @ShowInventory.started -= instance.OnShowInventory;
+            @ShowInventory.performed -= instance.OnShowInventory;
+            @ShowInventory.canceled -= instance.OnShowInventory;
+            @ShowSkillBuild.started -= instance.OnShowSkillBuild;
+            @ShowSkillBuild.performed -= instance.OnShowSkillBuild;
+            @ShowSkillBuild.canceled -= instance.OnShowSkillBuild;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -629,5 +687,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
         void OnBlock(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnShowInventory(InputAction.CallbackContext context);
+        void OnShowSkillBuild(InputAction.CallbackContext context);
     }
 }

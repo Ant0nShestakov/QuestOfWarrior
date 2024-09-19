@@ -11,7 +11,7 @@ public class FifthSpecialAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        //fsm.PlayerModel.Attacking();
+        fsm.Visitor.Visit(this);
         fsm.Animator.SetBool(nameof(FifthSpecialAttack), true);
     }
 

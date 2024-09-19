@@ -1,34 +1,18 @@
-using System;
 using System.Linq;
-using Unity.VisualScripting;
 
 public sealed class AttackFSMVisitor : IActionStateVisitor
 {
     private readonly UnitModel _unitModel;
     private readonly PhysicsController _physicsController;
 
-    public AttackFSMVisitor(UnitModel unitModel)
+    public AttackFSMVisitor(UnitModel unitModel, PhysicsController physicsController)
     {
-        _unitModel = unitModel; 
+        _unitModel = unitModel;
+        _physicsController = physicsController;
     }
 
     public void Visit(ActionState state)
     {
-        switch (state)
-        {
-            case WalkState:
-                _unitModel.SetWalkSpeed();
-                break;
-            case RunState:
-                _unitModel.SetRunSpeed();
-                break;
-            case CrouchState:
-                _unitModel.SetCrouchSpeed();
-                break;
-            default:
-                throw new InvalidOperationException($"{state.GetType()} is not registered in {nameof(MovementFSM)}");
-        }
-
     }
 
     private bool CheckStaminaForAttack(Skill cd)
@@ -48,7 +32,7 @@ public sealed class AttackFSMVisitor : IActionStateVisitor
         return true;
     }
 
-    public bool TryCast(CooldownTypes cooldownTypes, float time)
+    public bool TryCast(CooldownTypes cooldownTypes)
     {
         if (_physicsController.IsGrounded || _unitModel.IsAttack)
             return false;
@@ -59,7 +43,7 @@ public sealed class AttackFSMVisitor : IActionStateVisitor
         if (!CheckStaminaForAttack(cooldown))
             return false;
 
-        if (!cooldown.CheckCooldownStemp(time))
+        if (!cooldown.CheckCooldownStemp())
             return false;
 
         _unitModel.Damage = cooldown.Damage;

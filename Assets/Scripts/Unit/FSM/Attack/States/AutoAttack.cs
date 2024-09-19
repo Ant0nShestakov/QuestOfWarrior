@@ -10,8 +10,11 @@ public class AutoAttack : ActionState
         _inputManager = inputManager;
     }
 
-    public override void EnterState(IFSM fsm) =>
+    public override void EnterState(IFSM fsm)
+    {
+        fsm.Visitor.Visit(this);
         fsm.Animator.SetBool("isAttack", true);
+    }
 
     public override void ExitState(IFSM fsm) =>
         fsm.Animator.SetBool("isAttack", false);

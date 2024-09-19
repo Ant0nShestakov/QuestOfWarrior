@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +7,8 @@ public class InputController : MonoBehaviour
 
     [SerializeField] private float _sensetivity;
     
+    public bool IsLocked {  get; private set; }
+
     #region Movement
     [field: SerializeField] public float MinClampAngle { get; private set; }
     [field: SerializeField] public float MaxClampAngle { get; private set; }
@@ -19,8 +20,8 @@ public class InputController : MonoBehaviour
     public float CrouchValue { get; private set; }
     #endregion
     
-    public float ShowInventoryValue { get; private set; }
-    public float ShowSkillBuildValue { get; private set; }
+    [field: SerializeField] public float ShowInventoryValue { get; private set; }
+    [field: SerializeField] public float ShowSkillBuildValue { get; private set; }
 
     #region Attack
     public float BlockValue { get; private set; }
@@ -38,14 +39,21 @@ public class InputController : MonoBehaviour
     private void Awake()
     {
         _inputActions = new BaseMap();
+        SetCursorLockState();
 
         SubscribeMovement();
         SubscribeAttack();
+        SubscribeUI();
     }
 
     private void OnEnable()
     {
         _inputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _inputActions.Disable();
     }
 
     private void SubscribeMovement()
@@ -60,11 +68,42 @@ public class InputController : MonoBehaviour
         SubscribeCancelAttackActions();
     }
 
+    private void SubscribeUI()
+    {
+        SubscribeUIPerformed();
+        SubscribeUICanceled();
+    }
+
+    #region UI
+    private void SubscribeUIPerformed()
+    {
+        _inputActions.Player.ShowSkillBuild.started += ShowSkillBuild;
+        _inputActions.Player.ShowInventory.started += ShowInventory;
+    }
+
+    private void SubscribeUICanceled()
+    {
+        _inputActions.Player.ShowSkillBuild.performed += ShowSkillBuild;
+        _inputActions.Player.ShowInventory.performed += ShowInventory;
+    }
+
+    private void ShowInventory(InputAction.CallbackContext context)
+    {
+        ShowInventoryValue = context.action.ReadValue<float>();
+    }
+
+    private void ShowSkillBuild(InputAction.CallbackContext context)
+    {
+        ShowInventoryValue = context.action.ReadValue<float>();
+    }
+
+    #endregion
 
     #region AttackActions
     private void SubscribePerformAttackActions()
     {
         _inputActions.Player.AutoAttack.performed += AutoAttack;
+        _inputActions.Player.Block.performed += Block;
         _inputActions.Player.FirstSpecialAttack.performed += FirstSpecialAttack;
         _inputActions.Player.SecondSpecialAttack.performed += SecondSpecialAttack;
         _inputActions.Player.ThridSpecialAttack.performed += ThridSpecialAttack;
@@ -78,6 +117,7 @@ public class InputController : MonoBehaviour
     private void SubscribeCancelAttackActions()
     {
         _inputActions.Player.AutoAttack.canceled += AutoAttack;
+        _inputActions.Player.Block.canceled += Block;
         _inputActions.Player.FirstSpecialAttack.canceled += FirstSpecialAttack;
         _inputActions.Player.SecondSpecialAttack.canceled += SecondSpecialAttack;
         _inputActions.Player.ThridSpecialAttack.canceled += ThridSpecialAttack;
@@ -91,6 +131,11 @@ public class InputController : MonoBehaviour
     private void AutoAttack(InputAction.CallbackContext context)
     {
         AutoAttackValue = context.action.ReadValue<float>();
+    }
+
+    private void Block(InputAction.CallbackContext context)
+    {
+        BlockValue = context.action.ReadValue<float>();
     }
 
     private void EighthSpecialAttack(InputAction.CallbackContext context)
@@ -173,8 +218,19 @@ public class InputController : MonoBehaviour
     }
     #endregion
 
-    private void OnDisable()
+    public bool IsMoved() => MoveValue != Vector2.zero;
+
+    public void SetCursorLockState()
     {
-        _inputActions.Disable();
+        Time.timeScale = 1.0f;
+        Cursor.lockState = CursorLockMode.Locked;
+        IsLocked = true;
     }
+
+    public void SetCursorFreeState()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        IsLocked = false;
+    }
+
 }

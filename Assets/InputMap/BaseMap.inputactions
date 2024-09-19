@@ -130,6 +130,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ShowInventory",
+                    "type": "Button",
+                    "id": "8ede7410-8a9d-4ce9-9e49-6188bbb064e8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap,Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowSkillBuild",
+                    "type": "Button",
+                    "id": "f54b4de2-0def-462f-a899-c73efb543f59",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -328,6 +346,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9475263b-3f99-4be2-9435-2a461e509452",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ShowInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8a1a1ef-754f-4e2f-94c6-463132b913c6",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowSkillBuild",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

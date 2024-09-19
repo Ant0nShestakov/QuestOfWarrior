@@ -12,7 +12,7 @@ public class FirstSpecialAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        //manager.PlayerModel.Attacking();
+        fsm.Visitor.Visit(this);
         fsm.Animator.SetBool(nameof(FirstSpecialAttack), true);
     }
 

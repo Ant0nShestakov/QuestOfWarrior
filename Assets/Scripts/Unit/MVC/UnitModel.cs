@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public sealed class UnitModel : IDamageable
 {
-    //private readonly UnitStats _stats;
     //private readonly IResistance _resistances;
 
     private readonly PlayerStats _playerStats;
@@ -30,7 +28,6 @@ public sealed class UnitModel : IDamageable
     public float Damage { get; set; }
 
     public bool IsBlocked { get; set; }
-    public bool IsLocked { get; set; }
     public bool IsAttack { get; set; }
     
     public Vector3 SavePosition { get; set; }
@@ -42,6 +39,9 @@ public sealed class UnitModel : IDamageable
     {
         _playerStats = stats;
         _data = dataPersistanceManager;
+
+        Cooldowns = new List<Skill>();
+
         _data.SetPersistances();
 
         _currentMass = _playerStats.Mass;
@@ -57,24 +57,11 @@ public sealed class UnitModel : IDamageable
 
     public void SetZeroSpeed() => _playerStats.SetZeroSpeed();
 
-    public void SetCursorLockState()
-    {
-        Time.timeScale = 1.0f;
-        Cursor.lockState = CursorLockMode.Locked;
-        IsLocked = false;
-    }
-
     //public void HealthSelf(int points)
     //{
     //    PlayerProperites.RegenerationHealth(points);
     //    UpdateStatsInfo();
     //}
-
-    public void SetCursorFreeState()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        IsLocked = true;
-    }
 
     public void ApplyDamage(float damage)
     {

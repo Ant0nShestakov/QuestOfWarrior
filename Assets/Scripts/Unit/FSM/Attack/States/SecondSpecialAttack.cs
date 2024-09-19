@@ -11,7 +11,7 @@ public class SecondSpecialAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-       // fsm.PlayerModel.Attacking();
+        fsm.Visitor.Visit(this);
         fsm.Animator.SetBool(nameof(SecondSpecialAttack), true);
     }
 

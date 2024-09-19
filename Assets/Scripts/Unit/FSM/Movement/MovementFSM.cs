@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public sealed class MovementFSM : IFSM
@@ -22,12 +23,13 @@ public sealed class MovementFSM : IFSM
 
     public IActionStateVisitor Visitor => _fSMVisitor;
 
-    public MovementFSM(UnitView unitView, IActionStateVisitor fSMVisitor)
+    public MovementFSM(UnitView unitView, IActionStateVisitor[] fSMVisitor)
     {
         _animator = unitView.GetComponent<Animator>();
         _inputManager = unitView.GetComponent<InputController>();
         _physicsController = unitView.GetComponent<PhysicsController>();
-        _fSMVisitor = fSMVisitor;
+
+        _fSMVisitor = fSMVisitor.Where(visitor => visitor is MovementFSMVisitor).FirstOrDefault();
 
         Initialize();
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public sealed class AttackFSM : IFSM
@@ -22,12 +23,13 @@ public sealed class AttackFSM : IFSM
 
     public IActionStateVisitor Visitor => _fSMVisitor;
 
-    public AttackFSM(UnitView unitView, IActionStateVisitor fSMVisitor)
+    public AttackFSM(UnitView unitView, IActionStateVisitor[] fSMVisitor)
     {
         _animator = unitView.GetComponent<Animator>();
         _inputManager = unitView.GetComponent<InputController>();
         _physicsController = unitView.GetComponent<PhysicsController>();
-        _fSMVisitor = fSMVisitor;
+
+        _fSMVisitor = fSMVisitor.Where(visitor => visitor is AttackFSMVisitor).FirstOrDefault();
 
         Initialize();
 

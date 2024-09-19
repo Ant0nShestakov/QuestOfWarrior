@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SixSpecialAttack : ActionState
 {
@@ -12,7 +11,7 @@ public class SixSpecialAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-       // fsm.PlayerModel.Attacking();
+        fsm.Visitor.Visit(this);
         fsm.Animator.SetBool(nameof(SixSpecialAttack), true);
     }
 

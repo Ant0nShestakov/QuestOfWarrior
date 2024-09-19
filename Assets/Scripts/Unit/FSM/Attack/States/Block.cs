@@ -24,7 +24,7 @@ public class Block : ActionState
 
     public override void UpdateState(IFSM fsm)
     {
-        if (_inputManager.BlockValue == 0)
+        if (_inputManager.BlockValue == 0 || _inputManager.IsMoved())
         {
             ExitState(fsm);
             fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));

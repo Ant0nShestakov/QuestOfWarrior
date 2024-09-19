@@ -6358,7 +6358,6 @@ GameObject:
   - component: {fileID: 5386614340931639390}
   - component: {fileID: 1000878150876436836}
   - component: {fileID: 6069209795962735446}
-  - component: {fileID: 5797714463505024581}
   - component: {fileID: 5166463559423860768}
   m_Layer: 6
   m_Name: Player
@@ -6460,6 +6459,7 @@ MonoBehaviour:
   _stepOffset: 0.45
   _slopeLimit: 45
   _climbForce: 1
+  _physicsSettings: {fileID: 0}
 --- !u!114 &1104486001501748717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6490,6 +6490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916e36261de536d4b834df0510f97fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sensetivity: 0
   <MinClampAngle>k__BackingField: -45
   <MaxClampAngle>k__BackingField: 45
 --- !u!114 &1000878150876436836
@@ -6518,24 +6519,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dampTime: 0.01
   _text: {fileID: 0}
---- !u!114 &5797714463505024581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7930128217420386539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d9ebeb5f2538142a5d43f553ef9bc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemPrefab: {fileID: 0}
-  _transformItem: {fileID: 0}
-  _maxCount: 0
-  _minCount: 0
-  _isAdded: 0
-  _items: []
 --- !u!114 &5166463559423860768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6550,6 +6533,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraTransform: {fileID: 3054400943376027948}
   _unitStats: {fileID: 11400000, guid: 38387b1de3f3ea64bbc4a291b0388103, type: 2}
+  _inventoryManager: {fileID: 0}
+  _unitController: {fileID: 0}
+  _skillBuilder: {fileID: 0}
 --- !u!1 &7973218272713360465
 GameObject:
   m_ObjectHideFlags: 0
