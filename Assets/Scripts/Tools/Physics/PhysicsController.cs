@@ -41,6 +41,7 @@ public class PhysicsController : MonoBehaviour
     float _slopeAngle;
 
     public bool IsGrounded { get; private set; }
+    public bool IsMoved { get; private set; }
 
     private void Awake()
     {
@@ -59,7 +60,7 @@ public class PhysicsController : MonoBehaviour
             IsGrounded = Physics.Raycast(transform.position, _from, _collisionDistance, _collisionMask);
         }
 
-        if(!IsGrounded)
+        if (!IsGrounded)
             Debug.Log("nope");
     }
 
@@ -90,10 +91,10 @@ public class PhysicsController : MonoBehaviour
 
         if (!Physics.Raycast(root, move, _offsetDistance))
         {
-            if(_slopeAngle > _slopeLimit && _slopeAngle != 90)
+            if (_slopeAngle > _slopeLimit && _slopeAngle != 90)
                 return false;
 
-           _rigidbody.position += _climbVector * Time.deltaTime;
+            _rigidbody.position += _climbVector * Time.deltaTime;
             return true;
         }
 
@@ -157,6 +158,12 @@ public class PhysicsController : MonoBehaviour
 
     public void Move(in Vector3 moveDirection, float mass)
     {
+        if (moveDirection == Vector3.zero)
+        {
+            IsMoved = false;
+            return;
+        }
+
         _moveDirection = moveDirection;
 
         SlopeLimit();
@@ -167,6 +174,7 @@ public class PhysicsController : MonoBehaviour
             _projectedDirection.y -= _gravity * Time.deltaTime;
 
         _rigidbody.MovePosition(_rigidbody.position + _projectedDirection * Time.deltaTime);
+        IsMoved = true;
     }
 
     public void Jump(float jumpForce)

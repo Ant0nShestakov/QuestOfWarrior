@@ -50,7 +50,7 @@ public partial class @BaseMap: IInputActionCollection2, IDisposable
                     ""name"": ""AutoAttack"",
                     ""type"": ""Button"",
                     ""id"": ""a41bf26a-bf03-479c-ab0b-27fda70d4a60"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false

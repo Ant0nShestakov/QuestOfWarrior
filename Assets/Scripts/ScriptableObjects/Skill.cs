@@ -37,6 +37,8 @@ public class Skill : ScriptableObject
             return false;
 
         CooldownCurrentTime = Time.time;
+
+        Debug.Log(Time.time);
         return true;
     }
 

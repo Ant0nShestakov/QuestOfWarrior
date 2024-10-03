@@ -15,9 +15,10 @@ public sealed class UnitMonoInsaller : MonoInstaller
 
     private void BindHandlers()
     {
-        Container.Bind<IHandler>().To<MovementHandler>().AsCached();
         Container.Bind<IHandler>().To<AimHandler>().AsCached().WithArguments(_cameraTransform);
+        Container.Bind<IHandler>().To<MovementHandler>().AsCached();
         Container.Bind<IHandler>().To<UI_Handler>().AsCached().WithArguments(_skillBuilder);
+        Container.Bind<IHandler>().To<WeaponHandler>().AsCached();
     }
     private void BindUnitModel()
     {

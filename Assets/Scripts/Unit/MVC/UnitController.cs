@@ -38,7 +38,9 @@ public sealed class UnitController : Controller, IDataPersistance
     private void Update()
     {
         foreach (var handler in _handlers)
+        {
             handler.Update();
+        }
     }
 
     private void UpdateStatsOnHUD()
@@ -118,18 +120,5 @@ public sealed class UnitController : Controller, IDataPersistance
         data.PlayerPosition[index] = new ObjectPosition(index + 1, _model.SavePosition, transform.rotation);
     }
 
-    //public void SetCrawlSpeed()
-    //{
-    //    _model.SetCrawlSpeed();
-    //}
-
-    //public void SetWalkSpeed()
-    //{
-    //    _model.SetWalkSpeed();
-    //}
-
-    //public void SetStop()
-    //{
-    //    _model.SetZeroSpeed();
-    //}
+    public void CanceledAttack() => _model.IsAttack = false;
 }

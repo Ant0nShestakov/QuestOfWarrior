@@ -4,17 +4,17 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerDataModel
 {
-    [SerializeField] private int _maxHealth;
-    [SerializeField] private int _maxStamina;
+    [SerializeField] private float _maxHealth;
+    [SerializeField] private float _maxStamina;
 
     [SerializeField] private float _currentHealth;
-    [SerializeField] private int _currentStamina;
+    [SerializeField] private float _currentStamina;
     [SerializeField] private List<SkillData> _skills;
 
-    public int MaxHealth { get => _maxHealth; }
-    public int MaxStamina { get => _maxStamina; }
+    public float MaxHealth { get => _maxHealth; }
+    public float MaxStamina { get => _maxStamina; }
     public float CurrentHealth { get => _currentHealth; }
-    public int CurrentStamina { get => _currentStamina; }
+    public float CurrentStamina { get => _currentStamina; }
     public List<SkillData> Skills { get => _skills; }
 
     public PlayerDataModel(PlayerStats playerModel)

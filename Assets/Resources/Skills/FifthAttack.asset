@@ -15,4 +15,4 @@ MonoBehaviour:
   <Type>k__BackingField: 5
   <CooldownTime>k__BackingField: 10
   <Damage>k__BackingField: 30
-  <Stamina>k__BackingField: 100
+  <Stamina>k__BackingField: 10

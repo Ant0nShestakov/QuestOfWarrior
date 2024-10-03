@@ -18,7 +18,6 @@ public sealed class MovementHandler : IHandler
         _inputManager = controller.GetComponent<InputController>();
         _characterController = controller.GetComponent<PhysicsController>();
         _view = controller.GetComponent<UnitView>();
-
         _transform = controller.transform;
     }
 

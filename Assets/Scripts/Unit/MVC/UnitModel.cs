@@ -29,7 +29,7 @@ public sealed class UnitModel : IDamageable
 
     public bool IsBlocked { get; set; }
     public bool IsAttack { get; set; }
-    
+
     public Vector3 SavePosition { get; set; }
 
     public PlayerStats PlayerProperites { get => _playerStats; }

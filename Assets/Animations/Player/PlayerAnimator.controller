@@ -37,7 +37,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: ThridSpecialAttack
+    m_ConditionEvent: SeventhSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1427898641663800542}
@@ -223,7 +223,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: One Hand Club Combo
+  m_Name: FithSpecialAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -357,7 +357,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpecialFastAttack
+  m_Name: SecondSpecialAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -412,7 +412,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jump Attack
+  m_Name: SixSpecialAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -469,7 +469,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: SixSpecialAttack
+    m_ConditionEvent: FirstSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1427898641663800542}
@@ -494,7 +494,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: SixSpecialAttack
+    m_ConditionEvent: FirstSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3071998007152287091}
@@ -577,7 +577,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: FourthSpecialAttack
+    m_ConditionEvent: FifthSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1427898641663800542}
@@ -629,7 +629,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sword And Shield Special Attack
+  m_Name: FourthSpecialAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -700,7 +700,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: SeconbSpecialAttack
+  - m_Name: SecondSpecialAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -724,7 +724,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: JumpAttack
+  - m_Name: SeventhSpecialAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -881,7 +881,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: SeconbSpecialAttack
+    m_ConditionEvent: SecondSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4960854054176076378}
@@ -934,7 +934,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: FifthSpecialAttack
+    m_ConditionEvent: FourthSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1427898641663800542}
@@ -959,7 +959,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: FourthSpecialAttack
+    m_ConditionEvent: FifthSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6067035294657376848}
@@ -1052,7 +1052,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: FirstSpecialAttack
+    m_ConditionEvent: ThridSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1427898641663800542}
@@ -1077,7 +1077,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: FifthSpecialAttack
+    m_ConditionEvent: FourthSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -459528100869782017}
@@ -1102,7 +1102,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: SeconbSpecialAttack
+    m_ConditionEvent: SecondSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1427898641663800542}
@@ -1150,7 +1150,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Special Attack on Left
+  m_Name: FirstSpecialAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1179,7 +1179,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: JumpAttack
+    m_ConditionEvent: SixSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3125405743945529023}
@@ -1227,7 +1227,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpecialStrongAttack
+  m_Name: ThridSpecialAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1339,7 +1339,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: FirstSpecialAttack
+    m_ConditionEvent: ThridSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3596882184598392406}
@@ -1432,7 +1432,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 4596cdd5acd40d944b1db2a25bc7e05e, type: 2}
     m_Threshold: 0.33333334
     m_Position: {x: -1, y: 1}
-    m_TimeScale: 1
+    m_TimeScale: 1.2
     m_CycleOffset: 0
     m_DirectBlendParameter: hInput
     m_Mirror: 0
@@ -1440,7 +1440,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: fc8ce597a039e4741863cd2b9a11a94c, type: 2}
     m_Threshold: 0.40000004
     m_Position: {x: 1, y: 1}
-    m_TimeScale: 1
+    m_TimeScale: 1.2
     m_CycleOffset: 0
     m_DirectBlendParameter: hInput
     m_Mirror: 0
@@ -1466,7 +1466,7 @@ BlendTree:
   m_MaxThreshold: 0.53333336
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
-  m_BlendType: 2
+  m_BlendType: 1
 --- !u!1101 &6159880188072441180
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1531,7 +1531,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpecialStrongAttackWithJump
+  m_Name: SeventhSpecialAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1697,7 +1697,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: ThridSpecialAttack
+    m_ConditionEvent: SeventhSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6978398284319774429}
@@ -1750,7 +1750,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: JumpAttack
+    m_ConditionEvent: SixSpecialAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1427898641663800542}

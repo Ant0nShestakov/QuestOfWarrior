@@ -1,28 +1,22 @@
-//using UnityEngine;
+using UnityEngine;
 
-//public sealed class WeaponHandler //: IHandler
-//{
-//    private readonly Transform _recoilTargetTransform;
-//    private readonly InputManager _inputManager;
+public sealed class WeaponHandler : IHandler
+{
+    private readonly UnitModel _unitModel;
 
+    private readonly float _maxStamina;
 
-//    public WeaponHandler(Transform recoilTargetTransform, Controller controller)
-//    {
-//        _recoilTargetTransform = recoilTargetTransform;
-//        _inputManager = controller.GetComponent<InputManager>();
-//    }
+    public WeaponHandler(UnitModel model)
+    {
+        _maxStamina = model.PlayerProperites.MaxStamina;
+        _unitModel = model;
+    }
 
-//    public void Update()
-//    {
-//        if (_inputManager.ShootValue > 0)
-//            _currentWeapon?.Shoot();
-//        else if (_inputManager.ReloadValue > 0)
-//            _currentWeapon?.Reload();
-//    }
-
-//    public void SetupWeapon(AbstractWeapon weapon)
-//    {
-//        _currentWeapon = weapon;
-//        _currentWeapon.SetRecoilTarget();
-//    }
-//}
+    public void Update()
+    {
+        if(_unitModel.PlayerProperites.CurrentStamina < _maxStamina)
+        {
+            _unitModel.PlayerProperites.RegenerationStamina();
+        }
+    }
+}

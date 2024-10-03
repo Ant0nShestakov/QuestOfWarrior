@@ -20,13 +20,13 @@ public class InputController : MonoBehaviour
     public float CrouchValue { get; private set; }
     #endregion
     
-    [field: SerializeField] public float ShowInventoryValue { get; private set; }
-    [field: SerializeField] public float ShowSkillBuildValue { get; private set; }
+    public float ShowInventoryValue { get; private set; }
+    public float ShowSkillBuildValue { get; private set; }
 
     #region Attack
     public float BlockValue { get; private set; }
     public float AutoAttackValue { get; private set; }
-    public float FirstSpecialAttackValue { get; private set; }
+    [field: SerializeField] public float FirstSpecialAttackValue { get; private set; }
     public float SecondSpecialAttackValue { get; private set; }
     public float ThridSpecialAttackValue { get; private set; }
     public float FourthSpecialAttackValue { get; private set; }

@@ -4,10 +4,9 @@ using UnityEngine;
 public class PlayerStats : ScriptableObject
 {
     [field: SerializeField] public int AutoAttackDamage { get; private set; }
-    [field: SerializeField] public int MaxHealth { get; set; }
-    [field: SerializeField] public int MaxStamina { get; set; }
-    [field: SerializeField] public int RegenerationStaminaOnTick { get; private set; }
-    [field: SerializeField] public float TickRegenerationInSeconds { get; private set; }
+    [field: SerializeField] public float MaxHealth { get; set; }
+    [field: SerializeField] public float MaxStamina { get; set; }
+    [field: SerializeField] public float RegenerationStaminaOnTick { get; private set; }
     [field: SerializeField] public int WalkSpeed { get; private set; }
     [field: SerializeField] public float RunSpeedModificator { get; private set; }
     [field: SerializeField] public int SwimSpeedModificator { get; private set; }
@@ -15,7 +14,7 @@ public class PlayerStats : ScriptableObject
     [field: SerializeField] public float Mass { get; private set; }
 
     public float CurrentHealth { get; set; }
-    public int CurrentStamina { get; set; }
+    public float CurrentStamina { get; set; }
     public float CurrentSpeed { get; set; }
 
     private void OnEnable()
@@ -35,7 +34,7 @@ public class PlayerStats : ScriptableObject
 
     public void RegenerationStamina(int points)
     {
-        CurrentStamina += points;
+        CurrentStamina += points * Time.deltaTime;
 
         if (CurrentStamina > MaxStamina)
             CurrentStamina = MaxStamina;
