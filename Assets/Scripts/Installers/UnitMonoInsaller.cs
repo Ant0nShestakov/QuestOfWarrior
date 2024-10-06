@@ -9,7 +9,6 @@ public sealed class UnitMonoInsaller : MonoInstaller
     [Header("Unit")]
     [SerializeField] private PlayerStats _unitStats;
     [SerializeField] private InventoryManager _inventoryManager;
-    [SerializeField] private UnitController _unitController;
     //!
     [SerializeField] private GameObject _skillBuilder;
 
@@ -31,8 +30,8 @@ public sealed class UnitMonoInsaller : MonoInstaller
    
     private void BindFSM()
     {
-        Container.Bind<IActionStateVisitor>().To<MovementFSMVisitor>().AsCached();
-        Container.Bind<IActionStateVisitor>().To<AttackFSMVisitor>().AsCached();
+        Container.Bind<IMovementStateVisitor>().To<MovementFSMVisitor>().AsSingle();
+        Container.Bind<IAttackStateVisitor>().To<AttackFSMVisitor>().AsSingle();
         Container.Bind<IFSM>().To<MovementFSM>().AsCached().WithArguments(GetComponent<UnitView>());
         Container.Bind<IFSM>().To<AttackFSM>().AsCached().WithArguments(GetComponent<UnitView>());
     }
@@ -40,10 +39,11 @@ public sealed class UnitMonoInsaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<PhysicsController>().FromInstance(GetComponent<PhysicsController>());
-
+        Container.Bind<UnitView>().FromInstance(GetComponent<UnitView>()).AsSingle().NonLazy();
         BindUnitModel();
 
-        Container.Bind<Controller>().To<UnitController>().FromInstance(_unitController).AsSingle().NonLazy();
+        Container.Bind<Controller>().To<UnitController>().FromInstance(GetComponent<UnitController>()).AsSingle().NonLazy();
+
 
         BindHandlers();
         BindFSM();

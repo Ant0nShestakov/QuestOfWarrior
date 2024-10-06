@@ -27,12 +27,9 @@ public sealed class UnitController : Controller, IDataPersistance
     private void Awake()
     {
         _view = GetComponent<UnitView>();
-    }
 
-    private void OnEnable()
-    {
-        _model.UpdateStatsEvent += OnDamage;
-        _model.UpdateStatsEvent += UpdateStatsOnHUD;
+        _view.UpdateHP(_model.CurrentHealth);
+        _view.UpdateMana(_model.PlayerProperites.CurrentStamina);
     }
 
     private void Update()
@@ -41,23 +38,6 @@ public sealed class UnitController : Controller, IDataPersistance
         {
             handler.Update();
         }
-    }
-
-    private void UpdateStatsOnHUD()
-    {
-        _view.UpdateHP(_model);
-    }
-
-    private void OnDisable()
-    {
-        _model.UpdateStatsEvent -= OnDamage;
-        _model.UpdateStatsEvent -= UpdateStatsOnHUD;
-    }
-
-    private void OnDamage()
-    {
-        if (_model.CurrentHealth <= 0)
-            Destroy(gameObject);
     }
 
     public void LoadData(GameData data)

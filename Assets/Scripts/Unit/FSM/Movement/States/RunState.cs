@@ -11,7 +11,7 @@ public sealed class RunState : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        fsm.Visitor.Visit(this);
+        ((IMovementStateVisitor)fsm.Visitor).Visit(this);
         fsm.Animator.SetBool("Run", true);
     }
 

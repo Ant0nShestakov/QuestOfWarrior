@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public sealed class UnitModel : IDamageable
 {
     //private readonly IResistance _resistances;
+    private readonly UnitView _unitView;
 
     private readonly PlayerStats _playerStats;
     private readonly DataPersistanceManager _data;
@@ -13,7 +14,8 @@ public sealed class UnitModel : IDamageable
     private float _currentHealth;
     private float _currentMass;
 
-    public event Action UpdateStatsEvent;
+    public event Action<float> ApplyDamageEvent;
+    public event Action<float> ManaEvent;
 
     //public IResistance Resistances => _resistances; 
 
@@ -35,9 +37,17 @@ public sealed class UnitModel : IDamageable
     public PlayerStats PlayerProperites { get => _playerStats; }
     public InventoryManager InventoryManager { get; private set; }
 
-    public UnitModel(PlayerStats stats, DataPersistanceManager dataPersistanceManager, InventoryManager inventoryManager)
+    public UnitModel(PlayerStats stats, UnitView unitView,
+        DataPersistanceManager dataPersistanceManager, InventoryManager inventoryManager)
     {
+        _unitView = unitView;
+
+        ApplyDamageEvent += _unitView.UpdateHP;
+
+        ManaEvent += _unitView.UpdateMana;
+
         _playerStats = stats;
+
         _data = dataPersistanceManager;
 
         Cooldowns = new List<Skill>();
@@ -67,12 +77,17 @@ public sealed class UnitModel : IDamageable
     {
         if (!IsBlocked)
         {
-            PlayerProperites.CurrentHealth -= damage;
+            _currentHealth -= damage;
 
-            if (PlayerProperites.CurrentHealth <= 0)
+            if (_currentHealth <= 0)
                 SceneManager.LoadScene(6);
 
-            UpdateStatsEvent?.Invoke();
+            ApplyDamageEvent?.Invoke(_currentHealth);
         }
+    }
+
+    public void UpdateManaInfo()
+    {
+        ManaEvent?.Invoke(_playerStats.CurrentStamina);
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-public sealed class MovementFSMVisitor : IActionStateVisitor
+public sealed class MovementFSMVisitor : IMovementStateVisitor
 {
     private readonly UnitModel _unitModel;
 
@@ -9,22 +9,19 @@ public sealed class MovementFSMVisitor : IActionStateVisitor
         _unitModel = unitModel; 
     }
 
-    public void Visit(ActionState state)
+    public void Visit(RunState state)
     {
-        switch (state)
-        {
-            case WalkState:
-                _unitModel.SetWalkSpeed();
-                break;
-            case RunState:
-                _unitModel.SetRunSpeed();
-                break;
-            case CrouchState:
-                _unitModel.SetCrouchSpeed();
-                break;
-            default:
-                throw new InvalidOperationException($"{state.GetType()} is not registered in {nameof(MovementFSM)}");
-        }
+        _unitModel.SetRunSpeed();
+    }
 
+    public void Visit(CrouchState state)
+    {
+        _unitModel.SetCrouchSpeed();
+    }
+
+    public bool Visit(IdleState state)
+    {
+        _unitModel.SetWalkSpeed();
+        return true;
     }
 }

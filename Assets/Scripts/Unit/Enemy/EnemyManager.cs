@@ -32,7 +32,7 @@ public class EnemyManager : MonoBehaviour, IPooledObject<EnemyManager>
     private void OnEnable()
     {
         SetTarget();
-        _enemyModel.UpdateStatsEvent += CheckHealth;
+        _enemyModel.ApplyDamageEvent += CheckHealth;
     }
 
     private void OnDisable()
@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour, IPooledObject<EnemyManager>
         PushEvent = null;
 
         if(_enemyModel != null)
-            _enemyModel.UpdateStatsEvent -= CheckHealth;
+            _enemyModel.ApplyDamageEvent -= CheckHealth;
     }
 
     private void Update()
@@ -66,9 +66,9 @@ public class EnemyManager : MonoBehaviour, IPooledObject<EnemyManager>
         PushEvent?.Invoke(this);
     }
 
-    private void CheckHealth()
+    private void CheckHealth(float currentHealth)
     {
-        if (_enemyModel.Health <= 0)
+        if (currentHealth <= 0)
         {
             _destinationSetter.target = null;
             _enemyModel.CharacterController.excludeLayers = 65;

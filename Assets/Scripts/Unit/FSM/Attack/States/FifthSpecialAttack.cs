@@ -11,8 +11,13 @@ public class FifthSpecialAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        fsm.Visitor.Visit(this);
-        fsm.Animator.SetBool(nameof(FifthSpecialAttack), true);
+        if (((IAttackStateVisitor)fsm.Visitor).Visit(this))
+            fsm.Animator.SetBool(nameof(FifthSpecialAttack), true);
+        else
+        {
+            ExitState(fsm);
+            fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));
+        }
     }
 
     public override void ExitState(IFSM fsm) =>
@@ -20,7 +25,7 @@ public class FifthSpecialAttack : ActionState
 
     public override void UpdateState(IFSM fsm)
     {
-        if (_inputManager.SixSpecialAttackValue == 0)
+        if (_inputManager.FifthSpecialAttackValue == 0 && CheckCancelAnimation(fsm, 2, nameof(FifthSpecialAttack)))
         {
             ExitState(fsm);
             fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));

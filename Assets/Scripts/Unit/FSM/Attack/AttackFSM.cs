@@ -9,7 +9,7 @@ public sealed class AttackFSM : IFSM
     private readonly InputController _inputManager;
     private readonly PhysicsController _physicsController;
 
-    private readonly IActionStateVisitor _fSMVisitor;
+    private readonly IAttackStateVisitor _fSMVisitor;
 
     private ActionState _currentState;
 
@@ -21,15 +21,15 @@ public sealed class AttackFSM : IFSM
 
     public Animator Animator => _animator;
 
-    public IActionStateVisitor Visitor => _fSMVisitor;
+    public IIdleStateVisitor Visitor => _fSMVisitor;
 
-    public AttackFSM(UnitView unitView, IActionStateVisitor[] fSMVisitor)
+    public AttackFSM(UnitView unitView, IAttackStateVisitor fSMVisitor)
     {
         _animator = unitView.GetComponent<Animator>();
         _inputManager = unitView.GetComponent<InputController>();
         _physicsController = unitView.GetComponent<PhysicsController>();
 
-        _fSMVisitor = fSMVisitor.Where(visitor => visitor is AttackFSMVisitor).FirstOrDefault();
+        _fSMVisitor = fSMVisitor;
 
         Initialize();
 

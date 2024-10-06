@@ -15,9 +15,9 @@ MonoBehaviour:
   <AutoAttackDamage>k__BackingField: 20
   <MaxHealth>k__BackingField: 200
   <MaxStamina>k__BackingField: 350
-  <RegenerationStaminaOnTick>k__BackingField: 30
-  <WalkSpeed>k__BackingField: 5
-  <RunSpeedModificator>k__BackingField: 1.5
+  <RegenerationStaminaOnTick>k__BackingField: 1
+  <WalkSpeed>k__BackingField: 7
+  <RunSpeedModificator>k__BackingField: 2
   <SwimSpeedModificator>k__BackingField: 1
   <JumpForce>k__BackingField: 7
-  <Mass>k__BackingField: 15
+  <Mass>k__BackingField: 0

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FirstAttack
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
-  <CooldownTime>k__BackingField: 20
+  <CooldownTime>k__BackingField: 5
   <Damage>k__BackingField: 100
   <Stamina>k__BackingField: 20

@@ -11,8 +11,13 @@ public class FourthSpecialAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        fsm.Visitor.Visit(this);
-        fsm.Animator.SetBool(nameof(FourthSpecialAttack), true);
+        if (((IAttackStateVisitor)fsm.Visitor).Visit(this))
+            fsm.Animator.SetBool(nameof(FourthSpecialAttack), true);
+        else
+        {
+            ExitState(fsm);
+            fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));
+        }
     }
 
     public override void ExitState(IFSM fsm) =>
@@ -20,7 +25,7 @@ public class FourthSpecialAttack : ActionState
 
     public override void UpdateState(IFSM fsm)
     {
-        if (_inputManager.FourthSpecialAttackValue == 0)
+        if (CheckCancelAnimation(fsm, 2, nameof(FourthSpecialAttack)))
         {
             ExitState(fsm);
             fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));

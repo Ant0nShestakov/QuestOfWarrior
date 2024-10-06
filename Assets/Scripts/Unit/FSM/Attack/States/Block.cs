@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Block : ActionState 
 {
@@ -12,13 +11,12 @@ public class Block : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        //manager.PlayerModel.IsBlocked = true;
+        ((IAttackStateVisitor)fsm.Visitor).Visit(this);
         fsm.Animator.SetBool(nameof(Block), true);
     }
 
     public override void ExitState(IFSM fsm)
     {
-        //fsm.PlayerModel.IsBlocked = false;
         fsm.Animator.SetBool(nameof(Block), false);
     }
 
@@ -29,6 +27,5 @@ public class Block : ActionState
             ExitState(fsm);
             fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));
         }
-
     }
 }

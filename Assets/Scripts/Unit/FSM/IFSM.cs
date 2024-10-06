@@ -7,7 +7,7 @@ public interface IFSM
 
     public IReadOnlyDictionary<string, ActionState> States { get; }
 
-    public IActionStateVisitor Visitor { get; }
+    public IIdleStateVisitor Visitor { get; }
 
     public void Update();
 

@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public sealed class AttackFSMVisitor : IActionStateVisitor
+public sealed class AttackFSMVisitor : IAttackStateVisitor
 {
     private readonly UnitModel _unitModel;
     private readonly PhysicsController _physicsController;
@@ -12,13 +12,8 @@ public sealed class AttackFSMVisitor : IActionStateVisitor
         _physicsController = physicsController;
     }
 
-    public void Visit(ActionState state)
-    {
-    }
-
     private bool CheckStaminaForAttack(Skill cd)
     {
-        Debug.Log($"Current Stamina {_unitModel.PlayerProperites.CurrentStamina}");
         if (_unitModel.PlayerProperites.CurrentStamina - cd.Stamina < 0)
             return false;
         return true;
@@ -34,12 +29,10 @@ public sealed class AttackFSMVisitor : IActionStateVisitor
         return true;
     }
 
-    public bool TryCast(CooldownTypes cooldownTypes)
+    private bool TryCast(CooldownTypes cooldownTypes)
     {
         if (!_physicsController.IsGrounded || _unitModel.IsAttack)
             return false;
-
-        Debug.Log("IsGrounded and not attack");
 
         if (!TryGetCooldownForType(cooldownTypes, out Skill cooldown))
             return false;
@@ -49,17 +42,102 @@ public sealed class AttackFSMVisitor : IActionStateVisitor
         if (!CheckStaminaForAttack(cooldown))
             return false;
 
-        Debug.Log("Stamina check success");
-
         if (!cooldown.CheckCooldownStemp())
             return false;
 
-        Debug.Log("Cast");
         _unitModel.Damage = cooldown.Damage;
         _unitModel.PlayerProperites.CurrentStamina -= cooldown.Stamina;
 
         _unitModel.IsAttack = true;
 
+        _unitModel.UpdateManaInfo();
+
         return true;
+    }
+
+    public bool Visit(IdleState state)
+    {
+        _unitModel.SetWalkSpeed();
+        return true;
+    }
+
+    public bool Visit(Block state)
+    {
+        return true;
+    }
+
+    public bool Visit(FirstSpecialAttack state)
+    {
+        bool tryCast = TryCast(CooldownTypes.FirstSpecialAttack);
+
+        if(tryCast)
+            _unitModel.SetZeroSpeed();
+
+        return tryCast;
+    }
+
+    public bool Visit(SecondSpecialAttack state)
+    {
+        bool tryCast = TryCast(CooldownTypes.SecondSpecialAttack);
+
+        if (tryCast)
+            _unitModel.SetZeroSpeed();
+
+        return tryCast;
+    }
+
+    public bool Visit(ThridSpecialAttack state)
+    {
+        bool tryCast = TryCast(CooldownTypes.ThirdSpecialAttack);
+
+        if (tryCast)
+            _unitModel.SetZeroSpeed();
+
+        return tryCast;
+    }
+
+    public bool Visit(FourthSpecialAttack state)
+    {
+        bool tryCast = TryCast(CooldownTypes.FourthSpecialAttack);
+
+        if (tryCast)
+            _unitModel.SetZeroSpeed();
+
+        return tryCast;
+    }
+
+    public bool Visit(FifthSpecialAttack state)
+    {
+        bool tryCast = TryCast(CooldownTypes.FifthSpecialAttack);
+
+        if (tryCast)
+            _unitModel.SetZeroSpeed();
+
+        return tryCast;
+    }
+
+    public bool Visit(SixSpecialAttack state)
+    {
+        bool tryCast = TryCast(CooldownTypes.SixSpecialAttack);
+
+        if (tryCast)
+            _unitModel.SetZeroSpeed();
+
+        return tryCast;
+    }
+
+    public bool Visit(SeventhSpecialAttack state)
+    {
+        bool tryCast = TryCast(CooldownTypes.SeventhSpecialAttack);
+
+        if (tryCast)
+            _unitModel.SetZeroSpeed();
+
+        return tryCast;
+    }
+
+    public bool Visit(AutoAttack state)
+    {
+        return TryCast(CooldownTypes.AutoAttack);
     }
 }

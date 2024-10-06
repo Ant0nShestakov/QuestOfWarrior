@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class AutoAttack : ActionState
 {
@@ -12,7 +11,7 @@ public class AutoAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        fsm.Visitor.Visit(this);
+        ((IAttackStateVisitor)fsm.Visitor).Visit(this);
         fsm.Animator.SetBool("isAttack", true);
     }
 

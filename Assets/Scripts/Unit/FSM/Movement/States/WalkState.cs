@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public sealed class WalkState : ActionState
+public sealed class WalkState : IdleState
 {
     private readonly InputController _inputManager;
 
@@ -11,13 +11,8 @@ public sealed class WalkState : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        fsm.Visitor.Visit(this);
+        ((IMovementStateVisitor)fsm.Visitor).Visit(this);
         fsm.Animator.SetBool("Walk", true);
-    }
-
-    public override void ExitState(IFSM fsm)
-    {
-        fsm.Animator.SetBool("Walk", false);
     }
 
     public override void UpdateState(IFSM fsm)

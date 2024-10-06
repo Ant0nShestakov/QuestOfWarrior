@@ -22,7 +22,7 @@ public class Singleton <T> : MonoBehaviour where T : MonoBehaviour
                         Destroy(instances[i]);
                     return _instance = instances[0];
                 }
-                //Debug.Log($"Объекта типа {typeof(T)} нет сцене");
+                Debug.Log($"Объекта типа {typeof(T)} нет сцене");
                 //return _instance = new GameObject($"({nameof(T)}){typeof(T)}").AddComponent<T>(); 
                 return null;
             }

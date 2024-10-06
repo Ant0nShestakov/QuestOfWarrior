@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public sealed class MovementFSM : IFSM
@@ -9,7 +8,7 @@ public sealed class MovementFSM : IFSM
     private readonly InputController _inputManager;
     private readonly PhysicsController _physicsController;
 
-    private readonly IActionStateVisitor _fSMVisitor;
+    private readonly IMovementStateVisitor _fSMVisitor;
 
     private ActionState _currentState;
 
@@ -21,15 +20,15 @@ public sealed class MovementFSM : IFSM
 
     public Animator Animator => _animator;
 
-    public IActionStateVisitor Visitor => _fSMVisitor;
+    public IIdleStateVisitor Visitor => _fSMVisitor;
 
-    public MovementFSM(UnitView unitView, IActionStateVisitor[] fSMVisitor)
+    public MovementFSM(UnitView unitView, IMovementStateVisitor fSMVisitor)
     {
         _animator = unitView.GetComponent<Animator>();
         _inputManager = unitView.GetComponent<InputController>();
         _physicsController = unitView.GetComponent<PhysicsController>();
 
-        _fSMVisitor = fSMVisitor.Where(visitor => visitor is MovementFSMVisitor).FirstOrDefault();
+        _fSMVisitor = fSMVisitor;
 
         Initialize();
 

@@ -6,7 +6,7 @@ public class EnemyModel : MonoBehaviour, IDamageable
     [SerializeField] private EnemyStats _enemyProperites;
     private CharacterController _characterController;
 
-    public event Action UpdateStatsEvent;
+    public event Action<float> ApplyDamageEvent;
 
     public CharacterController CharacterController => _characterController;
 
@@ -33,6 +33,6 @@ public class EnemyModel : MonoBehaviour, IDamageable
     public void ApplyDamage(float damage)
     {
         Health -= damage;
-        UpdateStatsEvent?.Invoke();
+        ApplyDamageEvent?.Invoke(Health);
     }
 }

@@ -8,7 +8,8 @@ public sealed class UnitView : MonoBehaviour
     [SerializeField] private float _dampTime;
     //[SerializeField] private AudioSource _audioSource;
 
-    [SerializeField] private TMP_Text _text;
+    [SerializeField] private TMP_Text _hpText;
+    [SerializeField] private TMP_Text _manaText;
 
     private Animator _animator;
 
@@ -33,9 +34,14 @@ public sealed class UnitView : MonoBehaviour
             fsm.Update();
     }
 
-    public void UpdateHP(UnitModel model)
+    public void UpdateHP(float hp)
     {
-        _text.text = model.CurrentHealth.ToString();
+        _hpText.text = hp.ToString();
+    }
+
+    public void UpdateMana(float mana)
+    {
+        _manaText.text = Mathf.Ceil(mana).ToString();
     }
 
     public void AnimateMovement(in Vector2 moveVector)

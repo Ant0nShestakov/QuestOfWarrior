@@ -11,8 +11,13 @@ public class ThridSpecialAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        fsm.Visitor.Visit(this);
-        fsm.Animator.SetBool(nameof(ThridSpecialAttack), true);
+        if (((IAttackStateVisitor)fsm.Visitor).Visit(this))
+            fsm.Animator.SetBool(nameof(ThridSpecialAttack), true);
+        else
+        {
+            ExitState(fsm);
+            fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));
+        }
     }
 
     public override void ExitState(IFSM fsm) =>
@@ -20,7 +25,7 @@ public class ThridSpecialAttack : ActionState
 
     public override void UpdateState(IFSM fsm)
     {
-        if (_inputManager.ThridSpecialAttackValue == 0)
+        if (_inputManager.ThridSpecialAttackValue == 0 && CheckCancelAnimation(fsm, 2, nameof(ThridSpecialAttack)))
         {
             ExitState(fsm);
             fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));

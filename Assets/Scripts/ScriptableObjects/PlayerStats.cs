@@ -26,7 +26,7 @@ public class PlayerStats : ScriptableObject
 
     public void RegenerationStamina()
     {
-        CurrentStamina += RegenerationStaminaOnTick;
+        CurrentStamina += RegenerationStaminaOnTick * Time.deltaTime;
 
         if (CurrentStamina > MaxStamina)
             CurrentStamina = MaxStamina;

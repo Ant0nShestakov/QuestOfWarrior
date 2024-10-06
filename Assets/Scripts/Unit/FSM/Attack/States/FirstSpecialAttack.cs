@@ -12,16 +12,22 @@ public class FirstSpecialAttack : ActionState
 
     public override void EnterState(IFSM fsm)
     {
-        fsm.Visitor.Visit(this);
-        fsm.Animator.SetBool(nameof(FirstSpecialAttack), true);
+        if (((IAttackStateVisitor)fsm.Visitor).Visit(this))
+            fsm.Animator.SetBool(nameof(FirstSpecialAttack), true);
+        else
+        {
+            ExitState(fsm);
+            fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));
+        }
     }
+
 
     public override void ExitState(IFSM fsm) =>
         fsm.Animator.SetBool(nameof(FirstSpecialAttack), false);
 
     public override void UpdateState(IFSM fsm)
     {
-        if (_inputManager.FirstSpecialAttackValue == 0)
+        if (CheckCancelAnimation(fsm, 2, nameof(FirstSpecialAttack)))
         {
             ExitState(fsm);
             fsm.SwitchState(fsm.States.GetValueOrDefault(nameof(IdleAttack)));

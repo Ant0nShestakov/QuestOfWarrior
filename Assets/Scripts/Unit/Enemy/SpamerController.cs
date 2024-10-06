@@ -27,7 +27,7 @@ public class SpamerController : MonoBehaviour, IDataPersistance
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.TryGetComponent(out PlayerInteractionManager _))
+        if (collision.GetComponentInParent<UnitController>() != null)
         {
             for (int i = 0; i < _enemyCount; i++)
             {

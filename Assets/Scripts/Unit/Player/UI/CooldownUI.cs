@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class CooldownUI : MonoBehaviour
 {
     [SerializeField] private List<TMP_Text> _skills;
+
     private UnitModel _playerModel;
     private int i;
 
+    [Inject]
     public void Construct(UnitModel playerModel)
     {
         _playerModel = playerModel;

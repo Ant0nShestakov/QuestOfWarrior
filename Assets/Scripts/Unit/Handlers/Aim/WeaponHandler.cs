@@ -17,6 +17,7 @@ public sealed class WeaponHandler : IHandler
         if(_unitModel.PlayerProperites.CurrentStamina < _maxStamina)
         {
             _unitModel.PlayerProperites.RegenerationStamina();
+            _unitModel.UpdateManaInfo();
         }
     }
 }
